@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 不使用的 -->
+    <selector
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:state_enabled="true" android:drawable="@drawable/monitoring_rec_small" />
+        <item android:state_enabled="false" android:drawable="@drawable/monitoring_rec_inactive" />
+    </selector>

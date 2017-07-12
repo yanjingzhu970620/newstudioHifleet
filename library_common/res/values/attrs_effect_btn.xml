@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EffectColorBtn">
+        <attr name="effectColor_bgNormalColor" format="color|reference" />
+        <attr name="effectColor_bgPressedColor" format="color|reference" />
+        <attr name="effectColor_textNormalColor" format="color|reference" />
+        <attr name="effectColor_textPressedColor" format="color|reference" />
+        <attr name="effectColor_radius" format="dimension" />
+        <attr name="effectColor_clickable" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="EffectImageBtn">
+        <attr name="effectImage_pressedColor" format="color|reference" />
+    </declare-styleable>
+
+</resources>

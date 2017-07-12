@@ -1,0 +1,506 @@
+package com.hifleet.lnfo.layer;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Paint.Style;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+import com.hifleet.R;
+import com.hifleet.activity.LoginActivity;
+import com.hifleet.bean.ShipsBean;
+import com.hifleet.bean.lableBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.lnfo.layer.PlotInfoLayer.LoadingPlotXMLThread;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.LatLon;
+import com.hifleet.map.MapActivity;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.map.OsmandMapLayer;
+import com.hifleet.map.OsmandMapTileView;
+import com.hifleet.map.QuadRect;
+import com.hifleet.map.RotatedTileBox;
+import com.hifleet.map.MapTileLayer.IMapRefreshCallback;
+import com.hifleet.map.OsmandMapLayer.DrawSettings;
+import com.hifleet.thread.MyTeamShipsThread;
+
+public class ShipLableLayer extends OsmandMapLayer implements
+IMapRefreshCallback {
+	OsmandApplication app;
+	DisplayMetrics dm;
+	private boolean lableadd=false;
+	public static boolean lablePost=false;
+	private final boolean mainMap;
+	public RotatedTileBox tileBox;
+	protected static OsmandMapTileView view;
+	public static List<lableBean> addedlable=new ArrayList<lableBean>();
+	public List<lableBean> addedlable1=new ArrayList<lableBean>();
+	public List<String> xy=new ArrayList<String>();
+	public List<ShipsBean> tempship=new ArrayList<ShipsBean>();
+	public List<String> point=new ArrayList<String>();
+	public  List<ShipsBean> teamShipsBeans = new ArrayList<ShipsBean>();
+	public  List<ShipsBean> teamShipsBeans1 = new ArrayList<ShipsBean>();
+	private  List<ShipsBean> teamShipsBeans2 = new ArrayList<ShipsBean>();
+	public  List<Rect> RectList = new ArrayList<Rect>();
+	private Paint paint,paint1;
+	private long lastCallAsynTaskTime = 0;
+	private double callIntervalLimit1 = 1 * 500L;
+
+	private RotatedTileBox lastQueryTileBox = null;
+	private boolean isTheSameTileBox = false;
+	private boolean refreshflag=false;
+	public static List<Map<String, String>> checkpoint =new ArrayList<Map<String, String>>();
+	public ShipLableLayer(boolean mainMap) {
+		this.mainMap = mainMap;
+	}
+	public void initLayer(OsmandMapTileView view) {
+		System.out.println("创建lablelayer");
+		this.view = view;
+		   paint = new Paint(); // 设置�?个笔刷大小是3的黄色的画笔
+	   		paint.setColor(Color.WHITE);
+	   		paint.setStrokeJoin(Paint.Join.ROUND);
+	   		paint.setStrokeCap(Paint.Cap.ROUND);
+	   		paint.setStrokeWidth(3);
+	   	   paint1 = new Paint(); // 设置�?个笔刷大小是3的黄色的画笔
+	  		paint1.setColor(Color.BLACK);
+	  		paint1.setStrokeJoin(Paint.Join.ROUND);
+	  		paint1.setStrokeCap(Paint.Cap.ROUND);
+	  		paint1.setStrokeWidth(3);
+	  		dm = view.getResources().getDisplayMetrics();
+	  		int ii=50;
+	    	 int jj=50;
+	    	 setCheckPoint(ii,jj);
+	}
+       public void setLable(List<ShipsBean> list,RotatedTileBox tilebox){
+    	   
+	    	 addedlable.clear();
+	    	 xy.clear();
+	    	 tempship.clear();
+    	 if(list.size()>60){
+    		 for(int i=0;i<list.size();i++){
+    			 if(!list.get(i).fle.equals("N/A")&&!list.get(i).fle.equals("0")){
+//    				 QuadRect rect = tilebox.getLatLonBounds();
+//    				 LatLon p = new LatLon(rect.bottom, rect.right);
+//   				     int XX = tilebox.getPixXFromLonNoRot(p.getLongitude());
+//    				 int YY = tilebox.getPixYFromLatNoRot(p.getLatitude());
+    				 int lX = tilebox.getPixXFromLonNoRot(list.get(i).getLo());
+    				 int lY = tilebox.getPixYFromLatNoRot(list.get(i).getLa());
+    				 double X=Math.floor(lX/20);
+    				 double Y=Math.floor(lY/20);
+    				 int have=0;
+    				 for(int j=0;j<xy.size();j++){
+    					 try{
+    					 if((X+"_"+Y).equals(xy.get(j))){
+    						 have++;
+    					 }
+    					 }catch (IndexOutOfBoundsException ibe){
+    						 System.out.println("IndexOutOfBoundsException shipslablelayer");
+    					 }
+    				 }
+//    				 if(have>0){
+//    					 System.out.println("格子删除了一�?");
+//    				 }
+    				 if(have==0){
+    					xy.add(X+"_"+Y);
+                        tempship.add(list.get(i));
+    				 }
+    			 }
+    		 }
+    	 }else{
+    		 for(int i=0;i<list.size();i++){
+    	      if(!list.get(i).fle.equals("N/A")&&!list.get(i).fle.equals("0")){
+    		    tempship.add(list.get(i));
+    			 }
+    		 }
+    	 }
+
+			System.out.println("筛�?�出的船舶数�?"+tempship.size());
+    	 for(int s=0;s<tempship.size();s++){
+//    		 System.out.println("船舶名称"+tempship.get(s).cname);
+    		 int locationx = tilebox.getPixXFromLonNoRot(tempship.get(s).getLo());
+			 int locationy = tilebox.getPixYFromLatNoRot(tempship.get(s).getLa());
+			 // ship location
+			 Rect rect = new Rect();  
+			 paint.setTextSize(30);
+			 paint.getTextBounds(list.get(s).cname, 0, list.get(s).cname.length(), rect);  
+			 int w = rect.width();  
+			 int h = rect.height();  
+//			 int textWidth = getTextWidth(paint, list.get(s).cname);
+			 for(int i=0;i<checkpoint.size();i++){
+//				 System.out.println("选了几个点"+i+"checksize"+checkpoint.size());
+				 boolean addlable=true;
+				 int x=Integer.parseInt(checkpoint.get(i).get("x"));
+				 int y=Integer.parseInt(checkpoint.get(i).get("y"));
+				 //prepare point 
+				 rect.set(locationx+x-((w+4)/2), locationy+y, locationx+x+((w)/2), locationy+y+h);
+				 for(int s1=0;s1<teamShipsBeans2.size();s1++){
+//					 System.out.println("第"+s1+"船舶");
+					 int locationx1 = tilebox.getPixXFromLonNoRot(teamShipsBeans2.get(s1).getLo());
+					 int locationy1 = tilebox.getPixYFromLatNoRot(teamShipsBeans2.get(s1).getLa());
+					 int _x=Math.abs(locationx1-x-locationx);
+					 int _y=Math.abs(locationy1-y-locationy);
+					 if ((_x >= 18 + w/2)||(_y >= 18 +h/2)) {
+	                        continue;
+//	                    }else{
+//	                    	 System.out.println("不能添加lable 和船"+addedlable.size());
+//	                    	 addlable=false;
+//							 break;
+	                    }
+//					 if(rect.contains(locationx1-18,locationy1-18,locationx1+18,locationy1+18)){
+//						 addlable=false;
+//						 System.out.println("不能添加lable 和船"+addedlable.size());
+//						 break;
+//					 }
+//					 if ((_x < 18 + w/2)&&(_y <18 +h/2)) {
+//	                    }else{
+//	                    	 System.out.println("不能添加lable 和船"+addedlable.size());
+	                    	 addlable=false;
+							 break;
+//	                    }
+//					 System.out.println("lable添加的对不对 ship"+rect.contains(locationx1-18,locationy1-18,locationx1+18,locationy1+18)+addlable+s1);
+//					 Rect rect1 = new Rect(locationx1-18,locationy1+18,locationx1+18,locationy1-18);  
+//					 if(Rect.intersects(rect,rect1)){
+//						 addlable=false;
+//						 break;
+//					 }
+				 }
+				 for(int q = 0;q<addedlable.size();q++){
+//					 System.out.println("第"+q+"已添加标签");
+//					 System.out.println("addedlable ");
+					 int lx=addedlable.get(q).x;
+					 int ly=addedlable.get(q).y;
+					 int wt=addedlable.get(q).width;
+					 int ht=addedlable.get(q).heigth;
+					 int __x=Math.abs(locationx+x-((w+4)/2)-lx);
+					 int __y=Math.abs( locationy+y-ly);
+					 Rect rect2 = new Rect(lx,ly,lx+wt,ly+ht);
+					 if ((__x >= wt/2 + w/2)||(__y >= ht/2 +h/2)) {
+	                        continue;
+	                    }
+//					 if(rect.contains(lx,ly,lx+wt,ly+ht)){
+//						 addlable=false;
+//						 System.out.println("不能添加lable 和其他lable"+addedlable.size());
+//						 break;
+//					 }
+//					 if ((__x <wt/2 + w/2)&&(__y <ht/2 +h/2)) {
+						 addlable=false;
+//						 System.out.println("不能添加lable 和其他lable"+addedlable.size());
+						 break;
+//	                    }
+//					 System.out.println("lable添加的对不对 lable"+rect.contains(lx,ly,lx+wt,ly+ht)+addlable+q);
+				 }
+				 if(addlable){
+//					 canvas.save();
+//					 canvas.drawRect(rect, paint);
+//					 canvas.drawText(list.get(s).cname, x, y, paint1);
+//					 canvas.restore();
+//					 System.out.println("添加几条lable"+addedlable.size());
+					 lableBean l=new lableBean();
+					 l.x=locationx+x-((w+4)/2);
+					 l.y= locationy+y;
+					 l.heigth=h;
+					 l.width=w;
+					 l.shipx=locationx;
+					 l.shipy=locationy;
+					 l.n=list.get(s).cname;
+					 addedlable.add(l);
+					 break;
+				 }
+			 }
+			 if(s==tempship.size()-1){
+				 System.out.println("可以显示标签");
+				 refreshflag=true;
+			 }
+    	 }
+    	 
+       }
+       public static void clearLayer(){
+    	   addedlable.clear();
+    	  // view.callPrepareBufferImage("shiplablelayer");
+       }
+       public static void clearLayer1(){
+    	   addedlable.clear();
+       }
+	public static int getTextWidth(Paint paint, String str) {  
+           int iRet = 0;  
+           if (str != null && str.length() > 0) {  
+               int len = str.length();  
+               float[] widths = new float[len];  
+               paint.getTextWidths(str, widths);  
+               for (int j = 0; j < len; j++) {  
+                   iRet += (int) Math.ceil(widths[j]);  
+               }  
+           }  
+           return iRet;  
+       } 
+	public void onMapMoveEndDraw(Canvas canvas, RotatedTileBox viewportToDraw) {
+//		long calltime = System.currentTimeMillis();
+//		if ((calltime - lastCallAsynTaskTime) < callIntervalLimit1) {
+//			return;
+//		}
+//		lastCallAsynTaskTime = calltime;
+		this.tileBox = viewportToDraw;
+//		System.out.println("执行lable move" + viewportToDraw.getZoom());
+		callLableAction(viewportToDraw);
+	}
+	public void mapRefreshed(RotatedTileBox tileBox) {
+		if (lastQueryTileBox == null) {
+			lastQueryTileBox = tileBox;
+			isTheSameTileBox = false;
+		} else {
+			isTheSameTileBox = isTheSameTileBox(tileBox);
+		}
+		System.out.println("lable   接收到了通知");
+		long calltime = System.currentTimeMillis();
+		if (!isTheSameTileBox) {
+			//如果前后两次收到的刷新船舶时，屏幕范围不同，那么就发起请求最近一次的。
+			callLableAction(tileBox);
+			lastQueryTileBox = tileBox;
+		}
+		if ((calltime - lastCallAsynTaskTime)>callIntervalLimit1) {
+			if(refreshflag){
+				System.out.println("lable   接收到了通知  准备刷新标签");
+		view.callPrepareBufferImage("shiplablelayer", tileBox);
+			}
+		}
+		lablePost=true;
+		lastCallAsynTaskTime = calltime;
+	}
+	private boolean isTheSameTileBox(RotatedTileBox tileBox) {
+		if (lastQueryTileBox != null) {
+			LatLon lastLatLon = lastQueryTileBox.getCenterLatLon();
+			LatLon thisLatLon = tileBox.getCenterLatLon();
+
+			if ((lastLatLon.getLatitude() != thisLatLon.getLatitude())
+					|| lastLatLon.getLongitude() != thisLatLon.getLongitude()) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
+		
+		this.tileBox = tileBox;
+		if(lablePost&&refreshflag){
+			lablePost=false;
+			refreshflag=false;
+		addedlable1.clear();
+		addedlable1.addAll(addedlable);
+		System.out.println("执行lable 刷新"+addedlable1.size());
+		 for(int q = 0;q<addedlable1.size();q++){
+			 int lx=addedlable1.get(q).x;
+			 int ly=addedlable1.get(q).y;
+			 int wt=addedlable1.get(q).width;
+			 int ht=addedlable1.get(q).heigth;
+			 int x=addedlable1.get(q).shipx;
+			 int y=addedlable1.get(q).shipy;
+			 String n=addedlable1.get(q).n;
+			 Rect rect = new Rect(lx,ly,lx+wt,ly+ht);
+		 canvas.save();
+		 canvas.drawLine(x, y, lx+wt/2, ly+ht/2, paint1);
+		 canvas.drawRect(rect, paint);
+		 paint1.setTextSize(28);
+		 canvas.drawText(n, lx, ly+ht-2*dm.density, paint1);
+		 canvas.restore();
+		 }
+		 }
+	}
+	private HashMap<String, LableThread> asyntaskmap = new HashMap<String, LableThread>();
+
+	private void clearMapByUUID(String uuid) {
+		asyntaskmap.remove(uuid);
+	}
+
+	private void closeReqest() {
+		if (asyntaskmap.isEmpty())
+			return;
+		Iterator<String> it = asyntaskmap.keySet().iterator();
+		while (it.hasNext()) {
+			String uuid = it.next();
+			LableThread task = asyntaskmap.get(uuid);
+			task.cancel(true);
+		}
+	}
+	public void callLableAction(RotatedTileBox viewportToDraw) {
+		closeReqest();
+		String uuid = UUID.randomUUID().toString();
+		lableadd = app.myPreferences.getBoolean("isShowMyTeamName", true);
+		if(lableadd){
+		LableThread task = new LableThread(uuid,
+				viewportToDraw);
+		asyntaskmap.put(uuid, task);
+		// System.out.println("" + uuid + " plot启动�?");
+		execute(task);
+		}
+	}
+
+	private void execute(LableThread task) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			task.executeOnExecutor(Executors.newCachedThreadPool(), new Void[0]);
+		} else {
+			task.execute(new Void[0]);
+		}
+	}
+	class LableThread extends AsyncTask<Void, String, String> {
+		String uuid;
+		private RotatedTileBox privateTileBox;
+		private Canvas privateCanvas;
+
+		public LableThread(String uuid, RotatedTileBox box) {
+			this.uuid = uuid;
+			this.privateTileBox = box;
+			// System.out.println("LoadingPlotXMLThread");
+		}
+
+		@Override
+		protected String doInBackground(Void... arg0) {
+			teamShipsBeans.clear();
+			teamShipsBeans1.clear();
+			teamShipsBeans2.clear();
+			teamShipsBeans.addAll(MyTeamShipsThread.shipsBeans);
+			 double minla=privateTileBox.getRightBottomLatLon().getLatitude();
+			 double maxlo=privateTileBox.getRightBottomLatLon().getLongitude();
+			 double maxla=privateTileBox.getLeftTopLatLon().getLatitude();
+			 double minlo=privateTileBox.getLeftTopLatLon().getLongitude();
+//			 System.out.println("maxla"+maxla+"maxlo"+maxlo+"minla"+minla+"minlo"+minlo);
+			 for(int i=0;i<teamShipsBeans.size();i++){
+				double sla=Double.valueOf(teamShipsBeans.get(i).la);
+				double slo=Double.valueOf(teamShipsBeans.get(i).lo);
+//				System.out.println("sla"+sla+"slo"+slo+(sla>minla)+(sla<maxla)+(slo>minlo)+(slo<maxlo));
+    				 if(sla>minla&&sla<maxla&&slo>minlo&&slo<maxlo&&teamShipsBeans.get(i).fle.equals(LoginActivity.myFleet)){
+    					 teamShipsBeans1.add(teamShipsBeans.get(i));
+    				 }
+    				 if(sla>minla&&sla<maxla&&slo>minlo&&slo<maxlo){
+    					 teamShipsBeans2.add(teamShipsBeans.get(i));
+    				 }
+    			 }
+			 System.out.println("执行了setlable  传入的列表长"+teamShipsBeans.size()+"hehe"+teamShipsBeans1.size()+teamShipsBeans1.size());
+			setLable(teamShipsBeans1,privateTileBox);
+			return null;
+		}
+
+		protected void onPostExecute(String result) {
+			clearMapByUUID(uuid);
+			lablePost=true;
+//			if(refresh){
+//			view.callPrepareBufferImage("shiplablelayer",privateTileBox);
+//			}
+		}
+	}
+       private void setCheckPoint(int i,int j){
+    	   point.add(1*i+"");
+    	   point.add(-1*j+"");
+    	   
+    	   point.add(0*i+"");
+    	   point.add(-1*j+"");
+    	   
+    	   point.add(-1*i+"");
+    	   point.add(-1*j+"");
+    	   
+    	   point.add(-1*i+"");
+    	   point.add(0*j+"");
+    	   
+    	   point.add(-1*i+"");
+    	   point.add(1*j+"");
+    	   
+    	   point.add(0*i+"");
+    	   point.add(1*j+"");
+    	   
+    	   point.add(1*i+"");
+    	   point.add(1*j+"");
+    	   
+    	   point.add(1*i+"");
+    	   point.add(0*j+"");
+    	   
+    	   point.add(2*i+"");
+    	   point.add(-1*j+"");
+    	   
+    	   point.add(1*i+"");
+    	   point.add(-2*j+"");
+    	   
+    	   point.add(0*i+"");
+    	   point.add(-2*j+"");
+    	   
+    	   point.add(1*i+"");
+    	   point.add(1*j+"");
+    	   
+    	   point.add(-1*i+"");
+    	   point.add(-2*j+"");
+    	   
+    	   point.add(-2*i+"");
+    	   point.add(0*j+"");
+    	   
+    	   point.add(-2*i+"");
+    	   point.add(1*j+"");
+    	   
+    	   point.add(-1*i+"");
+    	   point.add(2*j+"");
+    	   
+    	   point.add(0*i+"");
+    	   point.add(2*j+"");
+    	   
+    	   point.add(1*i+"");
+    	   point.add(2*j+"");
+    	   
+    	   point.add(2*i+"");
+    	   point.add(1*j+"");
+    	   
+    	   point.add(2*i+"");
+    	   point.add(0*j+"");
+    	   
+    	   point.add(2*i+"");
+    	   point.add(-2*j+"");
+    	   
+    	   point.add(-2*i+"");
+    	   point.add(-2*j+"");
+    	   
+    	   point.add(-2*i+"");
+    	   point.add(2*j+"");
+    	   
+    	   point.add(2*i+"");
+    	   point.add(2*j+"");
+    	   
+    	   checkpoint.clear();
+    	   
+    	   for(int mi=0;mi<point.size();mi+=2){
+    	   Map map = new HashMap<String, String>();
+			 map.put("x", point.get(mi));
+			 map.put("y", point.get(mi+1));
+			 checkpoint.add(map);
+    	   }
+       }
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings settings) {
+//		clearLayer();
+		
+	}
+	@Override
+	public void destroyLayer() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public boolean drawInScreenPixels() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}

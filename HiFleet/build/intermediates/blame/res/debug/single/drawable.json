@@ -1,0 +1,550 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_main_bottom.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_main_bottom.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_ships_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_ships_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\button_menu_pressed.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\button_menu_pressed.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\textlines.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\textlines.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_camera_retake.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_camera_retake.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\back_to_loc_white.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\back_to_loc_white.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\button_menu_mid_pressed.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\button_menu_mid_pressed.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__textfield_searchview_right_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__textfield_searchview_right_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\headliner_close.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\headliner_close.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__list_selector_background_transition_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__activated_background_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__activated_background_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\wheel_bg.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\wheel_bg.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_team_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_team_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_icon_panel_background_pushed.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\tab_icon_panel_background_pushed.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_navigate.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_navigate.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__textfield_searchview_right_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__textfield_searchview_right_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__ic_clear.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__ic_clear.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\circular_loading_view_bg.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\circular_loading_view_bg.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_left.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_left.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\quickaction_slider_btn.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\quickaction_slider_btn.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__item_background_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__item_background_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\button_menu.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\button_menu.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\text_color_fragment_setting.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\text_color_fragment_setting.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_main_bottom_child.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_main_bottom_child.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_btn_wocheckbox.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\ic_btn_wocheckbox.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__ic_clear_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__ic_clear_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_ship_information_all.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_ship_information_all.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__tab_indicator_ab_holo.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__tab_indicator_ab_holo.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\alertdialog_single_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\alertdialog_single_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_right.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_ok_big.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_ok_big.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_background_plugin_listitem.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\ic_background_plugin_listitem.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\progressbarstyle.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\progressbarstyle.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\alertdialog_left_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\alertdialog_left_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_menu.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_menu.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\actionsheet_top_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\actionsheet_top_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\background_fill_color_1.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\background_fill_color_1.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_t_stack.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_t_stack.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__spinner_ab_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__spinner_ab_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_rt.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_rt.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_r.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_r.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\img_all_sea_map.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\img_all_sea_map.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_rl.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_rl.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_rightr.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_rightr.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_leftr.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_leftr.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_ship_information_nobottom.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_ship_information_nobottom.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\wheel_val.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\wheel_val.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_zoom_control.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_zoom_control.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__list_selector_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__list_selector_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_rn.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_rn.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\distance_measure_start_point_shape.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\distance_measure_start_point_shape.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_details_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_details_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_bottom_corner_right.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_bottom_corner_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_zoom_out.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_zoom_out.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_l.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_l.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_cancel.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_cancel.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_lt.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_lt.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_area_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_area_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__item_background_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__item_background_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_ln.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_ln.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\actionsheet_bottom_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\actionsheet_bottom_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\shape_top_corner_no_bottom_line.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\shape_top_corner_no_bottom_line.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\round_corners_button_drawable.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\round_corners_button_drawable.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__textfield_searchview_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__textfield_searchview_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__list_selector_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\help_icon.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\help_icon.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_plain.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_plain.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\linearlayout_panel_state_change_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\linearlayout_panel_state_change_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_zoom_in.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_zoom_in.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_camera_switch.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_camera_switch.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__progress_horizontal_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__progress_horizontal_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\offlinemap_download_control_imagebutton_background.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\offlinemap_download_control_imagebutton_background.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__ic_menu_moreoverflow_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__ic_menu_moreoverflow_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__search_dropdown_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__search_dropdown_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_dialog_left.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_dialog_left.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_button_download.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_button_download.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_shutter.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_shutter.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_hmenu.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_hmenu.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\button_menu_mid.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\button_menu_mid.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\img_land_map.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\img_land_map.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_bottom_corner_left.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_bottom_corner_left.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\round_button_menu.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\round_button_menu.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\download_item_round_button_drawable.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\download_item_round_button_drawable.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\balloon_overlay_bg_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\balloon_overlay_bg_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_zoom_control_background_drawable.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_zoom_control_background_drawable.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__activated_background_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__activated_background_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__list_selector_background_transition_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_zoom_control_background_select.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_zoom_control_background_select.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\animdraw2.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\animdraw2.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bottom_image_view_background_drawable.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bottom_image_view_background_drawable.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__spinner_ab_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__spinner_ab_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_map_change.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_map_change.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__search_dropdown_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__search_dropdown_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\activity_open.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\activity_open.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_striped.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_striped.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_expand_t.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_expand_t.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__btn_cab_done_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__btn_cab_done_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_info.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_info.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__ic_menu_moreoverflow_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__ic_menu_moreoverflow_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\back_to_loc_tracked.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\back_to_loc_tracked.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\back_to_loc.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\back_to_loc.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_dialog_bg.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_dialog_bg.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__textfield_searchview_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__textfield_searchview_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\alertdialog_right_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\alertdialog_right_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radio_weather_image.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radio_weather_image.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_striped_split.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_striped_split.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\img_sea_map.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\img_sea_map.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\ship_shape.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\ship_shape.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_free.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_free.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_expand.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_expand.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__progress_horizontal_holo_light.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__progress_horizontal_holo_light.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_n_stack.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_n_stack.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_dialog_single.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_dialog_single.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_icon_panel_background.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\tab_icon_panel_background.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_text_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_text_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\activity_close.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\activity_close.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\background_fill_color.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\background_fill_color.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_icon_background.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\tab_icon_background.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_stack.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_stack.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_button_download_side.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_button_download_side.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_n.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_n.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_bottom_corner.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_bottom_corner.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\actionsheet_middle_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\actionsheet_middle_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\map_btn_signpost.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\map_btn_signpost.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_port_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_port_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\abs__btn_cab_done_holo_dark.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\drawable\\abs__btn_cab_done_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\point.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\point.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\round_button.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\round_button.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_ship_information_noup.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\bg_ship_information_noup.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\actionsheet_single_selector.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\actionsheet_single_selector.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobutton_set_focused.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\radiobutton_set_focused.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_camera_back.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_camera_back.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\xml_btn_dialog_right.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\drawable\\xml_btn_dialog_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\back_to_loc_tracked_white.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\back_to_loc_tracked_white.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\box_top_t.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\box_top_t.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable\\round_corners_image_view_drawable.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable\\round_corners_image_view_drawable.xml"
+    }
+]

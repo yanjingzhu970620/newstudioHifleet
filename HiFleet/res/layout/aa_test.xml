@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeffffff" >
+
+    <Button
+        android:id="@+id/btn_share_close"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/btn_share_close"
+        android:clickable="true"
+        android:onClick="onClick" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip" >
+
+        <Button
+            android:id="@+id/button_share_weixin"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawablePadding="5dip"
+            android:drawableTop="@drawable/btn_share_wechat"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="微信好友"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_share_xinlang"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawablePadding="5dip"
+            android:drawableTop="@drawable/btn_share_sina"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="新浪微博"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_share_weixing_friends"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawablePadding="5dip"
+            android:drawableTop="@drawable/btn_share_friends"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="朋友圈"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_f5f0eb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_nav" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/size_dp_20"
+        android:background="#e0e0e0" />
+
+    <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+        android:id="@+id/effectRelativeLayout_change_password"
+        style="@style/setting_child"
+        android:onClick="onClick" >
+
+        <TextView
+            style="@style/setting_child_text"
+            android:text="修改密码" />
+
+        <include layout="@layout/include_arrow_right" />
+    </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+    <include layout="@layout/include_line" />
+
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+   <!-- 
+<item
+        android:id="@+id/air_traffic"
+        android:icon="@drawable/ic_action_airtraffic"
+        android:showAsAction="always">
+    </item>
+     --> 
+     <!--  
+    <item
+        android:id="@+id/myFavorite"
+        android:icon="@drawable/ic_action_fav_light"
+        android:showAsAction="always">
+    </item>
+    -->
+    <item
+        android:title="@string/choose_storage_place"
+        android:id="@+id/choose_storage_place_id"
+        android:icon="@drawable/ic_action_gsave_light"
+        android:showAsAction="always">
+    </item>
+    <!-- item
+        android:id="@+id/deleteAllPoints"
+        android:icon="@drawable/ic_action_delete_light"
+        android:showAsAction="always">
+    </item -->
+    <!-- item
+        android:id="@+id/savePlanRoute"
+        android:icon="@drawable/ic_action_gsave_light"
+        android:showAsAction="always">
+    </item -->
+    
+
+</menu>

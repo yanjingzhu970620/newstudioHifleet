@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;XmlParseUtility.java&apos; to &apos;EasyNavigation2.0/src/com.hifleet.utility&apos;&#x0D;&#x0A;- Original project: &apos;HiFleet&apos;&#x0D;&#x0A;- Destination element: &apos;EasyNavigation2.0/src/com.hifleet.utility&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.utility.XmlParseUtility.java&apos;" description="Copy compilation unit" destination="=EasyNavigation2.0/src&lt;com.hifleet.utility" element1="/src&lt;com.hifleet.utility{XmlParseUtility.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1440383648339" units="1" version="1.0"/>
+</session>

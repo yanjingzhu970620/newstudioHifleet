@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;list&apos; in &apos;com.hifleet.app.OsmandApplication&apos; to &apos;activities&apos;&#x0D;&#x0A;- Original project: &apos;NavigationAIS&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.app.OsmandApplication.list&apos;&#x0D;&#x0A;- Renamed element: &apos;com.hifleet.app.OsmandApplication.activities&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;list&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;com.hifleet.app{OsmandApplication.java[OsmandApplication^list" name="activities" references="true" setter="false" stamp="1472200701949" textual="true" version="1.0"/>
+</session>

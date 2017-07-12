@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4"
+    android:clickable="true"
+    android:onClick="onClick"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#f3f7f6" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="设置"
+            android:textColor="#4f92ed"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="10dip"
+                android:text="基本设置"
+                android:textColor="#5b5a5f"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <RelativeLayout style="@style/setting_child" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="显示船名" />
+
+                    <com.e.common.widget.UISwitchButton
+                        android:id="@+id/switch_isshow_ship_name"
+                        style="@style/setting_child_choose" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_line" />
+
+                <RelativeLayout style="@style/setting_child" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="所有船舶" />
+
+                    <com.e.common.widget.UISwitchButton
+                        android:id="@+id/switch_isshow_dot"
+                        style="@style/setting_child_choose" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_line" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:text="当前用户"
+                android:textColor="#5b5a5f"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_10"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/rl_show_myteam"
+                    style="@style/setting_child" >
+
+                    <TextView
+                        android:id="@+id/text_user_name"
+                        style="@style/setting_child_text"
+                        android:text="无" />
+
+                    <TextView
+                        android:id="@+id/text_close_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dip"
+                        android:clickable="true"
+                        android:text="注销"
+                        android:textColor="@drawable/text_color_fragment_setting"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/text_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dip"
+                        android:clickable="true"
+                        android:text="[登录/注册]"
+                        android:textColor="@drawable/text_color_fragment_setting"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_left_line" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_show_wanning"
+                    style="@style/setting_child" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="用户权限" />
+
+                    <TextView
+                        android:id="@+id/text_access_control"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dip"
+                        android:text="无"
+                        android:textColor="#5b5a5f"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_line" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:text="离线海图"
+                android:textColor="#5b5a5f"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_10"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/offlinemap_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:clickable="true"
+                    app:effectColor_bgNormalColor="#ffffff"
+                    app:effectColor_bgPressedColor="#c7c7c7" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="离线海图(暂时仅限中国沿海)" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_arrow" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:text="清空缓存"
+                android:textColor="#5b5a5f"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_10"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/clearallmap_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:clickable="true"
+                    app:effectColor_bgNormalColor="#ffffff"
+                    app:effectColor_bgPressedColor="#c7c7c7" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="清除本地缓存（不包括离线包）" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_arrow" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="@dimen/size_dp_10"
+                    android:background="#e0e0e0" />
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/clearallrecord_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:clickable="true"
+                    app:effectColor_bgNormalColor="#ffffff"
+                    app:effectColor_bgPressedColor="#c7c7c7" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="清除浏览记录" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_arrow" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="20dip"
+                android:text="@string/about_settings"
+                android:textColor="#5b5a5f"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_10"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:background="#ffffff"
+                android:orientation="vertical" >
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/effect_service_qq"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:clickable="true"
+                    app:effectColor_bgNormalColor="#ffffff"
+                    app:effectColor_bgPressedColor="#c7c7c7" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="@string/customer_service_qq" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_arrow" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+                <include layout="@layout/include_left_line" />
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/effect_register_test"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:clickable="true"
+                    app:effectColor_bgNormalColor="#ffffff"
+                    app:effectColor_bgPressedColor="#c7c7c7" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="分享" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_arrow" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+                <include layout="@layout/include_left_line" />
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/effect_about_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+                    android:clickable="true"
+                    app:effectColor_bgNormalColor="#ffffff"
+                    app:effectColor_bgPressedColor="#c7c7c7" >
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/setting_child_text"
+                        android:text="@string/about_settings" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="15dip"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_arrow" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

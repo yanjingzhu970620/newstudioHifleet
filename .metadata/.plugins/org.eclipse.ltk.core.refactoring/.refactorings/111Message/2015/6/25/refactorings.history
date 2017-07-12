@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ShipLableLayer.java&apos; to &apos;HiFleet/src/com.hifleet.lnfo.layer&apos;&#x0D;&#x0A;- Original project: &apos;111Message&apos;&#x0D;&#x0A;- Destination element: &apos;HiFleet/src/com.hifleet.lnfo.layer&apos;&#x0D;&#x0A;- Original element: &apos;com.myandroid.activity.ShipLableLayer.java&apos;" description="Copy compilation unit" destination="=HiFleet/src&lt;com.hifleet.lnfo.layer" element1="/src&lt;com.myandroid.activity{ShipLableLayer.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1434533552348" units="1" version="1.0"/>
+</session>

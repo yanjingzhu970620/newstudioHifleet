@@ -1,0 +1,524 @@
+package com.hifleet.lnfo.layer;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.os.AsyncTask;
+import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.Log;
+
+import com.hifleet.R;
+import com.hifleet.activity.ShipInfoActivity;
+import com.hifleet.adapter.ShipsListAdapter;
+import com.hifleet.bean.HeartBeatBean;
+import com.hifleet.bean.ShipsBean;
+import com.hifleet.bean.TraceBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.lnfo.layer.ShipsInfoLayer.afterShip;
+import com.hifleet.map.AnimateDraggingMapThread;
+import com.hifleet.map.ITileSource;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.LatLon;
+import com.hifleet.map.MapActivity1;
+import com.hifleet.map.MapTileAdapter;
+import com.hifleet.map.MapTileLayer.IMapRefreshCallback;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.map.OsmandMapLayer;
+import com.hifleet.map.OsmandMapTileView;
+import com.hifleet.map.OsmandSettings;
+import com.hifleet.map.QuadRect;
+import com.hifleet.map.ResourceManager;
+import com.hifleet.map.RotatedTileBox;
+import com.hifleet.thread.MyTeamShipsThread;
+import com.hifleet.utility.XmlParseUtility;
+
+/**
+ * @{# PlotInfoLayer.java Create on 2015年5月18日 下午2:13:50
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ * 
+ */
+public class TraceInfoLayer extends OsmandMapLayer implements
+		IMapRefreshCallback {
+
+	OsmandApplication app;
+
+	private QuadRect quadRect;
+
+	protected static final int emptyTileDivisor = 16;
+	public static final int OVERZOOM_IN = 0;// 2;
+
+	public static final int START_SHOW = 10;
+	public static List<TraceBean> listp = new ArrayList<TraceBean>();
+
+	public static String la, lo;
+
+	List<TraceBean> msgs = null;
+	private final boolean mainMap;
+	protected ITileSource map = null;
+	protected MapTileAdapter mapTileAdapter = null;
+	List<TraceBean> list1 = new ArrayList<TraceBean>();
+	public static List<Map<String, String>> pointList = new ArrayList<Map<String, String>>();
+	public static List<Map<String, String>> pointList1 = new ArrayList<Map<String, String>>();
+
+	private static List<TraceBean> currentTraceBeans;
+	private List<HeartBeatBean> heartBeatBean = new ArrayList<HeartBeatBean>();
+	Paint paintBitmap, locationPaint;
+
+	protected RectF bitmapToDraw = new RectF();
+
+	protected Rect bitmapToZoom = new Rect();
+
+	protected MapActivity1 mapActivity1;
+	protected OsmandMapTileView view;
+	protected ResourceManager resourceManager;
+	private OsmandSettings settings;
+	private boolean visible = true;
+
+	private List<TraceBean> _plot = new ArrayList<TraceBean>();
+
+	private Paint paint_mid_point;
+
+	// LayerOperateListener listener;
+
+	String Polygon;
+	float drawpoint[];
+	private List<String> _point = new ArrayList<String>();
+	private RotatedTileBox tileBox;
+
+	private Paint paint;
+
+	private boolean flag = true;
+
+	DisplayMetrics dm;
+	private int radius = 4;// 轨迹点的半径
+
+	private boolean tracelable;
+
+	private Canvas canvas;
+
+	public TraceInfoLayer(boolean mainMap) {
+		this.mainMap = mainMap;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hifleet.map.OsmandMapLayer#initLayer(com.hifleet.map.OsmandMapTileView
+	 * )
+	 */
+	@Override
+	public void initLayer(OsmandMapTileView view) {
+		// TODO Auto-generated method stub
+		this.view = view;
+		settings = view.getSettings();
+		resourceManager = view.getApplication().getResourceManager();
+
+		// paintBitmap = new Paint();
+		// paintBitmap.setFilterBitmap(true);
+
+		locationPaint = new Paint();
+		locationPaint.setAntiAlias(true);
+		locationPaint.setStyle(Style.STROKE);
+		locationPaint.setDither(true);
+		locationPaint.setStrokeWidth(3);
+		locationPaint.setColor(view.getResources().getColor(R.color.blue));
+
+		paint_mid_point = new Paint();
+		paint_mid_point.setStyle(Style.STROKE);
+		paint_mid_point.setAntiAlias(true);
+		paint_mid_point.setColor(view.getResources().getColor(
+				com.hifleet.R.color.red));
+
+		paint_mid_point.setStrokeWidth(5);
+		paint_mid_point.setAlpha(127);
+		paint = new Paint(); // 设置一个笔刷大小是3的黄色的画笔
+		paint.setColor(Color.YELLOW);
+		paint.setStrokeJoin(Paint.Join.ROUND);
+		paint.setStrokeCap(Paint.Cap.ROUND);
+		paint.setStrokeWidth(3);
+
+		// 像素密度
+		dm = view.getResources().getDisplayMetrics();
+		radius = (int) (radius * dm.density);
+	}
+
+	private static void print(String msg) {
+		Log.i(TAG, msg);
+	}
+
+	public static final String TAG = "FileDownloader";
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings settings) {
+		
+		this.tileBox = tileBox;
+		this.canvas = canvas;
+		// if (flag) {
+		// print("执行onDraw  trace");
+		// new LoadingTraceThread(tileBox, canvas).execute();
+		// refreashShipTraceLayer(canvas, tileBox);
+		// } else {
+		//
+		// refreashShipTraceLayer(canvas, tileBox);
+		// }
+	}
+
+	@Override
+	public void destroyLayer() {
+	}
+
+	@Override
+	public boolean drawInScreenPixels() {
+
+		return false;
+	}
+
+	class LoadingTraceThread extends AsyncTask<Void, String, String> {
+		private RotatedTileBox privateTileBox;
+		private Canvas privateCanvas;
+
+		public LoadingTraceThread(RotatedTileBox box, Canvas canvas) {
+			this.privateTileBox = box;
+			this.privateCanvas = canvas;
+			
+		}
+
+		@Override
+		protected String doInBackground(Void... arg0) {
+			print("后台运行。。。  traceinfo");
+			try {
+				 System.out.println("LoadingTraceThread");
+				QuadRect rect = privateTileBox.getLatLonBounds();
+				LatLon p3 = new LatLon(rect.top, rect.right);
+				LatLon p2 = new LatLon(rect.top, rect.left);
+				LatLon p1 = new LatLon(rect.bottom, rect.left);
+				LatLon p4 = new LatLon(rect.bottom, rect.right);
+
+				String polygon = "((" + p2.getLongitude() + "%20"
+						+ p2.getLatitude() + "," + p1.getLongitude() + "%20"
+						+ p1.getLatitude() + "," + p4.getLongitude() + "%20"
+						+ p4.getLatitude() + "," + p3.getLongitude() + "%20"
+						+ p3.getLatitude() + "," + p2.getLongitude() + "%20"
+						+ p2.getLatitude() + "))" + "&mmsi="
+						+ ShipInfoActivity.mmsi + "&startdate="
+						+ ShipInfoActivity.startTime + "&endate="
+						+ ShipInfoActivity.endTime + "&zoom=" + view.getZoom();
+
+				String bboxurl = app.myPreferences.getString("loginserver",
+						null)
+						+ IndexConstants.GET_VESSEL_TRAJECTORY_DATA
+						+ polygon;
+
+				print("bboxurl===" + bboxurl);
+
+				URL url = new URL(bboxurl);
+				HttpURLConnection conn = (HttpURLConnection) url
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+				conn.setConnectTimeout(10000);
+				conn.setReadTimeout(10000);
+				InputStream inStream = conn.getInputStream();
+				parseXMLnew(inStream);
+
+				if (msgs.size() > 0) {
+					listp.clear();
+					for (int i = 0; i < msgs.size(); i++) {
+						listp.add(msgs.get(i));
+					}
+				}
+
+				print("轨迹解析完成啦");
+				inStream.close();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				print("轨迹出错啦。。。");
+				Message message = new Message();
+				message.obj = 11;
+				message.what = 22;
+				MapActivity1.tracHandler.sendMessage(message);
+			}
+			return null;
+		}
+
+		protected void onPostExecute(String result) {
+			Message message = new Message();
+			if (listp.size() > 0) {
+				tracelable = true;
+				test(listp, privateCanvas, privateTileBox);
+				print("trace画完  准备加入时间标签");
+			}
+			for (HeartBeatBean h : heartBeatBean) {
+				if (Integer.valueOf(h.flag).intValue() == 0) {
+					message.obj = 123;
+					message.what = 321;
+					return;
+				}
+			}
+			message.obj = 11;
+			message.what = 22;
+			MapActivity1.tracHandler.sendMessage(message);
+		}
+	}
+
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
+//		print("准备刷新trace");
+		this.canvas = canvas;
+		this.tileBox = tileBox;
+		refreashShipTraceLayer(canvas, tileBox);
+	}
+
+	 private List<afterTrace> calltl = new ArrayList<afterTrace>();
+	
+	 public interface afterTrace{
+	 public void traceRefreshed(RotatedTileBox tileBox);
+	 }
+	
+	 public void addAftertrace(afterTrace tl){
+	 calltl.add(tl);
+	 }
+	private void parseXMLnew(InputStream inStream) throws Exception {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		Element root = document.getDocumentElement();
+		NodeList childNodes = root.getChildNodes();
+
+		msgs = new ArrayList<TraceBean>();
+		msgs.clear();
+		// print("解析时ships： "+msgs.size());
+
+		// 判断是否超时
+		if (root.getNodeName().compareTo("session__timeout") == 0) {
+			heartBeatBean.add(XmlParseUtility.parse(root, HeartBeatBean.class));
+			print("轨迹层解析数据 拿到 超时了。");
+			return;
+		}
+
+		print("数据条数： " + childNodes.getLength());
+		// TODO 更新缓存部分
+		// 船舶数据解析并加入_ships
+		for (int j = 0; j < childNodes.getLength(); j++) {
+			Node childNode = (Node) childNodes.item(j);
+			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element childElement = (Element) childNode;
+				if (childElement.getNodeName().compareTo("ship") == 0) {
+					msgs.add(XmlParseUtility.parse(childElement,
+							TraceBean.class));
+				}
+			}
+		}
+
+		if (msgs.size() > 0) {
+			la = msgs.get(0).la;
+			lo = msgs.get(0).lo;
+		}
+	}
+	public static void addFleetVesselsInCurrentWindow(ArrayList<TraceBean> showArray,
+			List<TraceBean> TraceBeans,RotatedTileBox tileBox) {
+//		long startcount=System.currentTimeMillis();
+//		int justflag=0;
+		if (TraceBeans != null && tileBox != null) {
+			LatLon lefttop = tileBox.getLeftTopLatLon();
+			LatLon rightbottom = tileBox.getRightBottomLatLon();
+
+			double minlon = lefttop.getLongitude();
+			double maxlat = lefttop.getLatitude();
+			double maxlon = rightbottom.getLongitude();
+			double minlat = rightbottom.getLatitude();
+			showArray.clear();
+			for (TraceBean s : TraceBeans) {
+				if (Double.valueOf(s.la) <= maxlat &&Double.valueOf(s.la)  >= minlat
+						&& Double.valueOf(s.lo)  >= minlon && Double.valueOf(s.lo)  <= maxlon) {
+					showArray.add(s);
+				}
+			}
+				currentTraceBeans.clear();
+				currentTraceBeans.addAll(showArray);
+				print("计算当前屏幕内的船舶"+showArray.size());
+		}
+
+	}
+	private void refreashShipTraceLayer(Canvas canvas, RotatedTileBox tileBox) {
+		print("准备刷新trace");
+		flag = false;
+		try {
+			Path path = new Path();
+
+			// print("point" + list1.size());
+
+			for (int i = 0; i < list1.size(); i++) {
+
+				if (i >= 0) {
+
+					float xx = Float.parseFloat(list1.get(i).getLo());
+					float yy = Float.parseFloat(list1.get(i).getLa());
+
+					int locationX = tileBox.getPixXFromLonNoRot(xx);
+					int locationY = tileBox.getPixYFromLatNoRot(yy);
+
+					if (i == 0) {
+						path.moveTo(locationX, locationY);
+						// 画起始的轨迹点
+						canvas.drawCircle(locationX - radius / 2 + 2
+								* dm.density, locationY - radius / 2 + 2
+								* dm.density, radius, locationPaint);
+
+					} else {
+
+						// 在画当前的轨迹点之前，获得它前面一个轨迹点的屏幕位置（x1,y1)
+						int x1 = tileBox.getPixXFromLonNoRot(Float
+								.parseFloat(list1.get(i - 1).getLo()));
+						int y1 = tileBox.getPixYFromLatNoRot(Float
+								.parseFloat(list1.get(i - 1).getLa()));
+
+						// 画在前面一个点和当前一个点之间画一个箭头
+						drawArrow(path, x1, y1, locationX, locationY);
+
+						// 由于前面画了一个箭头，需要移动画笔的位置到前一个点上，然后连线到当前轨迹点
+						path.moveTo(x1, y1);
+
+						// 连线到当前轨迹点
+						path.lineTo(locationX, locationY);
+
+						// 画一个轨迹点
+						canvas.drawCircle(locationX - radius / 2 + 2
+								* dm.density, locationY - radius / 2 + 2
+								* dm.density, radius, locationPaint);
+
+						if (i == list1.size() - 1) {
+							canvas.save();
+							canvas.drawPath(path, locationPaint);
+							canvas.restore();
+						}
+					}
+				}
+			}
+			// if(tracelable){
+			 for(afterTrace call :new ArrayList<afterTrace>(calltl)){
+			 call.traceRefreshed(tileBox);
+			 }
+			// }
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	// 画一个箭头
+	private void drawArrow(Path path, float x1, float y1, float x2, float y2) {
+
+		// 如果两个点之间离开的很近，就不要画箭头了。
+		if (Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) < 100)
+			return;
+
+		float nArrowHeadLength = 18 * dm.density; // 箭头的基本长度
+		float nArrowHeadAngle = 15; // 箭头的夹角 15*2=30°
+		nArrowHeadAngle = (float) (nArrowHeadAngle * Math.PI / 180); // radians
+
+		float ang;
+		float tang;
+		float x3;
+		float y3;
+		float sign;
+
+		ang = (float) Math.atan((y2 - y1) / (x2 - x1));
+
+		// check for vertical path -> atan fails
+		if ((x2 - x1) == 0) {
+			if (y2 > y1)
+				ang = 4.712389f; // 270 deg
+			else
+				ang = 1.570796f; // 90 deg
+		}
+
+		if (x2 >= x1 && y2 >= y1) // quad 1
+			sign = -1;
+		else if (x2 <= x1 && y2 >= y1) // quad 2
+			sign = 1;
+		else if (x2 <= x1 && y2 <= y1) // quad 3
+			sign = 1;
+		else
+			sign = -1;
+
+		tang = nArrowHeadAngle + ang;
+		x3 = (float) (x2 + x1) / 2
+				+ (float) (sign * (nArrowHeadLength * Math.cos(tang)));
+		y3 = (float) (y2 + y1) / 2
+				+ (float) (sign * (nArrowHeadLength * Math.sin(tang)));
+
+		path.moveTo((int) (x2 + x1) / 2, (int) (y2 + y1) / 2);
+		path.lineTo((int) x3, (int) y3);
+
+		path.moveTo((int) (x2 + x1) / 2, (int) (y2 + y1) / 2);
+
+		tang = nArrowHeadAngle - ang;
+		x3 = (float) (x2 + x1) / 2
+				+ (float) (sign * (nArrowHeadLength * Math.cos(tang)));
+		y3 = (float) (y2 + y1) / 2
+				+ (float) (-sign * (nArrowHeadLength * Math.sin(tang)));
+		path.lineTo((int) x3, (int) y3);
+	}
+
+	public void test(List<TraceBean> list, Canvas canvas, RotatedTileBox tileBox) {
+		if (list.size() >= 1) {
+			list1.clear();
+			print("轨迹listsize: " + list.size());
+			for (int i = 0; i < list.size(); i++) {
+				// Log.v("mes"+i+"=", list.get(i).Polygon);
+				list1.add(list.get(i));
+			}
+			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
+			Double la = Double.parseDouble(list1.get(1).la);
+			Double lo = Double.parseDouble(list1.get(1).lo);
+			thread.startMoving(la, lo, tileBox.getZoom(), false);
+			print("test轨迹刷新   traceInfoLayer请求");
+		}
+	}
+
+	@Override
+	public void mapRefreshed(RotatedTileBox tileBox) {
+		// TODO Auto-generated method stub
+		this.tileBox = tileBox;
+		if (flag) {
+			print("执行onDraw  trace");
+			new LoadingTraceThread(tileBox, canvas).execute();
+//			refreashShipTraceLayer(canvas, tileBox);
+		} else {
+
+//			refreashShipTraceLayer(canvas, tileBox);
+		}
+	}
+
+}

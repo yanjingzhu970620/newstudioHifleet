@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;DeleteCachedTilesThread.java&apos; to &apos;EasyNavigation2.0/src/com.hifleet.util&apos;&#x0D;&#x0A;- Original project: &apos;EasyNavigation&apos;&#x0D;&#x0A;- Destination element: &apos;EasyNavigation2.0/src/com.hifleet.util&apos;&#x0D;&#x0A;- Original element: &apos;src.com.manyshipsand.util.DeleteCachedTilesThread.java&apos;" description="Copy compilation unit" destination="=EasyNavigation2.0/src&lt;com.hifleet.util" element1="/&lt;src.com.manyshipsand.util{DeleteCachedTilesThread.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1449126033696" units="1" version="1.0"/>
+</session>

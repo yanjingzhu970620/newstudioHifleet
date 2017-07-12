@@ -1,0 +1,1058 @@
+package com.hifleet.lnfo.layer;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.annotation.SuppressLint;
+import android.app.ActionBar.LayoutParams;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import com.hifleet.R;
+import com.hifleet.activity.ShipInfoActivity;
+import com.hifleet.adapter.ShipsListAdapter;
+import com.hifleet.adapter.TeamShipsListAdapter;
+import com.hifleet.bean.ShipsBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.map.AnimateDraggingMapThread;
+import com.hifleet.map.ITileSource;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.LatLon;
+import com.hifleet.map.MapTileAdapter;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.map.OsmandMapLayer;
+import com.hifleet.map.OsmandMapTileView;
+import com.hifleet.map.OsmandSettings;
+import com.hifleet.map.QuadRect;
+import com.hifleet.map.ResourceManager;
+import com.hifleet.map.RotatedTileBox;
+import com.hifleet.thread.MyTeamShipsThread;
+import com.hifleet.utility.Cell;
+import com.hifleet.utility.XmlParseUtility;
+
+public class ShipsInfoLayer extends OsmandMapLayer {
+
+	private QuadRect quadRect;
+
+	private static Timer timer1 = null;
+	private static TimerTask task1 = null;
+	protected static final int emptyTileDivisor = 16;
+	public static final int OVERZOOM_IN = 0;// 2;
+
+	public static final int START_SHOW = IndexConstants.START_TO_SHOW_SHIPS_ZOOM;
+	public static boolean flag = true;
+
+	public static boolean popflag = false;
+
+	private final boolean mainMap;
+	protected ITileSource map = null;
+	protected MapTileAdapter mapTileAdapter = null;
+
+	Paint paintBitmap, locationPaint;
+
+	protected RectF bitmapToDraw = new RectF();
+
+	protected Rect bitmapToZoom = new Rect();
+
+	protected static OsmandMapTileView view;
+	protected ResourceManager resourceManager;
+	private OsmandSettings settings;
+	private boolean visible = true;
+
+	private List<ShipsBean> _ships = new ArrayList<ShipsBean>();
+	public static List<ShipsBean> teamship = new ArrayList<ShipsBean>();
+
+	private List<ShipsBean> _ships2Draw;// = new ArrayList<ShipsBean>();
+	private Bitmap mShipIcon, mShipIcon1;
+	private Paint paint_mid_point;
+	private Paint shipShapPaint, shipShapHighPaint,shipShapPaint1,shipShapHighPaint1;
+    public static int justflag=0;
+	private Paint focusedShipShapePaint,focusedShipShapePaint1;
+
+	private HashMap<String, Cell> _cellHashMap = new HashMap<String, Cell>();// 保存cellid和cell的对应关�?
+	private HashMap<String, String> _shipCellMap = new HashMap<String, String>();// 保存mmsi和该船所在的cell的对应关�?
+	public  List<ShipsBean> allteamShipsBeans = new ArrayList<ShipsBean>();
+	public ShipsInfoLayer(boolean mainMap) {
+		this.mainMap = mainMap;
+	}
+
+	@Override
+	public boolean drawInScreenPixels() {
+		return false;
+	}
+
+	DisplayMetrics dm;
+	OsmandApplication app;
+
+	@Override
+	public void initLayer(OsmandMapTileView view) {
+		this.view = view;
+		settings = view.getSettings();
+		resourceManager = view.getApplication().getResourceManager();
+
+		// paintBitmap = new Paint();
+		// paintBitmap.setFilterBitmap(true);
+
+		locationPaint = new Paint();
+		locationPaint.setAntiAlias(true);
+		locationPaint.setFilterBitmap(true);
+		locationPaint.setDither(true);
+
+		shipShapPaint = new Paint();
+		shipShapPaint.setColor(view.getResources().getColor(R.color.blue));
+		shipShapPaint.setAntiAlias(true);
+		shipShapPaint.setStrokeWidth(0);
+		shipShapPaint.setStyle(Style.FILL_AND_STROKE);
+		
+		shipShapPaint1 = new Paint();
+		shipShapPaint1.setColor(view.getResources().getColor(R.color.black));
+		shipShapPaint1.setAntiAlias(true);
+		shipShapPaint1.setStrokeWidth(2);
+		shipShapPaint1.setStyle(Style.STROKE);
+		
+		focusedShipShapePaint = new Paint();
+		focusedShipShapePaint.setColor(view.getResources()
+				.getColor(R.color.red));
+		focusedShipShapePaint.setAntiAlias(true);
+		focusedShipShapePaint.setStrokeWidth(0);
+		focusedShipShapePaint.setStyle(Style.FILL_AND_STROKE);
+		
+		focusedShipShapePaint1 = new Paint();
+		focusedShipShapePaint1.setColor(view.getResources()
+				.getColor(R.color.black));
+		focusedShipShapePaint1.setAntiAlias(true);
+		focusedShipShapePaint1.setStrokeWidth(2);
+		focusedShipShapePaint1.setStyle(Style.STROKE);
+
+		shipShapHighPaint = new Paint();
+		shipShapHighPaint.setColor(view.getResources().getColor(R.color.red));
+		shipShapHighPaint.setStrokeWidth(2);
+		shipShapHighPaint.setStyle(Style.FILL_AND_STROKE);
+
+		paint_mid_point = new Paint();
+		paint_mid_point.setStyle(Style.FILL_AND_STROKE);
+		paint_mid_point.setAntiAlias(true);
+		paint_mid_point.setColor(view.getResources().getColor(
+				com.hifleet.R.color.blue));
+
+		BitmapDrawable bd = (BitmapDrawable) view.getResources().getDrawable(
+				R.drawable.icon_ships_test);
+		mShipIcon = bd.getBitmap();
+		// dm = new DisplayMetrics();
+		dm = view.getResources().getDisplayMetrics();
+		// System.out.println("dm.density: "+dm.density);
+		// System.out.println("view.dendity: "+view.getDensity());
+		// getWindowManager().getDefaultDisplay().getMetrics(dm);
+	}
+
+	private int basicLength = 12;
+	private int exactLength;
+	private float bmoffset = 0.5f;
+
+	// 画一个蓝色填充色的船�?
+	@SuppressLint("NewApi")
+	private Bitmap getShipBitmap(ShipsBean ship, boolean focused) {
+		exactLength = (int) dm.densityDpi * basicLength;
+		// exactLength = (int)dm.densityDpi *basicLength;
+		Bitmap shipbm;// = Bitmap.createBitmap(dm,
+						// 14*(int)dm.density,38*(int)dm.density,
+						// Bitmap.Config.ARGB_8888);
+
+		Canvas can;// = new Canvas(shipbm);
+
+		Path path = new Path();
+
+		if (ship.getSp() > 0) {
+			// 画一个三角形带头
+			shipbm = Bitmap.createBitmap(dm, 14 * (int) dm.density,
+					38 * (int) dm.density, Bitmap.Config.ARGB_8888);
+			path.moveTo(0 + bmoffset, 0 + bmoffset);
+			path.lineTo(12 * dm.density + bmoffset, 0 + bmoffset);
+			path.lineTo(6 * dm.density + bmoffset, 24 * dm.density + bmoffset);
+			path.lineTo(0 + bmoffset, 0 + bmoffset);
+			path.moveTo(6 * dm.density + bmoffset, 24 * dm.density + bmoffset);
+			path.lineTo(6 * dm.density + bmoffset, (24 + 12) * dm.density
+					+ bmoffset);
+		} else {
+
+			// 画一个菱�?
+			shipbm = Bitmap.createBitmap(dm, 18 * (int) dm.density,
+					18 * (int) dm.density, Bitmap.Config.ARGB_8888);
+			path.moveTo(0 + bmoffset, 8 * dm.density + bmoffset);
+			path.lineTo(8 * dm.density + bmoffset, 16 * dm.density + bmoffset);
+			path.lineTo(16 * dm.density + bmoffset, 8 * dm.density + bmoffset);
+			path.lineTo(8 * dm.density + bmoffset, 0 * dm.density + bmoffset);
+			path.lineTo(0 * dm.density + bmoffset, 8 * dm.density + bmoffset);
+		}
+		can = new Canvas(shipbm);
+		if (!focused){
+			can.drawPath(path, shipShapPaint);
+		    can.drawPath(path, shipShapPaint1);
+		}
+		else{
+			can.drawPath(path, focusedShipShapePaint);
+		    can.drawPath(path, focusedShipShapePaint1);
+		}
+		return shipbm;
+	}
+
+	private Cell getCellIndex(double lon, double lat) {
+		double _x = Math.floor((lon + 180) * 10);
+		double _y = Math.floor((lat + 90) * 10);
+		return new Cell(_x, _y);
+	}
+
+	private Canvas canvas;
+	private RotatedTileBox tileBox;
+	private long lastCallAsynTaskTime = 0;
+	private long lastCallTime = 0;
+	private double callIntervalLimit = 0.5 * 1000L;
+	private double callIntervalLimit1 = 1 * 1000L;
+	private boolean teamflag = true;
+
+	private boolean teamflag1=true;
+
+	// 放大结束执行
+	public void onMapZoomEndDraw(Canvas canvas, RotatedTileBox viewportToDraw) {
+
+		long calltime = System.currentTimeMillis();
+		if ((calltime - lastCallAsynTaskTime) < callIntervalLimit) {
+			return;
+		}
+		lastCallAsynTaskTime = calltime;
+
+		System.out.println("缩放结束");
+
+		if (viewportToDraw.getZoom() >= START_SHOW) {
+			this.canvas = canvas;
+			callWeatherInfoAction(viewportToDraw);
+			//
+			return;
+		}
+		if (ShipsListAdapter.isShow) {
+			refreashShipsInfoLayer1(canvas, tileBox);
+		}
+	}
+public static void callbuffer(){
+	view.callPrepareBufferImage("shipsInfoLayer");
+}
+	// 移动结束执行
+	public void onMapMoveEndDraw(Canvas canvas, RotatedTileBox viewportToDraw) {
+		long calltime = System.currentTimeMillis();
+		if ((calltime - lastCallAsynTaskTime) < callIntervalLimit) {
+			return;
+		}
+		System.out.println("ships 移动结束" + viewportToDraw.getZoom());
+		this.tileBox = viewportToDraw;
+		teamflag1 = false;
+		if ((calltime - lastCallAsynTaskTime) > callIntervalLimit1) {
+		if (app.myPreferences.getBoolean("isShowMyTeam", true)) {
+			closeReqest1();
+			String uuid = UUID.randomUUID().toString();
+			MyTeamShipsThread thread = null;
+			if (thread == null) {
+				thread = new MyTeamShipsThread();
+				System.out.println("moveend isShowMyTeam的请求");
+			}
+			teamntaskmap.put(uuid, thread);
+			thread.execute();
+		}
+		}
+		if (viewportToDraw.getZoom() >= START_SHOW) {
+			// destroyLayer();
+			// this.canvas = canvas;
+			callWeatherInfoAction(viewportToDraw);
+			return;
+		}
+		if (teamship.size() > 0) {
+			for (ShipsBean s : teamship) {
+				refreashShipsInfoLayer3(canvas, viewportToDraw);
+			}
+		}
+		if (ShipsListAdapter.isShow) {
+			refreashShipsInfoLayer1(canvas, tileBox);
+		}
+
+		lastCallAsynTaskTime = calltime;
+
+	}
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
+		this.tileBox = tileBox;
+		this.canvas = canvas;
+		if (teamflag) {
+			if (app.myPreferences.getBoolean("isShowMyTeam", true)) {
+				System.out.println(" ondraw  isShowMyTeam");
+				MyTeamShipsThread thread = null;
+				if (thread == null) {
+					thread = new MyTeamShipsThread();
+				}
+				thread.execute();
+				teamflag=false;
+			}
+		}
+		if(teamflag1){
+			System.out.println(" ondraw 刷新船队");
+			if(MyTeamShipsThread.shipsBeans.size()>0){
+				teamflag1=false;
+			}
+			refreashShipsInfoLayer2(canvas, tileBox);
+		}
+		if (tileBox.getZoom() < START_SHOW) {
+			// print("当前比例尺小�?9，不再显示船舶信息了" + tileBox.getZoom());
+			_ships.clear();
+			return;
+		}
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
+		this.tileBox = tileBox;
+		if (tileBox.getZoom() >= START_SHOW) {
+			refreashShipsInfoLayer(canvas, tileBox);
+		}
+
+		if (ShipsListAdapter.isShow) {
+			refreashShipsInfoLayer1(canvas, tileBox);
+		}
+
+		if (app.myPreferences.getBoolean("isShowMyTeam", true)) {
+			System.out.println("执行船队刷新  r2");
+			refreashShipsInfoLayer2(canvas, tileBox);
+		}
+		if (teamship.size() > 0) {
+			for (ShipsBean s : teamship) {
+				refreashShipsInfoLayer3(canvas, tileBox);
+			}
+		} else {
+		}
+	}
+
+	// 触发点击
+	@Override
+	public boolean onSingleTap(PointF point, RotatedTileBox rtileBox) {
+		if (rtileBox.getZoom() < START_SHOW) {
+			List<ShipsBean> infoObjects = new ArrayList<ShipsBean>();
+			getShipsInfo2(rtileBox, point, infoObjects);
+			if (!infoObjects.isEmpty()) {
+				for (ShipsBean fav : infoObjects) {
+					Double la = Double.parseDouble(fav.la);
+					Double lo = Double.parseDouble(fav.lo);
+					AnimateDraggingMapThread thread = view
+							.getAnimatedDraggingThread();
+					thread.startMoving(la, lo, rtileBox.getZoom(), false);
+					// view.callMapMoveEndDraw();
+					// int locationX =
+					// view.getCurrentRotatedTileBox().getPixXFromLonNoRot(fav.getLo());
+					// int locationY =
+					// view.getCurrentRotatedTileBox().getPixYFromLatNoRot(fav.getLa());
+
+					int locationX = tileBox.getCenterPixelX();// tileBox.getPixXFromLonNoRot(fav.getLo());
+					int locationY = tileBox.getCenterPixelY();// fav);
+
+					showPopupWindow(view, locationX, locationY, fav);
+				}
+				return true;
+			}
+		} else {
+			// System.out.println("on single tap.");
+			// .final double lat = tileBox.getLatFromPixel(point.x, point.y);
+			// final double lon = tileBox.getLonFromPixel(point.x, point.y);
+			List<ShipsBean> infoObjects = new ArrayList<ShipsBean>();
+			getShipsInfo(rtileBox, point, infoObjects);
+			if (!infoObjects.isEmpty()) {
+				for (ShipsBean fav : infoObjects) {
+					Double la = Double.parseDouble(fav.la);
+					Double lo = Double.parseDouble(fav.lo);
+					AnimateDraggingMapThread thread = view
+							.getAnimatedDraggingThread();
+					thread.startMoving(la, lo, rtileBox.getZoom(), false);
+					// int locationX =
+					// view.getCurrentRotatedTileBox().getPixXFromLonNoRot(fav.getLo());
+					// int locationY =
+					// view.getCurrentRotatedTileBox().getPixYFromLatNoRot(fav.getLa());
+
+					int locationX = tileBox.getCenterPixelX();// tileBox.getPixXFromLonNoRot(lo);
+					int locationY = tileBox.getCenterPixelY();// tileBox.getPixYFromLatNoRot(la);
+					showPopupWindow(view, locationX, locationY, fav);
+				}
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	private HashMap<String, LoadingShipsXMLThread> asyntaskmap = new HashMap<String, LoadingShipsXMLThread>();
+	private HashMap<String, MyTeamShipsThread> teamntaskmap = new HashMap<String, MyTeamShipsThread>();
+	private void clearMapByUUID(String uuid) {
+		asyntaskmap.remove(uuid);
+	}
+	private void closeReqest() {
+		if (asyntaskmap.isEmpty())
+			return;
+		Iterator<String> it = asyntaskmap.keySet().iterator();
+		while (it.hasNext()) {
+			String uuid = it.next();
+			LoadingShipsXMLThread task = asyntaskmap.get(uuid);
+			task.cancel(true);
+		}
+	}
+	private void closeReqest1() {
+		if (teamntaskmap.isEmpty())
+			return;
+		Iterator<String> it = teamntaskmap.keySet().iterator();
+		while (it.hasNext()) {
+			String uuid = it.next();
+			MyTeamShipsThread task = teamntaskmap.get(uuid);
+			task.cancel(true);
+		}
+	}
+	private void callWeatherInfoAction(RotatedTileBox viewportToDraw) {
+		closeReqest();
+		String uuid = UUID.randomUUID().toString();
+		LoadingShipsXMLThread task = new LoadingShipsXMLThread(uuid,
+				viewportToDraw, canvas);
+		asyntaskmap.put(uuid, task);
+		// System.out.println("" + uuid + " 启动�?");
+		execute(task);
+	}
+
+	// 判断android版本
+	private void execute(LoadingShipsXMLThread task) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			task.executeOnExecutor(Executors.newCachedThreadPool(), new Void[0]);
+		} else {
+			task.execute(new Void[0]);
+		}
+	}
+
+	// 解析xml
+	private void parseXMLnew(InputStream inStream) throws Exception {
+		// System.out.println("解析xml");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		Element root = document.getDocumentElement();
+		NodeList childNodes = root.getChildNodes();
+		// System.out.println(document.toString());
+		_ships.clear();
+		// print("解析时ships"+_ships.size());
+
+		// 判断是否超时
+		if (root.getNodeName().compareTo("session_timeout") == 0) {
+
+			// _ships.add(XmlParseUtility.parse(root, ShipsBean.class));
+			// for (ShipsBean bean : _ships) {
+			System.out.println("超时�?");
+			// }
+			return;
+		}
+
+		// TODO 更新缓存部分
+		// 船舶数据解析并加入_ships
+		for (int j = 0; j < childNodes.getLength(); j++) {
+			Node childNode = (Node) childNodes.item(j);
+			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element childElement = (Element) childNode;
+				if (childElement.getNodeName().compareTo("ship") == 0) {
+					_ships.add(XmlParseUtility.parse(childElement,
+							ShipsBean.class));
+				}
+			}
+		}
+		// System.out.println("_ships.size====" + _ships.size());
+
+		List<ShipsBean> myShips = new ArrayList<ShipsBean>();
+
+		// System.out.println("_ships 长度�? "+_ships.size());
+
+		myShips.addAll(_ships);
+
+		deleAllCurrentWindowCellShips();
+
+		for (ShipsBean ship : myShips) {
+			// System.out.println("MMSI: " + ship.m);
+			// System.out.println("航向:" + "======" + ship.co);
+
+			Cell c = getCellIndex(ship.getLo(), ship.getLa());// null
+
+			if (_shipCellMap.containsKey(ship.getM())) {
+				// 如果shipcellmap中包括该船舶的mmsi，先删除在该cell中船舶队列中该船舶的信息
+				Cell ccell = _cellHashMap.get(_shipCellMap.get(ship.getM()));
+				ccell.mmsiHashMapShipInfo().remove(ship.getM());
+			}
+
+			if (!_cellHashMap.containsKey(c.get_id())) {
+				// 如果cellmap队列中没有这个cell，那么要把这个cell添加到cellmap进去�?
+				// 同时把该船舶也添加到这个cell中船舶队列中去�??
+				c.mmsiHashMapShipInfo().put(ship.getM(), ship);
+				_cellHashMap.put(c.get_id(), c);
+			} else {
+				// cellmap中有这个cell了，那么要更新这个cell中船舶队列中该船舶的信息�?
+				_cellHashMap.get(c.get_id()).mmsiHashMapShipInfo()
+						.put(ship.getM(), ship);
+			}
+
+			// 更新ship-cell 索引
+			_shipCellMap.put(ship.getM(), c.get_id());
+		}
+	}
+
+	// 将当前窗口所有cells里面的船舶删�?
+	private void deleAllCurrentWindowCellShips() {
+		QuadRect rect = tileBox.getLatLonBounds();
+		LatLon p3 = new LatLon(rect.top, rect.right);
+		LatLon p1 = new LatLon(rect.bottom, rect.left);
+
+		Cell blIndex = getCellIndex(p1.getLongitude(), p1.getLatitude());
+		Cell trIndex = getCellIndex(p3.getLongitude(), p3.getLatitude());
+
+		double rd = -2;
+
+		for (double i = blIndex.get_x(); i <= trIndex.get_x() + rd; i++) {
+			for (double j = blIndex.get_y(); j <= trIndex.get_y() + rd; j++) {
+				String cellkey = "x" + i + "y" + j;
+				if (_cellHashMap.containsKey(cellkey)) {
+					(_cellHashMap.get(cellkey)).clearMMSIShipInfoMap();
+				} else {
+					continue;
+				}
+			}
+		}
+	}
+
+	// 将属于当前窗口内的船舶加入到�?个显示队列中去�??
+	public void addAllCellShips() {
+		// System.out.println("调用 addAllCellShips");
+		QuadRect rect = tileBox.getLatLonBounds();
+		LatLon p3 = new LatLon(rect.top, rect.right);
+		LatLon p1 = new LatLon(rect.bottom, rect.left);
+
+		Cell blIndex = getCellIndex(p1.getLongitude(), p1.getLatitude());
+		Cell trIndex = getCellIndex(p3.getLongitude(), p3.getLatitude());
+		// System.out.println(blIndex.get_x()+" "+blIndex.get_y()+"----�?"+trIndex.get_x()+" "+trIndex.get_y());
+		double rd = 2;
+
+		int celling = 1000;
+
+		if (tileBox.getZoom() <= 11) {
+			celling = 100;
+		} else if (tileBox.getZoom() == 12) {
+			celling = 200;
+		} else if (tileBox.getZoom() == 13) {
+			celling = 300;
+		} else if (tileBox.getZoom() == 14) {
+			celling = 400;
+		} else if (tileBox.getZoom() >= 15) {
+			celling = 500;
+		}
+
+		for (double i = blIndex.get_x(); i <= trIndex.get_x() + rd; i++) {
+			for (double j = blIndex.get_y(); j <= trIndex.get_y() + rd; j++) {
+				String cellkey = "x" + i + "y" + j;
+				if (_cellHashMap.containsKey(cellkey)) {
+					addCellShipsLimited(_cellHashMap.get(cellkey), celling);
+				}
+			}
+			// System.out.println("第一层for结束�?");
+		}
+		// System.out.println("第二层for结束�?");
+
+	}
+
+	private void addCellShipsLimited(Cell cell, int celling) {
+
+		HashMap<String, ShipsBean> iMMSIHashMap = cell.mmsiHashMapShipInfo();
+
+		if (iMMSIHashMap != null) {
+
+			try {
+				int ceilingInner = celling > iMMSIHashMap.size() ? iMMSIHashMap
+						.size() : celling;
+				String keysarray[] = (String[]) iMMSIHashMap.keySet().toArray(
+						new String[0]); // outofbounds
+
+				for (int i = 0; i < ceilingInner; i++) {
+					String key = keysarray[i];
+					ShipsBean ship = iMMSIHashMap.get(key);
+					// System.out.println("添加到了显示队列！： "+ship.getM());
+					_ships2Draw.add(ship);
+
+				}
+			} catch (java.util.ConcurrentModificationException ex) {
+				System.out.println("ConcurrentModificationException shipsinfo");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		}
+		// System.out.println("待显示队列： "+_ships2Draw.size());
+	}
+
+	private void refreashShipsInfoLayer(Canvas canvas, RotatedTileBox tileBox) {
+
+		_ships2Draw = new ArrayList<ShipsBean>();
+
+		addAllCellShips();
+
+		// System.out.println("画之前的_ships2Draw size: " + _ships2Draw.size()
+		// + "zoom" + tileBox.getZoom());
+
+		for (ShipsBean obj : _ships2Draw) {
+			if (obj == null) {
+				print("obj null.");
+				return;
+			}
+
+			int locationX = tileBox.getPixXFromLonNoRot(obj.getLo());
+			int locationY = tileBox.getPixYFromLatNoRot(obj.getLa());
+
+			try {
+				canvas.save();
+				canvas.rotate(obj.getCo() + 180, locationX, locationY);
+				Bitmap shipbm = getShipBitmap(obj, false);
+				if (obj.getSp() > 0) {
+					canvas.drawBitmap(shipbm,
+							locationX - shipbm.getWidth() / 2, locationY
+									- shipbm.getHeight() / 2 + 10 * dm.density,
+									shipShapPaint);
+				} else {
+					canvas.drawBitmap(shipbm,
+							locationX - shipbm.getWidth() / 2, locationY
+									- shipbm.getHeight() / 2, shipShapPaint);
+				}
+				canvas.restore();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+		}
+		flag = true;
+		// System.out.println("画完�?");
+		// System.out.println("ships1 size清空�?: " + _ships1.size());
+
+	}
+
+	public void refreashShipsInfoLayer1(Canvas canvas, RotatedTileBox tileBox) {
+		Double la = null, lo = null;
+		la = Double.parseDouble(ShipsListAdapter.shipsBeans
+				.get(ShipsListAdapter.shipsBeans.size() - 1).la);
+		lo = Double.parseDouble(ShipsListAdapter.shipsBeans
+				.get(ShipsListAdapter.shipsBeans.size() - 1).lo);
+		for (ShipsBean obj : ShipsListAdapter.shipsBeans) {
+			if (obj == null) {
+				return;
+			}
+			int locationX = tileBox.getPixXFromLonNoRot(obj.getLo());
+			int locationY = tileBox.getPixYFromLatNoRot(obj.getLa());
+			try {
+				canvas.save();
+				canvas.rotate(obj.getCo() + 180, locationX, locationY);
+				Bitmap shipbm = getShipBitmap(obj, true);
+				if (obj.getSp() > 0) {
+					canvas.drawBitmap(shipbm,
+							locationX - shipbm.getWidth() / 2, locationY
+									- shipbm.getHeight() / 2 + 10 * dm.density,
+									shipShapHighPaint);
+				} else {
+					canvas.drawBitmap(shipbm,
+							locationX - shipbm.getWidth() / 2, locationY
+									- shipbm.getHeight() / 2, shipShapHighPaint);
+				}
+				canvas.restore();
+				if (ShipsListAdapter.isMove) {
+					AnimateDraggingMapThread thread = view
+							.getAnimatedDraggingThread();
+					thread.startMoving(la, lo, tileBox.getZoom(), false);
+					int locationX1 = tileBox.getCenterPixelX();// tileBox.getPixXFromLonNoRot(fav.getLo());
+					int locationY1 = tileBox.getCenterPixelY();// fav);
+
+					showPopupWindow(view, locationX1, locationY1, obj);
+					ShipsListAdapter.isMove = false;
+					
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	public void refreashShipsInfoLayer2(Canvas canvas, RotatedTileBox tileBox) {
+		try {
+			allteamShipsBeans.clear();
+			allteamShipsBeans.addAll(MyTeamShipsThread.shipsBeans);
+			System.out.println(allteamShipsBeans.size()+"这是船队数量");
+			for (ShipsBean obj : allteamShipsBeans) {
+				if (obj == null) {
+					return;
+				}
+				int locationX = tileBox.getPixXFromLonNoRot(obj.getLo());
+				int locationY = tileBox.getPixYFromLatNoRot(obj.getLa());
+				try {
+					canvas.save();
+					canvas.rotate(obj.getCo() + 180, locationX, locationY);
+					Bitmap shipbm = getShipBitmap(obj, true);
+					if (obj.getSp() > 0) {
+						canvas.drawBitmap(shipbm, locationX - shipbm.getWidth()
+								/ 2, locationY - shipbm.getHeight() / 2 + 10
+								* dm.density, shipShapHighPaint);
+					} else {
+						canvas.drawBitmap(shipbm, locationX - shipbm.getWidth()
+								/ 2, locationY - shipbm.getHeight() / 2,
+								shipShapHighPaint);
+					}
+					canvas.drawCircle(locationX, locationY, 7 * tileBox.getDensity(), shipShapPaint1);
+					canvas.restore();
+				} catch (java.util.ConcurrentModificationException ce) {
+					System.out
+							.println("refreashShipsInfoLayer2 ConcurrentModificationException");
+				}
+			}
+		} catch (Exception ex) {
+
+		}
+	}
+
+	public void refreashShipsInfoLayer3(Canvas canvas, RotatedTileBox tileBox) {
+		Double la = null, lo = null;
+		for (ShipsBean obj : teamship) {
+			if (obj == null) {
+				return;
+			}
+			la = Double.parseDouble(obj.la);
+			lo = Double.parseDouble(obj.lo);
+			int locationX = tileBox.getPixXFromLonNoRot(obj.getLo());
+			int locationY = tileBox.getPixYFromLatNoRot(obj.getLa());
+			try {
+				canvas.save();
+				canvas.rotate(obj.getCo() + 180, locationX, locationY);
+				Bitmap shipbm = getShipBitmap(obj, true);
+				if (obj.getSp() > 0) {
+					canvas.drawBitmap(shipbm,
+							locationX - shipbm.getWidth() / 2, locationY
+									- shipbm.getHeight() / 2 + 10 * dm.density,
+									shipShapHighPaint);
+				} else {
+					canvas.drawBitmap(shipbm,
+							locationX - shipbm.getWidth() / 2, locationY
+									- shipbm.getHeight() / 2, shipShapHighPaint);
+				}
+				canvas.restore();
+				if (TeamShipsListAdapter.isMove) {
+					AnimateDraggingMapThread thread = view
+							.getAnimatedDraggingThread();
+					thread.startMoving(la, lo, tileBox.getZoom(), false);
+					int locationX1 = tileBox.getCenterPixelX();// tileBox.getPixXFromLonNoRot(fav.getLo());
+					int locationY1 = tileBox.getCenterPixelY();// fav);
+					showPopupWindow(view, locationX1, locationY1, obj);
+					TeamShipsListAdapter.isMove = false;
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+	class LoadingShipsXMLThread extends AsyncTask<Void, String, String> {
+		String uuid;
+		private RotatedTileBox privateTileBox;
+		private Canvas privateCanvas;
+
+		public LoadingShipsXMLThread(String uuid, RotatedTileBox box,
+				Canvas canvas) {
+			this.uuid = uuid;
+			this.privateTileBox = box;
+			this.privateCanvas = canvas;
+			// System.out.println("LoadingShipsXMLThread");
+			// refreashShipsInfoLayer(privateCanvas, privateTileBox);
+		}
+
+		protected void onPreExecute() {
+
+		}
+
+		protected void onProgressUpdate(String... values) {
+
+		}
+
+		protected void updateProgress(boolean updateOnlyProgress) {
+
+		}
+
+		protected void onPostExecute(String result) {
+			// System.out.println("异步结束。�?��??  shipInfoLayer请求");
+			view.callPrepareBufferImage("shipsInfoLayer");
+			clearMapByUUID(uuid);
+			// 刷新数据
+			// refreashShipsInfoLayer(privateCanvas, privateTileBox);
+			// if(canvas!=null&&!canvas.equals(null)){
+			// Paint paint = new Paint(); //设置�?个笔刷大小是3的黄色的画笔
+			// paint.setColor(Color.YELLOW);
+			// paint.setStrokeJoin(Paint.Join.ROUND);
+			// paint.setStrokeCap(Paint.Cap.ROUND);
+			// paint.setStrokeWidth(3);
+			// canvas.drawCircle(100, 100, 90, paint);
+			// }
+			// System.out.println("主线程里面的onPostExecute");
+
+			// refreashShipsInfoLayer(privateCanvas, privateTileBox);
+		}
+
+		protected void onCancelled() {
+			System.out.println("" + uuid + " cancelled.");
+		}
+
+		@Override
+		protected String doInBackground(Void... arg0) {
+			flag = false;
+			try {
+				QuadRect rect = privateTileBox.getLatLonBounds();
+				LatLon p3 = new LatLon(rect.top, rect.right);
+				LatLon p2 = new LatLon(rect.top, rect.left);
+				LatLon p1 = new LatLon(rect.bottom, rect.left);
+				LatLon p4 = new LatLon(rect.bottom, rect.right);
+				String polygon = "Polygon((" + p2.getLongitude() + "%20"
+						+ p2.getLatitude() + "," + p1.getLongitude() + "%20"
+						+ p1.getLatitude() + "," + p4.getLongitude() + "%20"
+						+ p4.getLatitude() + "," + p3.getLongitude() + "%20"
+						+ p3.getLatitude() + "," + p2.getLongitude() + "%20"
+						+ p2.getLatitude() + "))";
+				String bboxurl = IndexConstants.GET_BBOX_SHIPS_URL + polygon;
+
+				// System.out.println("URL" + "====" + bboxurl);
+
+				URL url = new URL(bboxurl);
+				HttpURLConnection conn = (HttpURLConnection) url
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+				// System.out.println("ships sessionid" + "===="
+				// +app.myPreferences.getString("sessionid", ""));
+				conn.setConnectTimeout(5000);
+				InputStream inStream = conn.getInputStream();
+				parseXMLnew(inStream);
+				inStream.close();
+				flag = true;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			return null;
+		}
+	}
+
+	private static void print(String msg) {
+		Log.i(TAG, msg);
+	}
+
+	public static final String TAG = "FileDownloader";
+
+	public void getShipsInfo2(RotatedTileBox tb, PointF point,
+			List<? super ShipsBean> res) {
+		int r = (int) (7 * tb.getDensity());
+		int ex = (int) point.x;
+		int ey = (int) point.y;
+		List<ShipsBean> _ships2 = new ArrayList<ShipsBean>();
+		// 搜索船舶
+		if (ShipsListAdapter.shipsBeans != null
+				&& ShipsListAdapter.shipsBeans.size() >= 1) {
+			for (int i = 0; i < ShipsListAdapter.shipsBeans.size(); i++) {
+				_ships2.add(ShipsListAdapter.shipsBeans.get(i));
+			}
+		}
+		// 船队船舶
+		if (app.myPreferences.getBoolean("isShowMyTeam", true)) {
+			if (MyTeamShipsThread.shipsBeans != null
+					&& MyTeamShipsThread.shipsBeans.size() >= 1) {
+				for (int i = 0; i < MyTeamShipsThread.shipsBeans.size(); i++) {
+					_ships2.add(MyTeamShipsThread.shipsBeans.get(i));
+				}
+			}
+		}
+		// 船队单个船舶
+		if (teamship != null && teamship.size() >= 1) {
+			for (int i = 0; i < teamship.size(); i++) {
+				_ships2.add(teamship.get(i));
+			}
+		}
+		if (_ships2 != null && _ships2.size() >= 1) {
+			for (ShipsBean n : _ships2) {
+				if (tb == null)
+					System.out.println("tb null!!!");
+				int x = (int) tb.getPixXFromLatLon(n.getLa(), n.getLo());
+				int y = (int) tb.getPixYFromLatLon(n.getLa(), n.getLo());
+				if (calculateBelongs(ex, ey, x, y, r)) {
+					res.add(n);
+					break;// TODO ?
+				}
+			}
+			_ships2.clear();
+		}
+	}
+
+	public void getShipsInfo(RotatedTileBox tb, PointF point,
+			List<? super ShipsBean> res) {
+		int r = (int) (7 * tb.getDensity());
+		int ex = (int) point.x;
+		int ey = (int) point.y;
+		List<ShipsBean> _ships2 = new ArrayList<ShipsBean>();
+		// 搜索船舶
+		if (ShipsListAdapter.shipsBeans != null
+				&& ShipsListAdapter.shipsBeans.size() >= 1) {
+			for (int i = 0; i < ShipsListAdapter.shipsBeans.size(); i++) {
+				_ships2.add(ShipsListAdapter.shipsBeans.get(i));
+			}
+		}
+		// 船队船舶
+		if (MyTeamShipsThread.shipsBeans != null
+				&& MyTeamShipsThread.shipsBeans.size() >= 1) {
+			for (int i = 0; i < MyTeamShipsThread.shipsBeans.size(); i++) {
+				_ships2.add(MyTeamShipsThread.shipsBeans.get(i));
+			}
+		}
+		// 所有船舶
+		if (_ships2Draw != null && _ships2Draw.size() >= 1) {
+
+			for (int ii = 0; ii < _ships2Draw.size(); ii++) {
+				// _ships.get(ii);
+				_ships2.add(_ships2Draw.get(ii));
+			}
+		}
+		if (_ships2 != null && _ships2.size() >= 1) {
+			for (ShipsBean n : _ships2) {
+				if (tb == null)
+					System.out.println("tb null!!!");
+				int x = (int) tb.getPixXFromLatLon(n.getLa(), n.getLo());
+				int y = (int) tb.getPixYFromLatLon(n.getLa(), n.getLo());
+				if (calculateBelongs(ex, ey, x, y, r)) {
+					res.add(n);
+					break;// TODO ?
+				}
+			}
+			_ships2.clear();
+		}
+	}
+
+	private boolean calculateBelongs(int ex, int ey, int objx, int objy,
+			int radius) {
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2
+				&& (objy - ey) <= 3 * radius;
+	}
+
+	public void showPopupWindow(final View view, int ex, int ey,
+			final ShipsBean fav) {
+		System.out.println("showPopupWindow");
+		View contentView = LayoutInflater.from(view.getContext()).inflate(
+				R.layout.balloon_overlay_ships, null);
+		LinearLayout info = (LinearLayout) contentView
+				.findViewById(R.id.balloon_main_layout);
+		info.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(view.getContext(),
+						ShipInfoActivity.class);
+				Bundle data = new Bundle();
+				data.putString("shipn", fav.n);
+				data.putString("shipcname", fav.cname);
+				data.putString("shipm", fav.m);
+				data.putString("shipi", fav.i);
+				data.putString("shiplo", fav.lo);
+				data.putString("shipla", fav.la);
+				data.putString("shipco", fav.co);
+				data.putString("shipsp", fav.sp);
+				data.putString("shipt", fav.t);
+				data.putString("ships", fav.s);
+				data.putString("shipl", fav.l);
+				data.putString("shipb", fav.b);
+				data.putString("shipdr", fav.dr);
+				data.putString("shipd", fav.d);
+				data.putString("shipe", fav.e);
+				data.putString("shipti", fav.ti);
+				data.putString("shipan", fav.an);
+				data.putString("shipc", fav.c);
+				data.putString("shipdn", fav.dn);
+				data.putString("shipflag", fav.flag);
+				data.putString("shipfle", fav.fle);
+				data.putString("shiph", fav.h);
+				data.putString("shipmes", fav.message);
+				data.putString("shiprot", fav.rot);
+				intent.putExtras(data);
+				view.getContext().startActivity(intent);
+			}
+		});
+		TextView textShisName = (TextView) contentView
+				.findViewById(R.id.text_ship_name);
+		TextView textMmsi = (TextView) contentView.findViewById(R.id.text_mmsi);
+		TextView textTime = (TextView) contentView.findViewById(R.id.text_time);
+		final PopupWindow pop = new PopupWindow(contentView,
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
+		textShisName.setText(fav.n);
+		textMmsi.setText(fav.m);
+		textTime.setText(fav.ti);
+		pop.setFocusable(true);
+		pop.setOutsideTouchable(true);
+		pop.setBackgroundDrawable(new BitmapDrawable());
+
+		int[] location = new int[2];
+		view.getLocationOnScreen(location);
+		pop.getContentView().measure(0, 0);
+		pop.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + ex
+				- pop.getContentView().getMeasuredWidth() / 2, location[1] + ey
+				- pop.getContentView().getMeasuredHeight());
+
+		// System.out.print(pop.getContentView().getMeasuredWidth() + "doubi");
+		// System.out.print(pop.getContentView().getMeasuredHeight() + "doubi");
+	}
+
+	@Override
+	public void destroyLayer() {
+		// TODO Auto-generated method stub
+
+	}
+}

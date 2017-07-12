@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_isLogin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4"
+    android:clickable="true"
+    android:onClick="onClick"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#f3f7f6" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="登录"
+            android:textColor="#4f92ed"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="3dip"
+                android:src="@drawable/icon_arrow_left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:text="返回"
+                android:textColor="#4f92ed"
+                android:textSize="19sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/include_line" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:background="#ffffff"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="15dip"
+                        android:text="手机号"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edit_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dip"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dip"
+                        android:background="@null"
+                        android:cursorVisible="true"
+                        android:gravity="center_vertical"
+                        android:phoneNumber="true"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textCursorDrawable="@null"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_send_auth_code"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#e6e6e6" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="发送验证码"
+                        android:textColor="#8aa7ce"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_time"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#e6e6e6"
+                    android:visibility="gone" >
+
+                    <TextView
+                        android:id="@+id/text_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="#8aa7ce"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <com.e.common.widget.effect.button.EffectColorButton
+                    android:id="@+id/effectButton_send_on"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="发送验证码"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/size_sp_18"
+                    android:visibility="gone"
+                    app:effectColor_bgNormalColor="#70baff"
+                    app:effectColor_bgPressedColor="#1752b0" />
+            </LinearLayout>
+
+            <include layout="@layout/include_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:background="#ffffff"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dip"
+                    android:text="验证码"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_auth_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:gravity="center_vertical"
+                    android:phoneNumber="true"
+                    android:textColor="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <include layout="@layout/include_line" />
+
+            <com.e.common.widget.effect.button.EffectColorButton
+                android:id="@+id/btn_phone_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_50"
+                android:layout_marginTop="20dip"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="验证码登录"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_sp_22"
+                app:effectColor_bgNormalColor="#70baff"
+                app:effectColor_bgPressedColor="#1752b0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="30dip"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:background="#ffffff"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dip"
+                    android:text="用户名"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <include layout="@layout/include_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:background="#ffffff"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dip"
+                    android:text="密   码"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:gravity="center_vertical"
+                    android:password="true"
+                    android:textColor="#000000"
+                    android:textCursorDrawable="@null"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <include layout="@layout/include_line" />
+
+            <com.e.common.widget.effect.button.EffectColorButton
+                android:id="@+id/effectButton_email_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_50"
+                android:layout_marginTop="20dip"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="用户名登录"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_sp_22"
+                app:effectColor_bgNormalColor="#70baff"
+                app:effectColor_bgPressedColor="#1752b0" />
+            <com.e.common.widget.effect.button.EffectColorButton
+                android:id="@+id/effectButton_wx_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_50"
+                android:layout_marginTop="20dip"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="微信登录"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_sp_22"
+                app:effectColor_bgNormalColor="#70baff"
+                app:effectColor_bgPressedColor="#1752b0" />
+
+            <com.e.common.widget.effect.button.EffectColorButton
+                android:id="@+id/effectButton_register"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_50"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="注册"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_sp_22"
+                app:effectColor_bgNormalColor="#70baff"
+                app:effectColor_bgPressedColor="#1752b0" />
+
+            <com.e.common.widget.effect.button.EffectColorButton
+                android:id="@+id/effect_close"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_50"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="取消"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_sp_22"
+                app:effectColor_bgNormalColor="#f16161"
+                app:effectColor_bgPressedColor="#1752b0" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

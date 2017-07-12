@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!--  string name="app_name">海e行</string -->
+    <!--<string name="app_version">1.0.0</string>-->
+    <!--<string name="app_version_code">1</string>-->
+    <!-- Not translatable -->
+    <!--<string name="ga_api_key">UA-28342846-2</string>-->
+    <!--<string name="ga_dispatchPeriod">10</string>-->
+    <!--<string name="ga_debug">true</string>-->
+    <!--<string name="versionFeatures">航行更安全，海洋更清洁！</string>-->
+    <!--<string name="next_tips_and_tricks_not_translate"></string>-->
+    <!-- string name="about_content">版权所有：中国海事局。\n数据支持：交通运输部东海航海保障中心。\n技术支持：上海海事大学。
+    </string -->
+</resources>

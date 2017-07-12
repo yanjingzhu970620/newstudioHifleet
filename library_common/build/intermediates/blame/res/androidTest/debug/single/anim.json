@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\loading_anim.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\bundles\\debug\\res\\anim\\loading_anim.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\push_bottom_out.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\bundles\\debug\\res\\anim\\push_bottom_out.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\push_bottom_in.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\bundles\\debug\\res\\anim\\push_bottom_in.xml"
+    }
+]

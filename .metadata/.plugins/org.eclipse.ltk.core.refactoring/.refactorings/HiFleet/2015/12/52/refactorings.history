@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.hifleet.activity.RegisterActivity.LodingShipsNameThread&apos; to &apos;GetcodeThread&apos;&#x0D;&#x0A;- Original project: &apos;HiFleet&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.activity.RegisterActivity.LodingShipsNameThread&apos;&#x0D;&#x0A;- Renamed element: &apos;com.hifleet.activity.RegisterActivity.GetcodeThread&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;LodingShipsNameThread&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.hifleet.activity{RegisterActivity.java[RegisterActivity[LodingShipsNameThread" matchStrategy="1" name="GetcodeThread" patterns="*" qualified="true" references="true" similarDeclarations="false" stamp="1450936094172" textual="true" version="1.0"/>
+</session>

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout-large-v4\\main.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout-large\\main.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout-large-v4\\abs__action_mode_close_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout-large-v4\\abs__action_mode_close_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout-large-v4\\route_info_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout-large\\route_info_list_item.xml"
+    }
+]

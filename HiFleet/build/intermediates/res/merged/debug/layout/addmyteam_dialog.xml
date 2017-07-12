@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="MMSI编号："
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_marginLeft="5dip"
+                android:id="@+id/add_mymmsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:selectAllOnFocus="true" />
+        </LinearLayout>
+
+        <LinearLayout
+           android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:orientation="horizontal" >
+
+            <TextView
+               android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10sp"
+                android:text="呼号："
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_marginLeft="5dip"
+                android:id="@+id/add_mycallsign"
+                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="选填"
+                android:paddingLeft="5dp"
+                android:selectAllOnFocus="true" />
+
+        </LinearLayout>
+        <LinearLayout
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="AIS船名:"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_marginLeft="5dip"
+                android:id="@+id/add_myaisname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:hint="选填"
+                android:selectAllOnFocus="true" />
+
+           
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:orientation="horizontal" >
+
+            <TextView
+                 android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="中文船名:"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_marginLeft="5dip"
+                android:id="@+id/add_mycname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:hint="选填"
+                android:selectAllOnFocus="true" />
+        </LinearLayout>
+         <LinearLayout
+             android:id="@+id/popselect_parent"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom|center"
+            android:orientation="horizontal" >
+
+            <TextView
+                 android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="分组:"
+                android:textSize="20dp" />
+
+            <EditText
+                android:layout_marginLeft="5dip"
+                 android:id="@+id/add_mygroupchoose"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:hint="选填"
+                android:selectAllOnFocus="true" />
+             <ImageView 
+                 android:id="@+id/btn_select_mygroup" 
+                 android:layout_width="30dp"
+                  android:layout_height="30dp" 
+	              android:src="@drawable/img1" 
+	              android:scaleType="fitXY"/>
+<!--              <ImageView  -->
+<!--                  android:id="@+id/btn_select"  -->
+<!--                  android:layout_width="30dp"  -->
+<!--                  android:layout_height="40dp"  -->
+<!-- 	             android:src="@drawable/img_expand"  -->
+<!-- 	             android:scaleType="fitXY"/> -->
+<!--              <Spinner android:id="@+id/add_groupchoose" -->
+<!--            android:paddingLeft="5dp" -->
+<!--            android:layout_width="fill_parent" -->
+<!--            android:layout_height="fill_parent"></Spinner> -->
+        </LinearLayout>
+        
+        <!--
+		<LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal" > 
+
+		    <Button
+		        android:id="@+id/button1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="bottom|center_horizontal|center"
+		        android:background="@color/white"
+		        android:text="搜索"
+		        android:textColor="@color/black" />
+		    
+		    <Button
+		        android:id="@+id/button2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="bottom|center_horizontal|center"
+		        android:background="@color/white"
+		        android:text="取消"
+		        android:textColor="@color/black" />
+		    </LinearLayout>        -->
+    </LinearLayout>
+    <!--
+	<Button
+	    android:id="@+id/button1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom|center"
+	    android:background="@color/navy"
+	    android:text="搜索" />    -->
+
+</LinearLayout>

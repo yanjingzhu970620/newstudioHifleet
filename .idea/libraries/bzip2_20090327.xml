@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bzip2-20090327">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/HiFleet/libs/bzip2-20090327.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

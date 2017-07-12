@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\release\\anim\\loading_anim.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\anim\\loading_anim.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\release\\anim\\push_bottom_out.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\anim\\push_bottom_out.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\release\\anim\\push_bottom_in.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\anim\\push_bottom_in.xml"
+    }
+]

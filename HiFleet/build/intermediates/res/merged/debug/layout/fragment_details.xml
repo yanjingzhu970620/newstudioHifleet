@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4"
+    android:clickable="true"
+    android:onClick="onClick" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="#f3f7f6" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="船舶资料"
+                android:textColor="#4f92ed"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <include layout="@layout/include_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_50"
+            android:background="#cccccc" >
+
+            <com.e.common.widget.effect.layout.EffectColorLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/size_dp_5"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginRight="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#cccccc"
+                app:effectColor_radius="7.0dip" >
+
+                <com.e.common.widget.CleanableEditText
+                    android:id="@+id/edit_ship"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_dp_20"
+                    android:layout_marginRight="@dimen/size_dp_20"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:digits="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:drawableRight="@drawable/btn_close_edittext"
+                    android:hint="请输入船名(拼音或英文)/呼号/MMSI/IMO"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/c_afa89f"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/size_sp_19" />
+            </com.e.common.widget.effect.layout.EffectColorLinearLayout>
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dip"
+            android:indeterminateDrawable="@drawable/animdraw2"
+            android:indeterminateDuration="1500"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/list_ships"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </LinearLayout>
+    
+    <RelativeLayout
+        android:id="@+id/progress_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/animdraw2"
+            android:indeterminateDuration="1500" />
+    </RelativeLayout>
+
+</RelativeLayout>

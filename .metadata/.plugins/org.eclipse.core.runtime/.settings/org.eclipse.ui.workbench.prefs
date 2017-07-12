@@ -1,0 +1,3 @@
+PLUGINS_NOT_ACTIVATED_ON_STARTUP=org.eclipse.cdt.codan.ui.cxx;org.eclipse.equinox.p2.ui.sdk.scheduler;org.eclipse.mylyn.tasks.ui;org.eclipse.mylyn.team.ui;
+RUN_IN_BACKGROUND=true
+eclipse.preferences.version=1

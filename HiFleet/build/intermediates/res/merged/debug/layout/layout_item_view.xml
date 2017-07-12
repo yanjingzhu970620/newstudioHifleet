@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_dp_60"
+        app:effectColor_bgNormalColor="@color/white"
+        app:effectColor_bgPressedColor="@color/c_cccccc" >
+
+        <ImageView
+            android:id="@+id/itemLayout_image_left_1"
+            android:layout_width="@dimen/size_dp_25"
+            android:layout_height="@dimen/size_dp_25"
+            android:scaleType="centerInside"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_dp_15" />
+
+        <TextView
+            android:id="@+id/itemLayout_text_left_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_dp_15"
+            android:layout_toRightOf="@id/itemLayout_image_left_1"
+            android:textColor="@color/c_afa89f"
+            android:textSize="@dimen/size_sp_19" />
+
+        <TextView
+            android:id="@+id/itemLayout_text_right_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_dp_15" />
+
+        <TextView
+            android:id="@+id/itemLayout_text_right_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_dp_15"
+            android:layout_toLeftOf="@+id/itemLayout_text_right_1"
+            android:textColor="@color/c_afa89f"
+            android:textSize="@dimen/size_sp_19" />
+    </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+</LinearLayout>

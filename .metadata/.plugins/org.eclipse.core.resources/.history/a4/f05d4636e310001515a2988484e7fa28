@@ -1,0 +1,383 @@
+package com.hifleet.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.ListView;
+
+import com.hifleet.R;
+import com.hifleet.adapter.ShowWanningListAdapter;
+import com.hifleet.bean.WanningBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.OsmandApplication;
+
+/**
+ * @{# ShowWanningActivity.java Create on 2015年5月28日 下午3:36:03
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class ShowWanningActivity extends HBaseActivity {
+	public final int REFRESH=70000;
+	private boolean buttonflag=true;
+	private int mt1have=0; 
+	private int mthave=0;
+	ListView mMyTeam;
+	List<WanningBean> msgs = null;
+	String wanningString;
+	public static boolean adpflag=false;
+	public static boolean lflag=false;
+	private int dflag1=0;
+	private int dflag=0;
+	OsmandApplication app;
+
+	ShowWanningListAdapter mMyTeamListAdapter;
+	private boolean inactivity;
+	public static List<WanningBean> mMyTeamBeans = new ArrayList<WanningBean>();
+	public static List<WanningBean> mMyTeamBeans1 = new ArrayList<WanningBean>();
+	public static List<WanningBean> tmMyTeamBeans = new ArrayList<WanningBean>();
+	public static List<WanningBean> tmMyTeamBeans1 = new ArrayList<WanningBean>();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.e.common.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		inactivity=true;
+		System.out.println("初始化"+inactivity+buttonflag);
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_my_team);
+
+		initNav();
+		setNavTitle("报警区域");
+		mMyTeam = (ListView) findViewById(R.id.list_my_team);
+//       if(mMyTeamBeans.size()>=1&&mMyTeamBeans1.size()>=1){
+        	mMyTeamListAdapter = new ShowWanningListAdapter(activity,
+					mMyTeamBeans1);
+	          mMyTeam.setAdapter(mMyTeamListAdapter);
+	          adpflag=true;
+	      if(mMyTeamBeans1.size()>1){
+	    	  System.out.println("初始化中全选的判断");
+	    	for(int i=0;i<mMyTeamBeans1.size();i++){
+	    		if(mMyTeamBeans1.get(i).booltf.equals("false")){
+	    			buttonflag=false;
+	    			System.out.println("全选的判断得到未勾选名称"+buttonflag+mMyTeamBeans1.get(i).Name);
+	    			return;
+	    		}
+	    	}
+	  		if(buttonflag){
+	  			System.out.println("初始化是否已经全选"+buttonflag);
+	  			setTextNavRight("全不选");
+	  			}else if(!buttonflag){
+	  				System.out.println("初始化是否已经全选"+buttonflag);
+	  				setTextNavRight("全选");
+	  			}
+	      }
+//         }
+//		new MyTeamThread().execute();
+//	          while(!lflag){
+//	        	System.out.println("等待报警适配");  
+//	          }
+	          callInfoAction();
+	}
+	
+	
+	class MyTeamThread extends AsyncTask<String, Void, Void> {
+
+
+
+		public MyTeamThread(){
+			
+		}
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				String userId = app.myPreferences.getString("User", null);
+				String httpPost = IndexConstants.GET_LAYER_LIST_URL
+						+ userId + "&userDomain=qq.com";
+				//System.out.println("httppost报警" + httpPost);
+				URL shipsUrl = new URL(httpPost);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+				conn.setConnectTimeout(5000);
+				InputStream inStream = conn.getInputStream();
+				parseXMLnew(inStream);
+				inStream.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			if(!mMyTeamBeans1.isEmpty()){
+//		  System.out.println("开始警报activity"+mMyTeamBeans1.size()+lflag+inactivity+(lflag||inactivity));
+//		  if(lflag){
+//			  System.out.println("z正在刷新警报"+mMyTeamBeans1.size());
+//	          mMyTeam.setAdapter(mMyTeamListAdapter);
+//		  }
+		  if(inactivity){
+				Message message = new Message();      
+	            message.what = REFRESH;      
+	            handler.sendMessage(message);
+		  }
+			for(int i=0;i<mMyTeamBeans.size();i++){
+				mMyTeamBeans.get(i).booltf=
+				app.myPreferences.getBoolean(mMyTeamBeans.get(i).getLayerId(), true)+"";
+//				if(i==mMyTeamBeans.size()-1){
+//				lflag=true;
+//				}
+			}
+		}
+		}
+	}
+	private int justflag=0;
+	Handler handler = new Handler() {
+
+		public void handleMessage(Message msg) {
+		switch (msg.what) {
+		case REFRESH : 
+			justflag++;
+			//System.out.println("刷新报警区域列表"+justflag);
+			if(mMyTeamBeans1.size()>1){
+				  System.out.println("刷新全选的判断");
+		    	for(int i=0;i<mMyTeamBeans1.size();i++){
+		    		if(mMyTeamBeans1.get(i).booltf.equals("false")){
+		    			buttonflag=false;
+		    			System.out.println("刷新报警区域列表得到未勾选名称"+buttonflag+mMyTeamBeans1.get(i).Name);
+		    			return;
+		    		}
+		    	}
+		  		if(buttonflag){
+		  			System.out.println("刷新报警区域列表"+buttonflag);
+		  			setTextNavRight("全不选");
+		  			}else if(!buttonflag){
+		  				System.out.println("刷新报警区域列表"+buttonflag);
+		  			setTextNavRight("全选");
+		  			}
+		      }
+//			  mMyTeamListAdapter = new ShowWanningListAdapter(activity,
+//	   					mMyTeamBeans1);
+			ShowWanningListAdapter.lastbean.addAll(mMyTeamBeans1);
+			mMyTeamListAdapter.notifyDataSetChanged();
+//			mMyTeamListAdapter = new ShowWanningListAdapter(activity,
+//					mMyTeamBeans1);
+//	          mMyTeam.setAdapter(mMyTeamListAdapter);
+		    break;
+		}
+		super.handleMessage(msg);
+		}
+		};
+	public void callInfoAction() {
+		System.out.println("启动报警区域请求");
+		MyTeamThread task = new MyTeamThread();
+		task.execute();
+	}
+	public void onClick(View view){
+		super.onClick(view);
+		switch (view.getId()) {
+		case R.id.ll_nav_right:
+			buttonflag=!buttonflag;
+			for(int j=0;j<mMyTeamBeans1.size();j++){
+				if(buttonflag){
+		  			setTextNavRight("全不选");
+		  			}else{
+		  			setTextNavRight("全选");
+		  			}
+				app.mEditor.putBoolean(mMyTeamBeans1.get(j).getLayerId(),buttonflag);
+				app.mEditor.commit();
+				mMyTeamBeans1.get(j).booltf=buttonflag+"";
+//				System.out.println(mMyTeamBeans1.get(j).Name+mMyTeamBeans1.get(j).booltf+buttonflag);
+			}
+			for(int j=0;j<mMyTeamBeans1.size();j++){
+				for(int j1=0;j1<mMyTeamBeans.size();j1++){
+					if(mMyTeamBeans.get(j1).getLayerId().equals(mMyTeamBeans1.get(j).getLayerId())){
+						mMyTeamBeans.get(j1).booltf=mMyTeamBeans1.get(j).booltf;
+					}
+				}
+			}
+			mMyTeamListAdapter.notifyDataSetChanged();
+			break;
+		}
+	}
+	/*private void parseXMLnew(InputStream inStream) throws Exception {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		Element root = document.getDocumentElement();
+		NodeList childNodes = root.getChildNodes();
+		mMyTeamBeans.clear();
+		mMyTeamBeans2.clear();
+		mMyTeamBeans3.clear();
+		for (int j = 0; j < childNodes.getLength(); j++) {
+			Node childNode = (Node) childNodes.item(j);
+			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element childElement = (Element) childNode;
+				if (childElement.getNodeName().compareTo("model") == 0) {
+					NodeList modelNodes = childElement.getChildNodes();
+					for (int i = 0; i < modelNodes.getLength(); i++) {
+						Node modelNode = (Node) modelNodes.item(i);
+						Element modelElement = (Element) modelNode;
+						if (modelElement.getNodeName().compareTo("layer") == 0) {
+							mMyTeamBeans.add(XmlParseUtility.parse(
+									modelElement, WanningBean.class));
+							NodeList modelNodes1 = modelElement.getChildNodes();
+							for (int i1 = 0; i1 < modelNodes1.getLength(); i1++) {
+								Node modelNode1 = (Node) modelNodes1.item(i1);
+								Element modelElement1 = (Element) modelNode1;
+								if (modelElement1.getNodeName().compareTo("layer") == 0) {
+									mMyTeamBeans2.add(XmlParseUtility.parse(
+											modelElement1, WanningBean.class));
+									NodeList modelNodes2 = modelElement1.getChildNodes();
+									for (int i2 = 0; i2 < modelNodes2.getLength(); i2++) {
+										Node modelNode2 = (Node) modelNodes2.item(i2);
+										Element modelElement2 = (Element) modelNode2;
+										if (modelElement2.getNodeName().compareTo("plot") == 0) {
+											mMyTeamBeans3.add(XmlParseUtility.parse(
+													modelElement2, WanningBean.class));
+						}
+									}
+					}
+								else if (modelElement1.getNodeName().compareTo("plot") == 0) {
+									mMyTeamBeans3.add(XmlParseUtility.parse(
+											modelElement1, WanningBean.class));
+									
+						}
+									}
+					}			
+								
+				}
+						}
+					}
+			}
+		
+		System.out.println(mMyTeamBeans.size()+"获取列表长度");
+		for (WanningBean bean : mMyTeamBeans2) {
+		//	System.out.println("第二层" + bean.getName());
+		}
+	}*/
+	private void parseXMLnew(InputStream inStream) throws Exception { 
+		tmMyTeamBeans.clear();
+		tmMyTeamBeans1.clear();
+		//System.out.println("解析警报区域"+inStream);
+	    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance() ;  
+	    DocumentBuilder builder = factory.newDocumentBuilder() ;  
+	    Document document = builder.parse(inStream) ;  
+	    XPath xpath = XPathFactory.newInstance().newXPath() ;  
+		  NodeList layers = (NodeList) xpath.evaluate("/root/model/layer", document,XPathConstants.NODESET);
+		  
+		  for(int i=0;i<layers.getLength();i++){
+			  Node layer = layers.item(i);
+			  WanningBean wbb=new WanningBean();
+			  String layerid=xpath.evaluate("@LayerId", layer,XPathConstants.STRING).toString();
+			  String layername=xpath.evaluate("@Name", layer,XPathConstants.STRING).toString();
+				  wbb.Name=layername;
+				  wbb.LayerId=layerid;
+				  tmMyTeamBeans1.add(wbb);
+			  //System.out.println(layerid+"layerid"+mMyTeamBeans1.size());
+			  NodeList plots = (NodeList) xpath.evaluate("/root/model/layer[@LayerId='"+layerid+"']//plot", document,XPathConstants.NODESET);
+			  
+			  for(int i1=0;i1<plots.getLength();i1++){
+				  WanningBean wb=new WanningBean();
+				  wb.Name=layername;
+				  wb.LayerId=layerid;
+				  Node plot = plots.item(i1);
+				  String plotid=xpath.evaluate("@PlotId", plot,XPathConstants.STRING).toString();
+				  wb.PlotId=plotid;
+				  wb.PlotName=xpath.evaluate("@Name", plot,XPathConstants.STRING).toString();
+				  tmMyTeamBeans.add(wb);
+			  }
+		  }
+		 for(int ti=0;ti<tmMyTeamBeans1.size();ti++){
+		  for(int mt=0;mt<mMyTeamBeans1.size();mt++){
+			  mt1have=0;
+			  if(mMyTeamBeans1.get(mt).LayerId.equals(tmMyTeamBeans1.get(ti).getLayerId())){
+				  mt1have++;
+				  return;
+			  }
+		  }
+		  if(mt1have==0){
+			  mMyTeamBeans1.add(tmMyTeamBeans1.get(ti));
+				  }
+	}
+		 for(int tj=0;tj<tmMyTeamBeans.size();tj++){
+			  for(int mt=0;mt<mMyTeamBeans.size();mt++){
+				  mthave=0;
+				  if(mMyTeamBeans.get(mt).PlotId.equals(tmMyTeamBeans.get(tj).PlotId)){
+					  mthave++;
+					  return;
+				  }
+			  }
+			  if(mthave==0){
+				  mMyTeamBeans.add(tmMyTeamBeans.get(tj));
+					  }
+		}
+		 for(int i=0;i<mMyTeamBeans1.size();i++){
+				dflag1=0;
+				for(int j=0;j<tmMyTeamBeans1.size();j++){
+					if(tmMyTeamBeans1.get(j).getLayerId().equals(mMyTeamBeans1.get(i).getLayerId())){
+						dflag1++;
+					}
+				}
+				if(dflag1==0){
+					System.out.println("删除layerlist");
+					mMyTeamBeans1.remove(i);
+				}
+	        }
+		 for(int i=0;i<mMyTeamBeans.size();i++){
+				dflag=0;
+				for(int j=0;j<tmMyTeamBeans.size();j++){
+					if(tmMyTeamBeans.get(j).getLayerId().equals(mMyTeamBeans.get(i).getLayerId())){
+						dflag++;
+					}
+				}
+				if(dflag==0){
+					System.out.println("删除plotlist");
+					mMyTeamBeans.remove(i);
+				}
+	        }
+	}
+
+
+}

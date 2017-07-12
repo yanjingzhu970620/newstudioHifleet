@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000" >
+
+    <!-- 显示预览图形 -->
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:onClick="onClick" />
+
+    <ImageView
+        android:id="@+id/id_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <Button
+        android:id="@+id/id_switch_camera"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/xml_btn_camera_switch"
+        android:onClick="onClick" />
+
+    <Button
+        android:id="@+id/id_back"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/xml_btn_camera_back"
+        android:onClick="onClick" />
+
+    <RelativeLayout
+        android:id="@+id/ll_bottom_btns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dip"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/ll_shutter_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" >
+
+                <Button
+                    android:id="@+id/id_shutter"
+                    android:layout_width="80dip"
+                    android:layout_height="80dip"
+                    android:background="@drawable/xml_btn_shutter"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/id_camera_retake"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="40dip"
+                android:layout_toLeftOf="@id/ll_shutter_ok"
+                android:background="@drawable/xml_btn_camera_retake"
+                android:onClick="onClick"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/id_btn_ok"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dip"
+                android:layout_toRightOf="@id/ll_shutter_ok"
+                android:background="@drawable/xml_btn_ok_big"
+                android:onClick="onClick"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

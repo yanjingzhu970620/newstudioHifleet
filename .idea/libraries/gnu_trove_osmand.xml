@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gnu-trove-osmand">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/HiFleet/libs/gnu-trove-osmand.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

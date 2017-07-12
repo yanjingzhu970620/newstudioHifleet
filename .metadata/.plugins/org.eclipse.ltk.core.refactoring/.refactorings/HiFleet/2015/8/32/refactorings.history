@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;MapTileLayer.java&apos; to &apos;HiFleet/src/com.hifleet.map&apos;&#x0D;&#x0A;- Original project: &apos;HiFleet&apos;&#x0D;&#x0A;- Destination element: &apos;HiFleet/src/com.hifleet.map&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.map.MapTileLayer.java&apos;" description="Copy compilation unit" destination="/src&lt;com.hifleet.map" element1="/src&lt;com.hifleet.map{MapTileLayer.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1438666606998" units="1" version="1.0"/>
+</session>

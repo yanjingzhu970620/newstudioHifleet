@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4"
+    android:clickable="true"
+    android:onClick="onClick"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#f3f7f6" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="港口船舶"
+            android:textColor="#4f92ed"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/effect_ports"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:clickable="true"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#c7c7c7" >
+
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/setting_child_text"
+                    android:text="在港船舶" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_arrow" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_left_line" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/effect_arriveports"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:clickable="true"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#c7c7c7" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/setting_child_text"
+                    android:text="最近抵港" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_arrow" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_left_line" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/effect_willarriveports"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:clickable="true"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#c7c7c7" >
+
+                <TextView
+                    style="@style/setting_child_text"
+                    android:text="预抵船舶" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_arrow" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_left_line" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/effect_lineships"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:clickable="true"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#c7c7c7" >
+
+                <TextView
+                    style="@style/setting_child_text"
+                    android:text="航线船舶" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_arrow" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_left_line" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/effect_areaships"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:clickable="true"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#c7c7c7" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/setting_child_text"
+                    android:text="区域船舶" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dip"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/icon_arrow" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

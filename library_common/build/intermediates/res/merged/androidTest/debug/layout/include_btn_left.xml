@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.e.common.widget.effect.layout.EffectColorLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_nav_left"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/size_dp_55"
+    android:layout_centerVertical="true"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:minWidth="@dimen/size_dp_50"
+    android:onClick="onClick"
+    android:orientation="horizontal"
+    app:effectColor_bgNormalColor="@color/transparent"
+    app:effectColor_bgPressedColor="@color/nav_side_pressed" >
+
+    <ImageView
+        android:id="@+id/img_nav_left"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_dp_40"
+        android:layout_marginLeft="@dimen/size_dp_10"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_back" />
+
+    <TextView
+        android:id="@+id/text_nav_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_dp_5"
+        android:layout_marginRight="@dimen/size_dp_10"
+        android:gravity="center_vertical"
+        android:text="返回"
+        android:textColor="@color/nav_side_text_color"
+        android:textSize="@dimen/size_sp_19" />
+
+</com.e.common.widget.effect.layout.EffectColorLinearLayout>

@@ -1,0 +1,174 @@
+package com.hifleet.thread;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.os.AsyncTask;
+import android.os.Message;
+import android.util.Log;
+
+import com.hifleet.bean.HeartBeatBean;
+import com.hifleet.bean.ShipsBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.lnfo.layer.ShipsInfoLayer;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.MapActivity;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.utility.XmlParseUtility;
+
+/**
+ * @{# LoginHandler.java Create on 2015年3月30日 下午1:52:39
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class MyTeamShipsThread extends AsyncTask<Void, String, String> {
+
+	private static void print(String msg) {
+		Log.i(TAG, msg);
+	}
+
+	public static final String TAG = "FileDownloader";
+
+	public static List<ShipsBean> shipsBeans = new ArrayList<ShipsBean>();
+	public static ArrayList<ShipsBean> currentshipsBeans = new ArrayList<ShipsBean>();
+	public static List<HeartBeatBean> heartBeatBean = new ArrayList<HeartBeatBean>();
+	static OsmandApplication app;
+	public static boolean flag = true;
+public static boolean teamshipfirst=true;
+	protected void onPreExecute() {
+
+	}
+
+	protected void onProgressUpdate(String... values) {
+
+	}
+
+	protected void updateProgress(boolean updateOnlyProgress) {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
+	
+	protected void onPostExecute(String result) {
+
+		for (HeartBeatBean h : heartBeatBean) {
+			if (Integer.valueOf(h.flag).intValue() == 0) {
+				Message message = new Message();
+				message.obj = 33;
+				message.what = 44;
+				MapActivity.teamShipsHandler.sendMessage(message);
+			}
+		}
+		print("船队船舶数量" + shipsBeans.size());
+//		ShipLableLayer.lablePost = true;
+		ShipsInfoLayer.clearLayer();
+		teamshipfirst=false;
+		ShipsInfoLayer.callbuffer();
+	}
+
+	protected String doInBackground(Void... arg0) {
+		// TODO Auto-generated method stub
+		try {
+			String httpPost = app.myPreferences.getString("loginserver", null)
+					+ IndexConstants.GET_MY_TEAM_URL;
+			URL shipsUrl = new URL(httpPost);
+			if(this.isCancelled()){
+				return null;
+			}
+			HttpURLConnection conn = (HttpURLConnection) shipsUrl
+					.openConnection();
+			// System.out.print("myteam session"+app.myPreferences.getString("sessionid",
+			// ""));
+			try {
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+			} catch (java.lang.RuntimeException re) {
+				re.printStackTrace();
+				// System.out.println("RuntimeException myteam doinbackground");
+				return null;
+			}
+			conn.setConnectTimeout(10000);
+			if(this.isCancelled()){
+				return null;
+			}
+			InputStream inStream = conn.getInputStream();
+			if(this.isCancelled()){
+				return null;
+			}
+			parseXMLnew(inStream);
+			if(this.isCancelled()){
+				return null;
+			}
+			inStream.close();
+			print("准备执行异步刷新船队");
+			currentshipsBeans.clear();
+			ShipsInfoLayer.addFleetVesselsInCurrentWindow(currentshipsBeans, MyTeamShipsThread.shipsBeans);
+		} catch (Exception e) {
+			// TODO: handle exception
+			// System.out.println("未能获取网络数据");
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	private static void parseXMLnew(InputStream inStream) throws Exception {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		Element root = document.getDocumentElement();
+		NodeList childNodes = root.getChildNodes();
+
+		if (shipsBeans != null) {
+			shipsBeans.clear();
+		}
+
+		if (root.getNodeName().compareTo("session__timeout") == 0) {
+			heartBeatBean.add(XmlParseUtility.parse(root, HeartBeatBean.class));
+		}
+
+		for (int j = 0; j < childNodes.getLength(); j++) {
+			Node childNode = (Node) childNodes.item(j);
+			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element childElement = (Element) childNode;
+				if (childElement.getNodeName().compareTo("ship") == 0) {
+					shipsBeans.add(XmlParseUtility.parse(childElement,
+							ShipsBean.class));
+				}
+			}
+		}
+		//print("船队船舶数量" + shipsBeans.size());
+		// int i=0;
+		// for (ShipsBean bean : shipsBeans) {
+		// i++;
+		// System.out.println("mmsi" + bean.m+"这是第"+i);
+		// }
+	}
+
+	public MyTeamShipsThread() {
+
+	}
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="red">#ffed1b2e</color>
+    <color name="transparent">#00000000</color>
+    <color name="dialog_btn_bg_color">#ffd9d9d9</color>
+    
+    <color name="none_color">#00000000</color>
+    <color name="bule_overlay">#99000000</color>
+    <color name="bg_content">#E5ECDD</color>
+    <color name="maincolor">#0bd151</color>
+    <color name="white">#fff</color>
+    <color name="bg_site_normal">#fafafa</color>
+    <color name="bg_site_pressed">#c7c7c7</color>
+</resources>

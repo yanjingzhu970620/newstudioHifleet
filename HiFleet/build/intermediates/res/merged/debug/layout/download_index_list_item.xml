@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="1dp"
+    android:paddingRight="8dp"
+    android:paddingTop="1dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:orientation="vertical" >
+
+        <!-- 水平放置 -->
+
+        <LinearLayout
+            android:id="@+id/panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal" >
+
+            <!-- 这个是前面的复选框 -->
+            <!--
+            LinearLayout android:layout_width="wrap_content" android:layout_height="fill_parent">
+				<CheckBox android:id="@+id/check_download_item" android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:gravity="center_vertical" android:focusable="false" />
+			</LinearLayout
+            -->
+
+
+            <!-- 离线包名称 -->
+
+            <TextView
+                android:id="@+id/download_item"
+                style="@style/ListText.Middle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:maxLines="1" >
+            </TextView>
+
+            <!-- 离线包描述性信息 -->
+
+            <TextView
+                android:id="@+id/download_descr"
+                style="@style/ListText.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:gravity="right" >
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/downloadImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/offlinemap_download_control_imagebutton_background"
+                android:scaleX=".9"
+                android:scaleY=".9" >
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/deleteImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/offlinemap_download_control_imagebutton_background"
+                android:scaleX=".9"
+                android:scaleY=".9"
+                android:src="@drawable/ic_action_delete_light" >
+            </ImageButton>
+        </LinearLayout>
+
+        <!-- 垂直放置 -->
+
+        <LinearLayout
+            android:id="@+id/visibleOrInvisibleArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <!-- 显示进度信息 -->
+            <!--
+                TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:id="@+id/ItemDownloadProgressText"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"                
+                android:text="0%"
+                style="@style/ListText.Small"                
+                android:textColor="@color/black"
+                /
+            -->
+            <!-- 进度条 -->
+            <!--
+                <ProgressBar
+                android:id="@+id/ItemDownloadProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:minHeight="15dp"  
+                android:indeterminate="false"                
+                style="?android:attr/progressBarStyleHorizontal" /> 
+            -->
+
+
+            <!-- 水平放置 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/downloadButton"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/round_corners_button_drawable"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp"
+                    android:text="开始下载"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" >
+                </Button>
+
+                <!--
+					 <Button android:id="@+id/updateButton"
+					     android:layout_width="100dp"					     
+					     android:layout_height="wrap_content"
+					     android:layout_gravity="center|bottom"
+					     android:paddingLeft="10sp" android:paddingRight="10sp"
+					     android:text="更新离线包"
+					     android:textSize="14dp"
+					     android:textColor="@color/black"					     
+				     android:layout_marginRight="10dp"
+				     android:layout_marginLeft="10dp"
+				     android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"/>
+                -->
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="100dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/round_corners_button_drawable"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp"
+                    android:text="删除"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

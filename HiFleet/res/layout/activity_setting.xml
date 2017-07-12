@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_f5f0eb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_nav" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_dp_30"
+            android:layout_marginTop="@dimen/size_dp_20"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <RelativeLayout style="@style/setting_child" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="显示标绘" />
+
+                    <com.e.common.widget.UISwitchButton
+                        android:id="@+id/switch_plot"
+                        style="@style/setting_child_choose" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_left_line" />
+
+                <RelativeLayout style="@style/setting_child" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="开启报警" />
+
+                    <com.e.common.widget.UISwitchButton
+                        android:id="@+id/switch_wanning"
+                        style="@style/setting_child_choose" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_left_line" />
+
+                <RelativeLayout style="@style/setting_child" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="显示船名" />
+
+                    <com.e.common.widget.UISwitchButton
+                        android:id="@+id/switch_my_team"
+                        style="@style/setting_child_choose" />
+                </RelativeLayout>
+
+                <include layout="@layout/include_line" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:background="#e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/rl_show_myteam"
+                    style="@style/setting_child"
+                    android:onClick="onClick" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="船队设置" />
+
+                    <include layout="@layout/include_arrow_right" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+                <include layout="@layout/include_left_line" />
+
+                <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                    android:id="@+id/rl_show_wanning"
+                    style="@style/setting_child"
+                    android:onClick="onClick" >
+
+                    <TextView
+                        style="@style/setting_child_text"
+                        android:text="警报设置" />
+
+                    <include layout="@layout/include_arrow_right" />
+                </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+                <include layout="@layout/include_line" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_20"
+                android:background="#e0e0e0" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/rl_change_server"
+                style="@style/setting_child"
+                android:onClick="onClick" >
+
+                <TextView
+                    style="@style/setting_child_text"
+                    android:text="服务器设置" />
+
+                <include layout="@layout/include_arrow_right" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_40"
+                android:background="#e0e0e0" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/effectRelativeLayout_management"
+                style="@style/setting_child"
+                android:onClick="onClick" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="修改四位密码"
+                    android:textColor="#fa3737"
+                    android:textSize="20sp" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:background="#e0e0e0" />
+
+            <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+                android:id="@+id/rl_exit"
+                style="@style/setting_child"
+                android:onClick="onClick" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="退出登录"
+                    android:textColor="#fa3737"
+                    android:textSize="20sp" />
+            </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+            <include layout="@layout/include_line" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

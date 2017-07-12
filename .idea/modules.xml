@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HiFleet/HiFleet.iml" filepath="$PROJECT_DIR$/HiFleet/HiFleet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SherlockBar/SherlockBar.iml" filepath="$PROJECT_DIR$/SherlockBar/SherlockBar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_common/library_common.iml" filepath="$PROJECT_DIR$/library_common/library_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/studioHifleet.iml" filepath="$PROJECT_DIR$/studioHifleet.iml" />
+    </modules>
+  </component>
+</project>

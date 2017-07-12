@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;HiFleet/res/drawable-hdpi/bf_weather_after.png&apos; to &apos;bt_weather_after.png&apos;" description="Rename resource &apos;bf_weather_after.png&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/drawable-hdpi/bf_weather_after.png" name="bt_weather_after.png" stamp="1452135340088" updateReferences="true"/>
+</session>

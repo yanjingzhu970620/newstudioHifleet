@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4" >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#f3f7f6" >
+
+        <TextView
+            android:id="@+id/activity_chooseship_title"
+            android:maxLength="13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="船舶"
+            android:textColor="#4f92ed"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="3dip"
+                android:src="@drawable/icon_arrow_left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:text="返回"
+                android:textColor="#4f92ed"
+                android:textSize="19sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/include_line" />
+ <RelativeLayout
+     android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:background="#f3f7f6" >
+
+            <TextView
+                android:id="@+id/portships_pagecount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="第1页"
+                android:textColor="#4f92ed"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/last_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:text="上一页"
+                    android:textColor="#4f92ed"
+                    android:textSize="19sp" />
+            </LinearLayout>
+             <LinearLayout
+                android:id="@+id/next_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dip"
+                    android:text="下一页"
+                    android:textColor="#4f92ed"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </RelativeLayout>
+   
+    <ListView
+        android:id="@+id/list_ship_simple_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.hifleet.xlistview.XListView
+        android:id="@+id/xlist_ship_simple_detail"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        </com.hifleet.xlistview.XListView>
+        </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/progress_ships_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/animdraw2"
+            android:indeterminateDuration="1500" />
+    </RelativeLayout>
+    
+</RelativeLayout>

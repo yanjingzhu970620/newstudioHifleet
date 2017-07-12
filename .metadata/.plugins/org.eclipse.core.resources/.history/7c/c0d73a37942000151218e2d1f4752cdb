@@ -1,0 +1,474 @@
+package com.hifleet.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.dom4j.io.SAXReader;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.hifleet.R;
+import com.hifleet.adapter.ShowWanningListAdapter;
+import com.hifleet.bean.HeartBeatBean;
+import com.hifleet.bean.WanningBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.lnfo.layer.ShipsInfoLayer;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.thread.UserLogout;
+import com.hifleet.utility.XmlParseUtility;
+
+/**
+ * @{# ShowWanningActivity.java Create on 2015年5月28日 下午3:36:03
+ * 在设置中打开报警的区域列表，然后勾选要
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class ShowWanningActivity extends HBaseActivity {
+	public final int ONCREATEREFRESH = 70000;
+	public final int REFRESH = 70001;
+	private boolean buttonflag = true;
+	ListView mMyTeam;
+	List<WanningBean> msgs = null;
+	String wanningString;
+	OsmandApplication app;
+
+	ShowWanningListAdapter mMyTeamListAdapter;
+	static boolean inactivity;
+	public static List<String> alertplots = new ArrayList<String>();
+//	public static List<WanningBean> ltmMyTeamBeans1 = new ArrayList<WanningBean>();//解析得到的列表
+	public static List<WanningBean> warnList = new ArrayList<WanningBean>();//缓存的列表
+	private List<HeartBeatBean> heartBeatBean = new ArrayList<HeartBeatBean>();
+
+	ProgressBar progress;
+
+	private static void print(String msg) {
+		Log.i(TAG, msg);
+	}
+
+	public static final String TAG = "FileDownloader";
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.e.common.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		print("初始化" + inactivity + buttonflag);
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_my_team);
+
+		initNav();
+		setNavTitle("报警区域");
+		inactivity = true;
+		progress = (ProgressBar) findViewById(R.id.progress);
+		mMyTeam = (ListView) findViewById(R.id.list_my_team);		
+		print("Show warning activity. ");
+		callwanAction();
+	}
+
+	class alertareaThread extends AsyncTask<String, Void, Void> {
+		String uuid;
+		public alertareaThread(String uuid) {
+            this.uuid=uuid;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				print("准备请求全部报警数据");
+				long s=System.currentTimeMillis();
+				String userId = app.myPreferences.getString("User", null);
+				String httpPost = app.myPreferences.getString("loginserver",
+						null)
+						+ IndexConstants.GET_LAYER_LIST_URL
+						+ userId
+						+ "&userDomain=qq.com";
+				// System.out.println("httppost报警" + httpPost);
+				URL shipsUrl = new URL(httpPost);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+				conn.setConnectTimeout(10000);
+				InputStream inStream = conn.getInputStream();
+//				System.out.println("解析报警列表数据");
+				parseXMLnew(inStream);
+				inStream.close();
+				long e=System.currentTimeMillis();
+				print("解析报警数据  完成"+(e-s));
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			clearMapByUUID(uuid);
+			super.onPostExecute(result);
+		}
+	}
+
+	class wanningThread extends AsyncTask<String, Void, Void> {
+
+		public wanningThread() {
+
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+//				System.out.println("准备请求报警列表数据");
+//				long s=System.currentTimeMillis();
+				String userId = app.myPreferences.getString("User", null);
+				String httpPost = app.myPreferences.getString("loginserver",
+						null)
+						+ IndexConstants.GET_LAYER_LIST_URL
+						+ userId
+						+ "&userDomain=qq.com";
+				print("httppost报警区域： " + httpPost);
+				URL shipsUrl = new URL(httpPost);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+				conn.setConnectTimeout(5000);
+				InputStream inStream = conn.getInputStream();
+				//print("准备解析报警列表数据");
+				parseXMLnew1(inStream);
+				inStream.close();
+//				long e=System.currentTimeMillis();
+				//print("解析报警列表数据  完成： ");
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+//			ShipsInfoLayer.justflag++;
+			super.onPostExecute(result);
+			for (HeartBeatBean h : heartBeatBean) {
+				if (Integer.valueOf(h.flag).intValue() == 0) {
+					UserLogout thread = null;
+					thread = new UserLogout();
+					thread.execute();
+					new AlertDialog.Builder(activity).setTitle("提示")
+							.setCancelable(false)
+							.setMessage("会话超时或账号在其他计算机登录！")
+							.setNegativeButton("确定", new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									app.mEditor.putInt("isAutoLogin", 2).commit();
+									Intent intent = new Intent(activity,
+											LoginActivity.class);
+									startActivity(intent);
+									app.getInstance().exit();
+								}
+							}).show();
+					return;
+				}
+			}
+
+					Message message = new Message();
+					message.what = ONCREATEREFRESH;
+					handler.sendMessage(message);
+//				}
+//			}
+		}
+	}
+
+	Handler handler = new Handler() {
+
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case ONCREATEREFRESH:
+				if (warnList.size() > 1) {
+					for (int i = 0; i < warnList.size(); i++) {
+						if (warnList.get(i).booltf.equals("false")) {
+							buttonflag = false;
+							// System.out.println("刷新报警得到未勾选名称"+buttonflag+warnList.get(i).Name);
+							setTextNavRight("全选");
+							break;
+						}
+					}
+					if (buttonflag) {
+						setTextNavRight("全不选");
+						// }else {
+						// System.out.println("刷新报警这儿执行了吗"+buttonflag);
+						// setTextNavRight("全选");
+					}
+				}
+				// ShowWanningListAdapter.lastbean.addAll(mMyTeamBeans1);
+				// mMyTeamListAdapter.notifyDataSetChanged();
+				mMyTeamListAdapter = new ShowWanningListAdapter(activity,
+						warnList);
+				// System.out.println("activity刷新报警这儿执行了吗"+ShowWanningListAdapter.lastbean.size());
+				mMyTeam.setAdapter(mMyTeamListAdapter);
+				progress.setVisibility(View.GONE);
+				//print("刷新报警ye完成了");
+				break;
+			case REFRESH:
+				mMyTeamListAdapter.notifyDataSetChanged();
+			}
+			super.handleMessage(msg);
+		}
+	};
+
+	public void callInfoAction() {
+		closeReqest();
+		
+		String uuid = UUID.randomUUID().toString();
+		
+		alertareaThread task = new alertareaThread(uuid);
+		asyntaskmap.put(uuid, task);
+			
+			//print("" + uuid + " LabelThread 启动。");
+			
+			task.execute();
+	}
+
+	private HashMap<String, alertareaThread> asyntaskmap = new HashMap<String, alertareaThread>();
+
+	private void clearMapByUUID(String uuid) {
+		asyntaskmap.remove(uuid);
+	}
+
+	private void closeReqest() {
+		if (asyntaskmap.isEmpty())
+			return;
+
+		Iterator<String> it = asyntaskmap.keySet().iterator();
+
+		while (it.hasNext()) {
+			String uuid = it.next();
+			alertareaThread task = asyntaskmap.get(uuid);
+			task.cancel(true);
+		}
+	}
+	public void callwanAction() {
+		wanningThread wan = new wanningThread();
+		wan.execute();
+	}
+
+	public void onClick(View view) {
+		super.onClick(view);
+		if (warnList.size() > 0) {
+			switch (view.getId()) {
+			case R.id.ll_nav_right:
+				buttonflag = !buttonflag;
+				for (int j = 0; j < warnList.size(); j++) {
+					if (buttonflag) {
+						setTextNavRight("全不选");
+					} else {
+						setTextNavRight("全选");
+					}
+					app.mEditor.putBoolean(warnList.get(j).getLayerId(),
+							buttonflag);
+					app.mEditor.commit();
+
+				}
+
+				Message message = new Message();
+				message.what = REFRESH;
+				handler.sendMessage(message);
+				break;
+			}
+		}
+	}
+
+	private void parseXMLnew(InputStream inStream) throws Exception {
+		// tmMyTeamBeans1.clear();
+		print("解析警报区域.");
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		System.out.println(LoginActivity.myFleet+"准备解析报警");
+		String myFleet= LoginActivity.myFleet;
+		NodeList layers = (NodeList) xpath.evaluate("/root/model/layer[@Name='" + myFleet+ "']/layer",
+				document, XPathConstants.NODESET);
+		for (int i = 0; i < layers.getLength(); i++) {
+			Node layer = layers.item(i);
+			WanningBean wbb = new WanningBean();
+			String layerid = xpath.evaluate("@LayerId", layer,
+					XPathConstants.STRING).toString();
+			String layername = xpath.evaluate("@Name", layer,
+					XPathConstants.STRING).toString();
+			wbb.Name = layername;
+			wbb.LayerId = layerid;
+			// tmMyTeamBeans1.add(wbb);
+			// System.out.println(layerid+"layerid"+mMyTeamBeans1.size());
+			
+
+			if(app.myPreferences.getBoolean(layerid, false)){
+				NodeList plots = (NodeList) xpath.evaluate(
+						"/root/model/layer[@Name='" + myFleet + "']/layer[@LayerId='" + layerid + "']//plot",
+						document, XPathConstants.NODESET);
+				for (int i1 = 0; i1 < plots.getLength(); i1++) {
+					Node plot = plots.item(i1);
+						String plotid = xpath.evaluate("@PlotId", plot,
+								XPathConstants.STRING).toString();
+						if(alertplots.contains(plotid)){
+							alertplots.remove(plotid);
+						}
+						alertplots.add(plotid);
+					}
+
+		}
+
+		}
+	}
+
+	private void parseXMLnew1(InputStream inStream) throws Exception {
+		//print("解析activity内报警");
+		long s=System.currentTimeMillis();
+		warnList.clear();
+		SAXReader reader = new SAXReader();
+		org.dom4j.Document document = reader.read(inStream);
+		String myFleet= LoginActivity.myFleet;
+		Map<String, org.dom4j.Element> map = new HashMap<String, org.dom4j.Element>();
+		List<org.dom4j.Element> root = document.getRootElement().elements();
+		
+		print("MoreActivity 》 报警结果中 Plot 个数: "+root.size());
+		
+		for (org.dom4j.Element  e : root) {
+			 map.put(e.attribute("Name").getText(), e);
+		}
+		
+		 for(String p:map.keySet()){
+			 org.dom4j.Element rse = map.get(p);
+			if(rse!=null){
+				List<org.dom4j.Element>  rslist = rse.elements();
+				 print("MoreActivity 》 筛选目标 个数： "+rslist.size());
+				for(org.dom4j.Element e:rslist){
+				String fleetname=e.attributeValue("Name");
+				 print("MoreActivity 》 筛选fleetlayer 目标 name： "+fleetname);
+				if(myFleet.equals(fleetname)){
+				if(rslist!=null){
+					org.dom4j.Element layers=(org.dom4j.Element) e.elements();
+					for(org.dom4j.Element e2:layers){
+            			String layerid = e2.attributeValue("LayerId");//.getText();
+            			String layername = e2.attributeValue("Name");//.getText();
+            			
+            			WanningBean wb = new WanningBean();
+            			
+            			wb.Name = layername;
+            			wb.LayerId = layerid;
+            			warnList.add(wb);    
+            			//System.out.println(mmsi+", "+shipname+", "+TriggerTime);
+            		}
+				}
+				}
+			}
+			}
+		 }
+//		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//		DocumentBuilder builder = factory.newDocumentBuilder();
+//		Document document = builder.parse(inStream);
+//		XPath xpath = XPathFactory.newInstance().newXPath();
+//		String myFleet= LoginActivity.myFleet;
+//		NodeList layers = (NodeList) xpath.evaluate("/root/model/layer[@Name='" + myFleet + "']/layer",
+//				document, XPathConstants.NODESET);
+//		print("layers.length: "+layers.getLength());
+//		Element root = document.getDocumentElement();
+//		NodeList childNodes = root.getChildNodes();
+//
+//		if (root.getNodeName().compareTo("session__timeout") == 0) {
+//			heartBeatBean.add(XmlParseUtility.parse(root, HeartBeatBean.class));
+//		}
+//
+//		for (int i = 0; i < layers.getLength(); i++) {
+//			Node layer = layers.item(i);
+//			WanningBean wbb = new WanningBean();
+//			String layerid = xpath.evaluate("@LayerId", layer,
+//					XPathConstants.STRING).toString();
+//			String layername = xpath.evaluate("@Name", layer,
+//					XPathConstants.STRING).toString();
+//			wbb.Name = layername;
+//			wbb.LayerId = layerid;
+//			//print("layername: "+layername);
+//			warnList.add(wbb);
+//			//ltmMyTeamBeans1.add(wbb);
+//
+//		}
+		 long e=System.currentTimeMillis();
+		print("报警列表解析完成 "+warnList.size()+"time"+(e-s));
+
+	}
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			
+			finish();
+
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

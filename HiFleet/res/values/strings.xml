@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!--
+    	 Disclaimer:
+         If you are going to translate strings, please make sure:
+         1. There is no duplicate strings by name
+         2. Every apostrophe (quote) is preceded by a backslash (see others).
+         If you are making/correcting English translations make sure:
+         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
+    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
+    -->
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">Loading...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">More</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="app_version">app_version</string>
+    <string name="app_name">hifleet online</string>
+    <string name="versionFeatures">versionFeatures</string>
+
+    <string name="exception_occured">发生异常。异常信息：</string>
+    <string name="uninstall_old_version_dialog_title">发现旧版本程序</string>
+		 <string name="find_old_version_app_installed">发现本机安装有旧版本程序，需要先卸载旧版本程序才能继续使用此版本软件。\n
+		     由于用户船队等数据保存在服务端，卸载旧版后用户重新登录会自动加载船队数据。\n
+		     现在需要卸载吗？\n</string>
+    <string name="uninstall_old_version_button">卸载</string>
+    <string name="about_settings">About</string>
+    <string name="customer_service_qq">客服 QQ</string>
+
+    <string name="map_view">Map</string>
+    <string name="download_all">Download all</string>
+    <string name="stop_all">Stop all</string>
+    <string name="delete_all">Delete all</string>
+
+    <string name="installing_new_resources">Unpacking new data…</string>
+    <string name="si_mi_foots">Miles/feet</string>
+    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_km_m">Kilometers/meters</string>
+    <string name="default_buttons_yes">Yes</string>
+    <string name="defalut_button_queding">Ok</string>
+    <string name="default_buttons_cancel">Cancel</string>
+    <string name="clean_in_progress">Cleaing now</string>
+    <string name="clear_record_success">清除浏览记录成功！</string>
+    <string name="clear_cache_success">Clear the cached resources successfully!</string>
+    <string name="clear_cache_failure">Clear the cached resources failured.</string>
+    <string name="tap_twice_to_exit">Tap back again will exit app.</string>
+    <string name="accessibility_on">On</string>
+    <string name="accessibility_off">Off</string>
+    <string name="accessibility_default">According to the global system setting</string>
+    <string name="finished_task">Finished</string>
+    <string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
+    <string name="km">km</string>
+    <string name="nautical_miles">n mile</string>
+    <string name="km_h">km/h</string>
+    <string name="knots">Knots</string>
+    <string name="m">m</string>
+    <string name="mile">mi</string>
+    <string name="yard">yd</string>
+    <string name="foot">ft</string>
+    <string name="mile_per_hour">mph</string>
+    <string name="server_no_response">Server no response.</string>
+    <string name="file_error">File error.</string>
+    <string name="network_connection_error">Can not connect to the server. Please check the network.</string>
+    <string name="read_offline_map_file_error">Exception occured while reading offline map. Please check the network.</string>
+    <string name="downloading_list_indexes">Downloading list of available regions…</string>
+
+
+    <string name="download_question">Download {0} - {1} ?</string>
+    <string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
+    <string name="address">Address</string>
+    <string name="download_index_success">Download successful</string>
+    <string name="error_io_error">I/O error occurred</string>
+    <string name="downloading_file_new">Downloading …</string>
+    <string name="downloading">Downloading…</string>
+    <string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
+    <string name="input_output_error">I/O error occurred</string>
+    <string name="choose_storage_place">choose storage place</string>
+    <string name="exit_offline_map_download_wnd_warning_dlg_title">Quit this window</string>
+    <string name="warning_message">There is offline map downloading, quit this window will interupt the download progress. \nAre you to quit?</string>
+    <string name="quedingtuichu">Yes</string>
+    <string name="quxiaotuichu">No</string>
+    <string name="offline_map_activity_title">Offline Nautical Maps</string>
+    <string name="offline_map_attention">仅限中国海图模式下使用！</string>
+    <string name="pause_offline_map">暂停下载</string>
+    <string name="resume_offline_map">继续下载</string>
+    <string name="download_offline_map">开始下载</string>
+    <string name="update_offline_map">更新下载</string>
+    <string name="delete_offline_map">删除海图</string>
+    <string name="download_all_offline_map">全部下载</string>
+    <string name="update_all_offline_map">全部更新</string>
+    <string name="pause_all_offline_map_download">全部暂停</string>
+    <string name="confirm_to_delete_offline_map_dialog_title">Are you sure to delete the downloaded offline maps?</string>
+    <string name="confirm_to_delete_all_offline_map_dialog_title">Are you sure to delete all downloaded offline maps?</string>
+    <string name="delete_all_downloaded_offline_maps_warning_message">Some maps will not be shown in offline mode after the offline maps deleted. \nAre you sure to delete them all?</string>
+    <string name="cancel_delete_all">Cancel</string>
+    <string name="confirm_delete_all">Confirm</string>
+    <string name="delete_all_success">Success!</string>
+    <string name="delete_all_failure">Failure!</string>
+    <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
+    <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
+    <string name="offline_map_download_status_needupdate">New version!</string>
+    <string name="offline_map_download_status_downloaed">Downloaded</string>
+    <string name="offline_map_download_status_downloading">Downloading</string>
+    <string name="offline_map_download_status_paused">Paused</string>
+    <string name="offline_map_download_status_download_completed">Downloaded</string>
+    <string name="offline_map_download_status_waiting">Waiting</string>
+    <string name="index_name_other">Worldwide and topic maps</string>
+    <string name="change_storage_place_warning_dialog_title">Can not change storage place</string>
+    <string name="change_storage_place_warning_message">Can not change storage place while there is offline map downloading.</string>
+    <string name="change_storage_dir_success">Change offline map storage place successful!</string>
+    <string name="change_storage_dir_failure">Change offline map storage place failure.</string>
+    <string name="upgrade_notification_dialog_title">Software upgrade</string>
+    <string name="find_new_app_version_info">Find new edition.</string>
+    <string name="upgrade_butoon">Upgrade</string>
+    <string name="storage_place_sdcard">SD card</string>
+    <string name="storage_place_phone_memory">Phone memory</string>
+    <string name="other_location">Other</string>
+    <string name="application_dir">Choose storage directory</string>
+    <string name="no_other_storage_place_or_sd_card">This device has no external storage, the data will be saved in the internal storage of this device.</string>
+    <string name="check_new_version">Check New Version</string>
+    <string name="no_new_version_info">This edtion is the latest one。</string>
+    <string name="downloading_now">Downloading......</string>
+    <string name="cancle_downloading">Cancel downloading</string>
+
+    <string name="title_activity_mainweb">MainwebActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>

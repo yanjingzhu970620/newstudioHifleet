@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <com.hifleet.jsbridge.BridgeWebView
+                    android:id="@+id/dwebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+    </com.hifleet.jsbridge.BridgeWebView>
+
+
+</RelativeLayout>

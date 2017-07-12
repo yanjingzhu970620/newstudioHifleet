@@ -1,0 +1,774 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_parking_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_parking_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_eye_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_eye_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_search_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_search_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gedit_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gedit_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\app_mode_globus_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\app_mode_globus_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_grot_left_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_grot_left_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_trekking_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_trekking_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_ok_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_ok_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gmarker_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gmarker_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_bicycle.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_bicycle.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_up_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_up_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\a_10_device_access_volume_on_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\a_10_device_access_volume_on_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gsearch_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gsearch_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gdirections_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gdirections_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gshare_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gshare_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_settings2_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_settings2_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_glabel_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_glabel_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_bus_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_bus_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\bg_striped_img.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\bg_striped_img.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_plus_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_plus_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_galert_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_galert_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gloc_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gloc_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_sail_boat_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_sail_boat_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gmarker_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gmarker_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_layers_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_layers_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_street_view_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_street_view_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\a_10_device_access_volume_muted_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\a_10_device_access_volume_muted_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_label_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_label_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_aircraft.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_aircraft.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_car_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_car_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_bug_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_bug_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_redo_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_redo_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_micro_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_micro_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_photo_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_photo_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_bicycle_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_bicycle_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_road_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_road_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\map_layers_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\map_layers_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_trekking_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_trekking_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_edit_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_edit_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gup_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gup_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_wmap_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_wmap_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gsave_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gsave_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_motorcycle_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_motorcycle_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_text_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_text_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_redo_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_redo_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_grot_right_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_grot_right_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_ok_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_ok_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gabout_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gabout_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_note_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_note_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_grot_left_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_grot_left_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_signpost_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_signpost_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_foot_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_foot_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_fav_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_fav_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gup_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gup_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gfav_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gfav_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_video_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_video_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_hillshade_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_hillshade_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\bg_striped_split_img.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\bg_striped_split_img.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_quit_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_quit_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_motorcycle_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_motorcycle_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_pedestrian_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_pedestrian_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_road_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_road_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_btn_notchecked_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_btn_notchecked_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_link_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_link_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_call_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_call_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_parking_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_parking_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_remove_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_remove_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\bg_login.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\bg_login.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_eye_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_eye_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\icon0.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\icon0.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_undo_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_undo_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_markers_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_markers_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_plus_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_plus_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gsettings_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gsettings_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_flage_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_flage_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_refresh_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_refresh_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_edit_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_edit_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_play_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_play_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gdirections_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gdirections_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_marker_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_marker_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_pedestrian.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_pedestrian.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_remove_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_remove_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_glabel_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_glabel_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_settings2_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_settings2_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\map_magnifier.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\map_magnifier.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_ruler_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_ruler_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_delete_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_delete_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_play_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_play_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_btn_notchecked_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_btn_notchecked_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_filter_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_filter_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_pedestrian_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_pedestrian_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_truck_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_truck_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_delete_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_delete_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_settings_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_settings_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gpin_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gpin_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gsettings_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gsettings_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gdiscard_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gdiscard_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_fav_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_fav_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_sail_boat.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_sail_boat.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_bicycle_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_bicycle_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_street_view_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_street_view_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_galert_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_galert_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_note_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_note_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_ghelp_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_ghelp_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gnext_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gnext_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\a_10_device_access_volume_muted_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\a_10_device_access_volume_muted_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_layers_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_layers_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_undo_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_undo_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_grefresh_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_grefresh_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_polygom_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_polygom_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\box_free_simple.9.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\box_free_simple.9.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gnew_label_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gnew_label_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gremove_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gremove_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_down_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_down_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\map_layers_black.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\map_layers_black.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_bug_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_bug_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_home_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_home_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gplay_over_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gplay_over_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gremove_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gremove_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_micro_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_micro_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_hillshade_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_hillshade_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gcall_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gcall_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_filter_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_filter_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_info_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_info_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_flag_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_flag_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_down_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_down_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_label_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_label_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_flag_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_flag_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_video_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_video_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_info_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_info_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_close_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_close_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_ruler_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_ruler_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_ghelp_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_ghelp_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_polygom_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_polygom_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_bus_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_bus_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_map_marker_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_map_marker_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_search_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_search_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_car.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_car.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_sail_boat_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_sail_boat_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\a_10_device_access_volume_on_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\a_10_device_access_volume_on_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_pin_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_pin_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_grefresh_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_grefresh_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_foot_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_foot_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_browse_map.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_browse_map.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_marker_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_marker_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_up_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_up_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_truck_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_truck_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_pin_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_pin_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_btn_checked_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_btn_checked_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_globus_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_globus_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gdown_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gdown_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_wmap_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_wmap_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gsave_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gsave_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_call_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_call_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gnew_label_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gnew_label_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_globus_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_globus_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_car_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_car_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_trekking.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_trekking.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_markers_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_markers_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_refresh_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_refresh_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_flage_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_flage_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_audio_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_audio_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gfav_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gfav_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gloc_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gloc_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_btn_checked_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_btn_checked_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gshare_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gshare_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\icon_free.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\icon_free.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_photo_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_photo_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_close_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_close_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_link_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_link_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gdown_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gdown_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_aircraft_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_aircraft_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_grot_right_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_grot_right_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_text_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_text_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\box_free_pressed.9.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\box_free_pressed.9.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_home_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_home_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_settings_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_settings_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gplay_over_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gplay_over_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gpin_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gpin_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_truck.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_truck.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gedit_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gedit_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_quit_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_quit_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\app_mode_globus_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\app_mode_globus_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_signpost_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_signpost_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gabout_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gabout_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gnext_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gnext_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_map_marker_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_map_marker_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gcall_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gcall_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gsearch_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gsearch_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_aircraft_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_aircraft_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_audio_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_audio_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_motorcycle.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_motorcycle.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_gdiscard_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-xhdpi\\ic_action_gdiscard_dark.png"
+    }
+]

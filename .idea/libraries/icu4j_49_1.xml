@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="icu4j-49_1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/HiFleet/libs/icu4j-49_1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

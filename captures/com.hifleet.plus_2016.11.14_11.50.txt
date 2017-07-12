@@ -1,0 +1,121 @@
+TASK com.hifleet.plus id=69
+  ACTIVITY com.hifleet.plus/com.hifleet.map.MapActivity 432d9b68 pid=27971
+    Local Activity 43080e00 State:
+      mResumed=true mStopped=false mFinished=false
+      mLoadersStarted=true
+      mChangingConfigurations=false
+      mCurrentConfig={1.0 460mcc2mnc zh_CN ldltr sw360dp w360dp h615dp 320dpi nrml long port finger -keyb/v/h -nav/h s.5 themeChanged=0 themeChangedFlags=0}
+    Active Fragments in 43080fb0:
+      #0: AreaFragment{45b75048 #0 id=0x7f0c0098}
+        mFragmentId=#7f0c0098 mContainerId=#7f0c0098 mTag=null
+        mState=5 mIndex=0 mWho=android:fragment:0 mBackStackNesting=0
+        mAdded=true mRemoving=false mResumed=true mFromLayout=false mInLayout=false
+        mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+        mRetainInstance=false mRetaining=false mUserVisibleHint=true
+        mFragmentManager=FragmentManager{43080fb0 in MapActivity{43080e00}}
+        mActivity=com.hifleet.map.MapActivity@43080e00
+        mContainer=android.widget.FrameLayout{42927048 V.E..... ........ 0,0-720,1120 #7f0c0098 app:id/fragment_content}
+        mView=android.widget.LinearLayout{43efa1b8 V.E...C. ........ 0,0-720,1120 #7f0c0154 app:id/ll_team}
+    Added Fragments:
+      #0: AreaFragment{45b75048 #0 id=0x7f0c0098}
+    FragmentManager misc state:
+      mActivity=com.hifleet.map.MapActivity@43080e00
+      mContainer=android.app.Activity$1@43081028
+      mCurState=5 mStateSaved=false mDestroyed=false
+    ViewRoot:
+      mAdded=true mRemoved=false
+      mConsumeBatchedInputScheduled=false
+      mPendingInputEventCount=0
+      mProcessInputEventsScheduled=false
+      mTraversalScheduled=false
+      android.view.ViewRootImpl$NativePreImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$ImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$NativePostImeInputStage: mQueueLength=0
+    Choreographer:
+      mFrameScheduled=false
+      mLastFrameTime=79648957 (145134 ms ago)
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{430f3240 V.E..... R....... 0,0-720,1280}
+        android.widget.LinearLayout{430f3888 V.E..... ........ 0,0-720,1280}
+          android.view.ViewStub{430f4380 G.E..... ......I. 0,0-0,0 #102031f}
+          android.widget.FrameLayout{430f45e0 V.ED.... ........ 0,50-720,1280 #1020002 android:id/content}
+            android.widget.FrameLayout{430f5428 V.E..... ........ 0,0-720,1230 #7f0c0081 app:id/frame_map}
+              com.hifleet.map.OsmandMapTileView{430f6070 VFE...CL ........ 0,0-720,1230 #7f0c0082 app:id/MapView}
+              android.widget.RelativeLayout{42912508 V.E..... ........ 0,0-720,1230 #7f0c0083 app:id/relative}
+                com.e.common.widget.effect.layout.EffectColorRelativeLayout{4291a990 V.E...C. ........ 40,40-680,110 #7f0c0084 app:id/effectRelativeLayout_search}
+                  android.widget.TextView{4292a318 V.ED.... ........ 45,14-594,55 #7f0c0085 app:id/text_search}
+                android.widget.ImageButton{42924750 VFED..C. ........ 20,1036-84,1100 #7f0c0086 app:id/locateMyLocationImageButton}
+                android.widget.LinearLayout{42957538 V.E..... ........ 636,952-700,1100}
+                  android.widget.ImageButton{42929aa8 VFED..C. ........ 0,0-64,64 #7f0c0088 app:id/mapActivityZoomInImageButton}
+                  android.widget.ImageButton{42940650 VFED..C. ........ 0,84-64,148 #7f0c0089 app:id/mapActivityZoomOutImageButton}
+                android.view.View{42ffedc8 G.ED..C. ......I. 0,0-0,0 #7f0c008a app:id/view_black}
+                android.widget.ImageButton{42943b20 VFED..C. ........ 633,170-700,237 #7f0c008b app:id/img_change_map}
+                android.widget.LinearLayout{4295b798 G.E..... ......I. 0,0-0,0 #7f0c008c app:id/ll_change_map}
+                  android.widget.LinearLayout{4296d9c8 V.E..... ......I. 0,0-0,0}
+                    android.widget.LinearLayout{4302ba68 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{42944880 VFED..C. ......I. 0,0-0,0 #7f0c008d app:id/img_land_map}
+                      android.widget.TextView{4293f660 V.ED.... ......ID 0,0-0,0}
+                    android.widget.LinearLayout{430a92a0 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{4295a818 VFED..C. ......I. 0,0-0,0 #7f0c008e app:id/img_all_sea_map}
+                      android.widget.TextView{42926110 V.ED.... ......ID 0,0-0,0}
+                    android.widget.LinearLayout{430a9fc8 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{43082a38 VFED..C. ......I. 0,0-0,0 #7f0c008f app:id/img_sea_map}
+                      android.widget.TextView{4292b528 V.ED.... ......ID 0,0-0,0}
+                  android.widget.LinearLayout{430e9df0 V.E..... ......I. 0,0-0,0}
+                    android.widget.LinearLayout{42948d78 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{43082dc0 VFED..C. ......I. 0,0-0,0 #7f0c0090 app:id/img_air_pressure_show}
+                      android.widget.TextView{4292fb18 V.ED.... ......ID 0,0-0,0}
+                    android.widget.LinearLayout{4296dcb0 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{430a8d30 VFED..C. ......ID 0,0-0,0 #7f0c0091 app:id/img_wind_show}
+                      android.widget.TextView{4295cfe0 V.ED.... ......ID 0,0-0,0}
+                    android.widget.LinearLayout{430217b8 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{430a8fe8 VFED..C. ......I. 0,0-0,0 #7f0c0092 app:id/img_wave_show}
+                      android.widget.TextView{430928e0 V.ED.... ......ID 0,0-0,0}
+                    android.widget.LinearLayout{43027168 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{430c3258 VFED..C. ......I. 0,0-0,0 #7f0c0093 app:id/img_ocean_show}
+                      android.widget.TextView{42943250 V.ED.... ......ID 0,0-0,0}
+                  android.widget.LinearLayout{42928050 V.E..... ......I. 0,0-0,0}
+                    android.widget.SeekBar{429289e8 VFED.... ......I. 0,0-0,0 #7f0c0094 app:id/seekBar}
+                    android.widget.LinearLayout{4292fe90 V.E..... ......I. 0,0-0,0}
+                      android.widget.ImageButton{430f2f60 VFED..C. ......I. 0,0-0,0 #7f0c0095 app:id/weather_time_before}
+                      android.widget.ImageButton{42949560 VFED..C. ......I. 0,0-0,0 #7f0c0096 app:id/weather_time_after}
+                    android.widget.TextView{4305c6f0 V.ED.... ......ID 0,0-0,0 #7f0c0097 app:id/description}
+                android.widget.FrameLayout{42927048 V.E..... ........ 0,0-720,1120 #7f0c0098 app:id/fragment_content}
+                  android.widget.LinearLayout{43efa1b8 V.E...C. ........ 0,0-720,1120 #7f0c0154 app:id/ll_team}
+                    android.widget.RelativeLayout{430e9220 V.E..... ........ 0,0-720,100}
+                      android.widget.TextView{44037af8 V.ED.... ........ 280,23-440,77 #7f0c0155 app:id/team_title}
+                    android.view.View{4589d768 V.ED.... ........ 0,100-720,101}
+                    android.widget.ProgressBar{468dce98 G.ED.... ......I. 312,201-408,297 #7f0c0061 app:id/progress}
+                    android.widget.ListView{4689f548 VFED.VCL .F...... 0,101-720,408 #7f0c0156 app:id/list_my_team}
+                      android.widget.LinearLayout{468e3210 V.E..... ........ 0,0-720,101}
+                        com.e.common.widget.effect.layout.EffectColorRelativeLayout{45947670 V.E...C. ........ 0,0-720,100 #7f0c0169 app:id/effectRelativeLayout_ships}
+                          android.widget.TextView{43fd1c48 V.ED.... ........ 40,25-220,74 #7f0c016a app:id/text_ships}
+                          android.widget.LinearLayout{469d9cc0 V.E...C. ........ 580,0-640,100 #7f0c016b app:id/teamship_alert_png}
+                            android.widget.ImageView{43f5e068 V.ED.... ........ 14,34-46,66}
+                          android.widget.ImageView{43f5e250 V.ED.... ........ 677,38-690,62 #7f0c0157 app:id/include_arrow_right}
+                        android.view.View{429839e0 V.ED.... ........ 0,100-720,101}
+                      android.widget.LinearLayout{468b8640 V.E..... ........ 0,103-720,204}
+                        com.e.common.widget.effect.layout.EffectColorRelativeLayout{46b4e388 V.E...C. ........ 0,0-720,100 #7f0c0169 app:id/effectRelativeLayout_ships}
+                          android.widget.TextView{45bc9800 V.ED.... ........ 40,25-94,74 #7f0c016a app:id/text_ships}
+                          android.widget.LinearLayout{46b4e5c8 G.E..... ......I. 0,0-0,0 #7f0c016b app:id/teamship_alert_png}
+                            android.widget.ImageView{45bc9ab8 V.ED.... ......I. 0,0-0,0}
+                          android.widget.ImageView{46097e40 V.ED.... ........ 677,38-690,62 #7f0c0157 app:id/include_arrow_right}
+                        android.view.View{44082d38 V.ED.... ........ 0,100-720,101}
+                      android.widget.LinearLayout{45979be8 V.E..... ........ 0,206-720,307}
+                        com.e.common.widget.effect.layout.EffectColorRelativeLayout{45979e28 V.E...C. ........ 0,0-720,100 #7f0c0169 app:id/effectRelativeLayout_ships}
+                          android.widget.TextView{459ea548 V.ED.... ........ 40,25-158,74 #7f0c016a app:id/text_ships}
+                          android.widget.LinearLayout{459241a0 G.E..... ......I. 0,0-0,0 #7f0c016b app:id/teamship_alert_png}
+                            android.widget.ImageView{46aecc38 V.ED.... ......I. 0,0-0,0}
+                          android.widget.ImageView{459ea800 V.ED.... ........ 677,38-690,62 #7f0c0157 app:id/include_arrow_right}
+                        android.view.View{45a1f8a0 V.ED.... ........ 0,100-720,101}
+                android.view.View{43072d58 V.ED.... ........ 0,1119-720,1120}
+                android.widget.RadioGroup{42924ac8 V.E..... ........ 0,1120-720,1230 #7f0c0087 app:id/ll_bottom_bar}
+                  android.widget.RadioButton{429324f8 VFED..C. ........ 0,8-120,110 #7f0c0099 app:id/radio_ships}
+                  android.widget.RadioButton{4293ef80 VFED..C. ........ 120,8-240,110 #7f0c009a app:id/radio_details}
+                  android.widget.RadioButton{4292c510 VFED..C. ........ 240,8-360,110 #7f0c009b app:id/radio_team}
+                  android.widget.RadioButton{4292ed80 VFED..C. ........ 360,8-480,110 #7f0c009c app:id/radio_myarea}
+                  android.widget.RadioButton{4296f210 VFED..C. ........ 480,8-600,110 #7f0c009d app:id/radio_myportships}
+                  android.widget.RadioButton{43095768 VFED..C. ........ 600,8-720,110 #7f0c009e app:id/radio_setting}
+    Looper (main, tid 1) {4291b768}
+      Message 0: { when=+12s804ms callback=com.hifleet.map.OsmandApplication$3 target=android.os.Handler }
+      (Total messages: 1, idling=false, quitting=false)

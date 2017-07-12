@@ -1,0 +1,176 @@
+package com.hifleet.adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.e.common.widget.effect.layout.EffectColorRelativeLayout;
+import com.hifleet.R;
+import com.hifleet.activity.ChooseShipActivity;
+import com.hifleet.activity.SearchActivity;
+import com.hifleet.bean.ShipsBean;
+import com.hifleet.lnfo.layer.ShipsInfoLayer;
+
+/**
+ * @{# WeatherStationsAdapter.java Create on 2015年5月26日 下午6:50:23
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class ChooseShipAdapter extends BaseAdapter {
+	private Context context;
+	private List<ShipsBean> mShipBean;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getCount()
+	 */
+
+	public ChooseShipAdapter(Context context, List<ShipsBean> mShipBean) {
+		this.context = context;
+		this.mShipBean = mShipBean;
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return mShipBean.size();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getItem(int)
+	 */
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return mShipBean.get(position);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getItemId(int)
+	 */
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.Adapter#getView(int, android.view.View,
+	 * android.view.ViewGroup)
+	 */
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		convertView = LayoutInflater.from(context).inflate(
+				R.layout.item_simple_detail, null);
+		TextView nameText = (TextView) convertView
+				.findViewById(R.id.text_ship_name);
+		TextView mmsiText = (TextView) convertView
+				.findViewById(R.id.text_ship_mmsi);
+		TextView imoText = (TextView) convertView
+				.findViewById(R.id.text_ship_imo);
+		TextView callNumberText = (TextView) convertView
+				.findViewById(R.id.text_ship_call_number);
+		EffectColorRelativeLayout weatherStation = (EffectColorRelativeLayout) convertView
+				.findViewById(R.id.effectRelativeLayout_details);
+		final ShipsBean m = mShipBean.get(position);
+		nameText.setText("船名：" + m.n);
+		mmsiText.setText("MMSI：" + m.m);
+		imoText.setText("IMO：" + m.i);
+		callNumberText.setText("呼号：" + m.c);
+		weatherStation.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ShipsListAdapter.isShow = true;
+				ShipsListAdapter.isMove = true;
+				if (ShipsInfoLayer.tap_ships.size() >= 1) {
+					int have = 0;
+					for (int at = 0; at < ShipsInfoLayer.alltap_ships.size(); at++) {
+						if (ShipsInfoLayer.alltap_ships.get(at).m
+								.equals(ShipsInfoLayer.tap_ships.get(0).m)) {
+							ShipsInfoLayer.alltap_ships.remove(at);
+							ShipsInfoLayer.alltap_ships
+									.add(ShipsInfoLayer.tap_ships.get(0));
+							ShipsInfoLayer.tap_ships.clear();
+							have++;
+							break;
+						}
+					}
+					if (have == 0) {
+						ShipsInfoLayer.alltap_ships
+								.add(ShipsInfoLayer.tap_ships.get(0));
+						ShipsInfoLayer.tap_ships.clear();
+					}
+				}
+				if (ShipsInfoLayer.teamship.size() > 0) {
+					for (int i1 = 0; i1 < ShipsInfoLayer.teamship.size(); i1++) {
+						boolean have = false;
+						for (int i = 0; i < ShipsInfoLayer.allteamship.size(); i++) {
+
+							if (ShipsInfoLayer.teamship.get(i1).m
+									.equals(ShipsInfoLayer.allteamship.get(i).m)) {
+								ShipsInfoLayer.allteamship.remove(i);
+								ShipsInfoLayer.allteamship
+										.add(ShipsInfoLayer.teamship.get(i1));
+								have = true;
+								break;
+							}
+						}
+						if (!have) {
+							ShipsInfoLayer.allteamship
+									.add(ShipsInfoLayer.teamship.get(i1));
+						}
+					}
+					ShipsInfoLayer.teamship.clear();
+				}
+				if (ShipsInfoLayer.searchshipsBeans.size() > 0) {
+					for (int i1 = 0; i1 < ShipsInfoLayer.searchshipsBeans
+							.size(); i1++) {
+						boolean have = false;
+						for (int i = 0; i < ShipsInfoLayer.allsearchshipsBeans
+								.size(); i++) {
+
+							if (ShipsInfoLayer.searchshipsBeans.get(i1).m
+									.equals(ShipsInfoLayer.allsearchshipsBeans
+											.get(i).m)) {
+								ShipsInfoLayer.allsearchshipsBeans.remove(i);
+								ShipsInfoLayer.allsearchshipsBeans
+										.add(ShipsInfoLayer.searchshipsBeans
+												.get(i1));
+								have = true;
+								break;
+							}
+						}
+						if (!have) {
+							ShipsInfoLayer.allsearchshipsBeans
+									.add(ShipsInfoLayer.searchshipsBeans
+											.get(i1));
+						}
+					}
+				}
+				ShipsInfoLayer.searchshipsBeans.clear();
+				ShipsInfoLayer.searchshipsBeans.add(m);
+				SearchActivity.searchActivity.finish();
+				((ChooseShipActivity) context).finish();
+			}
+		});
+		return convertView;
+	}
+}

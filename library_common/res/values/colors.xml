@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="normal_color">#e61773</color>
+    <color name="btn_cellphone_nomal">#2c91f9</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="red">#ff0000</color>
+    <color name="blue">#0000ff</color>
+    <color name="green">#00ff00</color>
+    <color name="gray">@color/c_eee</color>
+    <color name="transparent">#00000000</color>
+    <color name="c_eee">#eee</color>
+    <color name="c_aaa">#aaa</color>
+    <color name="c_949494">#949494</color>
+    <color name="c_f9f9f9">#f9f9f9</color>
+    <color name="c_fafafa">#fafafa</color>
+    <color name="c_c7c7c7">#c7c7c7</color>
+    <color name="c_707070">#707070</color>
+    <color name="c_303030">#303030</color>
+    <color name="c_666">#666</color>
+    <color name="c_d3d3d3">#d3d3d3</color>
+    <color name="c_8c857e">#8c857e</color>
+    <color name="c_e6e1db">#e6e1db</color>
+    <color name="c_5fb336">#5fb336</color>
+    <color name="c_448026">#448026</color>
+    <color name="c_cccccc">#cccccc</color>
+    <color name="c_403b36">#403b36</color>
+    <color name="c_9b938b">#9b938b</color>
+    <color name="c_afa89f">#afa89f</color>
+    <color name="c_f5f0eb">#f5f0eb</color>
+    <color name="c_c2beba">#c2beba</color>
+    <color name="c_6d6d72">#6d6d72</color>
+    <color name="c_e7e2dd">#e7e2dd</color>
+    <color name="c_c0bbb4">#c0bbb4</color>
+    <color name="nav_title">@color/white</color>
+    <color name="nav_bg">@color/green</color>
+    <color name="nav_side">@color/white</color>
+    <color name="nav_side_pressed">#089e3c</color>
+    <color name="nav_side_text_color">@color/white</color>
+
+</resources>

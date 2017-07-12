@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;EasyNavigationAIS/src/com.hifleet.api&apos;&#x0D;&#x0A;- Original project: &apos;testxml&apos;&#x0D;&#x0A;- Destination element: &apos;EasyNavigationAIS/src/com.hifleet.api&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     SerialPort.java&#x0D;&#x0A;     SerialPortFinder.java" description="Copy compilation units" destination="=EasyNavigationAIS/src&lt;com.hifleet.api" element1="/src&lt;{SerialPort.java" element2="/src&lt;{SerialPortFinder.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1450321151540" units="2" version="1.0"/>
+</session>

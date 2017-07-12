@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+        android:id="@+id/effectRelativeLayout_myteam_item"
+        style="@style/setting_child"
+        android:onClick="onClick" >
+
+       <View
+            android:id="@+id/v_colorchoose"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:background="#fff222"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/text_team_name"
+            android:layout_toRightOf="@+id/v_colorchoose"
+            style="@style/setting_child_text" />
+
+        <TextView
+            android:id="@+id/text_tips"
+            style="@style/setting_child_text"
+            android:layout_toRightOf="@+id/text_team_name" />
+   <LinearLayout
+       android:id="@+id/alert_png"
+       android:visibility="gone"
+    android:layout_width="30dp"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="40dp"
+    android:gravity="center"
+    android:orientation="vertical" >
+        <ImageView
+            android:background="@drawable/alert_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp">
+        </ImageView>
+        </LinearLayout>
+        <include layout="@layout/include_arrow_right" />
+    </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+    <include layout="@layout/include_line" />
+
+</LinearLayout>

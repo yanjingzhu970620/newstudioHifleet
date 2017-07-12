@@ -1,0 +1,65 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:keepScreenOn="true" >
+
+    <com.hifleet.map.OsmandMapTileView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/MapView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/map_view" />
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null" >
+
+        <RelativeLayout
+            android:id="@+id/rl_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#55000000"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateDrawable="@drawable/animdraw2"
+                android:indeterminateDuration="1500" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="40dip"
+            android:layout_marginRight="10dip"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/mapActivityZoomInImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_zoom_control"
+                android:src="@drawable/stickers_add" />
+
+            <ImageButton
+                android:id="@+id/mapActivityZoomOutImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_zoom_control"
+                android:src="@drawable/stickers_sub" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

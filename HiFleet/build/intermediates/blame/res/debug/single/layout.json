@@ -1,0 +1,454 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_wanning.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_wanning.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\xlistview_header.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\xlistview_header.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\offline_map_activity.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\offline_map_activity.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_wanning_message.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_wanning_message.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_myportships.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\fragment_myportships.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_weather_shuiwen.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_weather_shuiwen.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_ships_search.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_ships_search.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\jpush_webview_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\jpush_webview_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\view_listview.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\view_listview.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_mainweb.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_mainweb.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\view_loading.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\view_loading.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\datedialog.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\datedialog.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\expandable_list_item_category_2.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\expandable_list_item_category_2.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_action_bar.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_action_bar.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\layout_custome_dialog.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\layout_custome_dialog.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\common_datetime.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\common_datetime.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_home.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_home.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_ship_more_details.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_ship_more_details.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__search_dropdown_item_icons_2line.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\pop_color_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\pop_color_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\addteam_dialog.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\addteam_dialog.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\list_textview.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\list_textview.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_icon.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map1.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_map1.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__popup_menu_item_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\expandable_offline_map_list_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\expandable_offline_map_list_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_typhoon_overlay.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\balloon_typhoon_overlay.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_setting.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_setting.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\download_index.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\download_index.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\include_btn_right.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\include_btn_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_team.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\fragment_team.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\include_left_line.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\include_left_line.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\configuration_dialog.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\configuration_dialog.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_title_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\pop_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\pop_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_overlay.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\balloon_overlay.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_about_out.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_about_out.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\toast_view_actionsheet.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\toast_view_actionsheet.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_menu_item_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__activity_chooser_view.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_choose_ship.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_choose_ship.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_is_login.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_is_login.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\xlistview_footer.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\xlistview_footer.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_tab.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_tab.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_safe_lock.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_safe_lock.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_mode_close_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_mode_close_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\first_dialog_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\first_dialog_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_simple_detail.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_simple_detail.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_simple_overlay_action_mode.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\layout_item_view.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\layout_item_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\include_btn_left.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\include_btn_left.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_account_management.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_account_management.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_tab_bar_view.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_tab_bar_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ship_information.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_ship_information.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_inport.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_inport.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_start.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_start.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_my_team.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_my_team.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\include_arrow_right.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\include_arrow_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\mode_toggles.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\mode_toggles.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_mode_bar.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_mode_bar.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_my_team.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_my_team.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_show_team.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_show_team.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_map.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_map.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main_map.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_main_map.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__activity_chooser_view_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_details.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\fragment_details.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\offline_map_list_item_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\offline_map_list_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ships_details.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_ships_details.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_menu_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\quickaction.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\quickaction.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_e.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\pull_to_refresh_header_e.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_show_image.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\activity_show_image.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_load_footer.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\pull_to_load_footer.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\addmyteam_dialog.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\addmyteam_dialog.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\notification.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\notification.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_simple.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_simple.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\alert.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\alert.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\item_ship_details.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\item_ship_details.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\offline_localmap_list.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\offline_localmap_list.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_camera.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\activity_camera.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_weather.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_weather.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_weather_info.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_weather_info.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\jpush_popwin_layout.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\jpush_popwin_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\expandable_list_item_category.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\expandable_list_item_category.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_action_bar_overlay.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_action_bar_overlay.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\download_build_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\download_build_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\route_info_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\route_info_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\alert_photo_upload.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\alert_photo_upload.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\popupwindow_select.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\popupwindow_select.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__simple_dropdown_hint.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__simple_dropdown_hint.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_search.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_search.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\softupdate_progress.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\softupdate_progress.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\action_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\action_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_weather_information.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_weather_information.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\download_index_list_item.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\download_index_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_register.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_radio.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__search_view.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__search_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\include_line.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\include_line.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_setting.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\fragment_setting.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_simple_ships_detail.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_simple_ships_detail.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_checkbox.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_more.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_more.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\include_nav.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\layout\\include_nav.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\balloon_overlay_ships.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\balloon_overlay_ships.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\frament_team.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\frament_team.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_alert_type.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_alert_type.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\aa_test.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\aa_test.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\view_change_map.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\view_change_map.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\layout\\activity_webview_psccheck.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\layout\\activity_webview_psccheck.xml"
+    }
+]

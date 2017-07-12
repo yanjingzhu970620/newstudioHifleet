@@ -1,0 +1,6 @@
+//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.applicationLaunchType=org.eclipse.cdt.dsf.gdb.launch.localCLaunch,debug;org.eclipse.cdt.cdi.launch.localCLaunch,run
+//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.attachLaunchType=org.eclipse.cdt.dsf.gdb.launch.attachCLaunch,debug
+//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.postmortemLaunchType=org.eclipse.cdt.dsf.gdb.launch.coreCLaunch,debug
+eclipse.preferences.version=1
+org.eclipse.debug.core.USE_STEP_FILTERS=true
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n<expression enabled\="true" text\="a"/>\r\n<expression enabled\="true" text\="geoS"/>\r\n<expression enabled\="true" text\="&\#9;int x\=(int)start.getX();&\#10;//&\#9;&\#9;&\#9;&\#9;int y\=(int)start.getY();&\#10;//&\#9;&\#9;&\#9;&\#9;"/>\r\n<expression enabled\="true" text\="favouritesAdapter"/>\r\n<expression enabled\="true" text\="sourceFavoriteGroups"/>\r\n<expression enabled\="true" text\="shipsinfo"/>\r\n</watchExpressions>\r\n

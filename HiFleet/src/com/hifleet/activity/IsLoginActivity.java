@@ -1,0 +1,514 @@
+package com.hifleet.activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Base64;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.e.common.activity.BaseActivity;
+import com.e.common.widget.effect.button.EffectColorButton;
+import com.hifleet.bean.LoginBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.plus.R;
+import com.hifleet.thread.EmailLoginThread;
+import com.hifleet.utility.XmlParseUtility;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+/**
+ * @{# IsLoginActivity.java Create on 2015年9月9日 下午4:05:08
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class IsLoginActivity extends BaseActivity{
+
+	private EditText mPhoneNumber, mEditAuthCode, mEditEmail, mEditPassword;
+	private RelativeLayout mSendAuthCode, mTime;
+	private TextView mSendCodeteTextView, mTimeTextView;
+	private String mPhoneNumberLength, mFinalPhoneNumber, mAuthCode, mEmail,
+			mPassword;
+	private EffectColorButton mSendOn, mPhoneLoginButton, mEmailLoginButton;
+
+	private TimeCount time;
+	private OsmandApplication app;
+	private IWXAPI api;
+
+	private List<LoginBean> mLoginSendCodeBeans = new ArrayList<LoginBean>();
+	private List<LoginBean> mPhoneLoginBeans = new ArrayList<LoginBean>();
+
+	public static String sessionid;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.e.common.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_is_login);
+		getWindow().setLayout(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
+        app=getMyApplication();
+		app.setIsLoginActivity(this);
+		api = app.getwxApi();
+
+		mPhoneNumber = (EditText) findViewById(R.id.edit_phone_number);
+		mSendAuthCode = (RelativeLayout) findViewById(R.id.rl_send_auth_code);
+		mSendOn = (EffectColorButton) findViewById(R.id.effectButton_send_on);
+		mTime = (RelativeLayout) findViewById(R.id.rl_time);
+		mTimeTextView = (TextView) findViewById(R.id.text_time);
+		mEditAuthCode = (EditText) findViewById(R.id.edit_auth_code);
+		mEditEmail = (EditText) findViewById(R.id.edit_email);
+		mEditPassword = (EditText) findViewById(R.id.edit_password);
+		mPhoneLoginButton = (EffectColorButton) findViewById(R.id.btn_phone_login);
+		mEmailLoginButton = (EffectColorButton) findViewById(R.id.effectButton_email_login);
+		mPhoneNumber.addTextChangedListener(watcher);
+		mEditAuthCode.addTextChangedListener(loginWatcher);
+		mEditEmail.addTextChangedListener(emailLoginWatcher);
+		mEditPassword.addTextChangedListener(emailLoginWatcher);
+
+		mPhoneLoginButton.setClickable(false);
+		mPhoneLoginButton.setBackgroundColor(0xffe6e6e6);
+
+		mEmailLoginButton.setClickable(false);
+		mEmailLoginButton.setBackgroundColor(0xffe6e6e6);
+
+	}
+
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.effectButton_register:
+			Intent intent = new Intent(activity, RegisterActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.effectButton_send_on:
+			mFinalPhoneNumber = mPhoneNumber.getText().toString();
+			LodingLogincodeThread loginthread = new LodingLogincodeThread();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+				loginthread.executeOnExecutor(Executors.newCachedThreadPool(),
+						new String[0]);
+			} else {
+				loginthread.execute();
+			}
+			mTime.setVisibility(View.VISIBLE);
+			mSendOn.setVisibility(View.GONE);
+			time = new TimeCount(60000, 1000);
+			time.start();
+			break;
+		case R.id.btn_phone_login:
+			mAuthCode = mEditAuthCode.getText().toString();
+			mFinalPhoneNumber = mPhoneNumber.getText().toString();
+			PhoneLoginThread phoneloginthread = new PhoneLoginThread();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+				phoneloginthread.executeOnExecutor(
+						Executors.newCachedThreadPool(), new String[0]);
+			} else {
+				phoneloginthread.execute();
+			}
+			break;
+		case R.id.effectButton_email_login:
+			mEmail = mEditEmail.getText().toString();
+			mPassword = mEditPassword.getText().toString();
+			EmailLoginThread emailloginthread = new EmailLoginThread(app,mEmail,mPassword,this);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+				emailloginthread.executeOnExecutor(
+						Executors.newCachedThreadPool(), new String[0]);
+			} else {
+				emailloginthread.execute();
+			}
+			break;
+		case R.id.effectButton_wx_login:
+			getWxlogincode();
+			break;
+		case R.id.ll_isLogin:
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+			break;
+		case R.id.ll_back:
+			finish();
+			break;
+		case R.id.effect_close:
+			finish();
+			this.overridePendingTransition(R.drawable.activity_close, 0);
+			break;
+		}
+	}
+
+    private void getWxlogincode()
+		{
+			System.out.println("wxlogin");
+			final SendAuth.Req req = new SendAuth.Req();
+			req.scope = "snsapi_userinfo";
+			req.state = "hifleet";
+			api.sendReq(req);
+		}
+
+	private TextWatcher emailLoginWatcher = new TextWatcher() {
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			// TODO Auto-generated method stub
+			if (mEditEmail.length() > 0 && mEditPassword.length() > 0) {
+				mEmailLoginButton.setClickable(true);
+				mEmailLoginButton.setBackgroundColor(0xff70baff);
+			} else {
+				mEmailLoginButton.setClickable(false);
+				mEmailLoginButton.setBackgroundColor(0xffe6e6e6);
+			}
+		}
+	};
+
+	private TextWatcher loginWatcher = new TextWatcher() {
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			// TODO Auto-generated method stub
+			if (mEditAuthCode.getText().length() >= 6) {
+				mPhoneLoginButton.setClickable(true);
+				mPhoneLoginButton.setBackgroundColor(0xff70baff);
+			} else {
+				mPhoneLoginButton.setClickable(false);
+				mPhoneLoginButton.setBackgroundColor(0xffe6e6e6);
+			}
+		}
+	};
+
+	private TextWatcher watcher = new TextWatcher() {
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			// TODO Auto-generated method stub
+			mPhoneNumberLength = mPhoneNumber.getText().toString();
+			if (mPhoneNumberLength.length() == 11) {
+				mSendOn.setVisibility(View.VISIBLE);
+				mSendAuthCode.setVisibility(View.GONE);
+			} else {
+				mSendOn.setVisibility(View.GONE);
+				mSendAuthCode.setVisibility(View.VISIBLE);
+			}
+		}
+	};
+
+	private void parseXMLnew(InputStream inStream) throws Exception {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		Element root = document.getDocumentElement();
+		NodeList childNodes = root.getChildNodes();
+
+		if (root.getNodeName().compareTo("result") == 0) {
+			mLoginSendCodeBeans.add(XmlParseUtility
+					.parse(root, LoginBean.class));
+		}
+	}
+
+	class LodingLogincodeThread extends AsyncTask<String, Void, Void> {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				String httpPost = app.myPreferences.getString("loginserver",
+						null)
+						+ IndexConstants.GET_LOGIN_CODE
+						+ mFinalPhoneNumber;
+				System.out.println(httpPost);
+				URL shipsUrl = new URL(httpPost);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (sessionid != null) {
+
+					conn.setRequestProperty("cookie", sessionid);
+					// response.encodeURL(sessionid);
+				}
+				// String cookieval = conn.getHeaderField("set-cookie");
+				String cookieval = null;
+				Map<String, List<String>> headers = conn.getHeaderFields();
+				for (String s : headers.keySet()) {
+					List<String> headerslist = (headers.get(s));
+					for (String ss : headerslist) {
+						System.out.println("value: " + ss);
+						if (ss.contains("JSESSIONID")) {
+							cookieval = ss;
+						}
+					}
+				}
+				if (cookieval != null) {
+					sessionid = cookieval.substring(0, cookieval.indexOf(";"));
+					// System.out.println("保存sessionid： "+sessionid);
+					loginSession.setSessionid(sessionid);
+					app.mEditor.putString("sessionid", sessionid);
+					app.mEditor.commit();
+				}
+				conn.setConnectTimeout(10000);
+				InputStream inStream = conn.getInputStream();
+				parseXMLnew(inStream);
+				inStream.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			for (LoginBean l : mLoginSendCodeBeans) {
+				Toast.makeText(activity, l.getMsg(), Toast.LENGTH_LONG).show();
+			}
+			mLoginSendCodeBeans.clear();
+		}
+	}
+
+	private void parsePhoenLoginXML(InputStream inStream) throws Exception {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		Element root = document.getDocumentElement();
+		NodeList childNodes = root.getChildNodes();
+		mPhoneLoginBeans.clear();
+		if (root.getNodeName().compareTo("result") == 0) {
+			LoginBean l=new LoginBean();
+			l.setEmail(root.getAttribute("email"));
+			l.setFlag(root.getAttribute("flag"));
+			l.setRole(root.getAttribute("role"));
+			l.setMsg(root.getAttribute("msg"));
+			l.setName(root.getAttribute("name"));
+			l.setPassword(root.getAttribute("password"));
+
+			if(l.getRole().equals("vvip")){
+				l.setMap(root.getAttribute("map"));
+				l.setSatellitemap(root.getAttribute("satellitemap"));
+				l.setChinachart(root.getAttribute("chinachart"));
+				l.setGchart(root.getAttribute("gchart"));
+				l.setGchartupdate(root.getAttribute("gchartupdate"));
+				l.setShipdetail(root.getAttribute("shipdetail"));
+				l.setWeather(root.getAttribute("weather"));
+				l.setSearchship(root.getAttribute("searchship"));
+				l.setTraffic(root.getAttribute("traffic"));
+				l.setFleets(root.getAttribute("fleets"));
+				l.setRegionalert(root.getAttribute("regionalert"));
+				l.setPortship(root.getAttribute("portship"));
+				l.setRegionship(root.getAttribute("regionship"));
+				l.setRoute(root.getAttribute("route"));
+				l.setObservatory(root.getAttribute("observatory"));
+			}
+			mPhoneLoginBeans.add(l);
+			System.err.println("loginbean "+l.getRole()+l.getMap()+l.getRegionalert());
+//			mPhoneLoginBeans.add(XmlParseUtility.parse(root, LoginBean.class));
+		}
+	}
+
+	class PhoneLoginThread extends AsyncTask<String, Void, Void> {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				String httpPost = app.myPreferences.getString("loginserver",
+						null)
+						+ IndexConstants.MOBILE_USER_LOGIN
+						+ mAuthCode
+						+ "&phone=" + mFinalPhoneNumber;
+				System.out.println(httpPost);
+				URL shipsUrl = new URL(httpPost);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (sessionid != null) {
+
+					conn.setRequestProperty("cookie", sessionid);
+					// response.encodeURL(sessionid);
+				}
+				// String cookieval = conn.getHeaderField("set-cookie");
+				String cookieval = null;
+				Map<String, List<String>> headers = conn.getHeaderFields();
+				for (String s : headers.keySet()) {
+					List<String> headerslist = (headers.get(s));
+					for (String ss : headerslist) {
+						System.out.println("value: " + ss);
+						if (ss.contains("JSESSIONID")) {
+							cookieval = ss;
+						}
+					}
+				}
+
+				if (cookieval != null) {
+					sessionid = cookieval.substring(0, cookieval.indexOf(";"));
+					// System.out.println("保存sessionid： "+sessionid);
+//					loginSession.setSessionid(sessionid);
+//					app.mEditor.putString("sessionid", sessionid);
+//					app.mEditor.commit();
+				}
+				conn.setConnectTimeout(10000);
+				InputStream inStream = conn.getInputStream();
+				parsePhoenLoginXML(inStream);
+				inStream.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+		 */
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			for (LoginBean l : mPhoneLoginBeans) {
+				Toast.makeText(activity, l.getMsg(), Toast.LENGTH_LONG).show();
+				if (l.getFlag().equals("1")) {
+					loginSession.setSessionid(sessionid);
+					app.mEditor.putString("sessionid", sessionid);
+					app.mEditor.commit();
+
+					if(l.getPassword()!=null){
+					app.mEditor
+							.putString(
+									"PassWord",
+									new String(Base64.decode(l.getPassword()
+											.getBytes(), Base64.DEFAULT)));
+					}
+					app.mEditor.putString("User", l.getEmail());
+					app.mEditor.putString("role", l.getRole());
+					app.setMyrole(l.getRole());
+					app.setIslogin(true);
+					app.setLoginbean(l);
+					app.mEditor.putBoolean("IsLogin", true);
+					app.mEditor.commit();
+					finish();
+				}
+			}
+			mPhoneLoginBeans.clear();
+		}
+	}
+
+
+
+	class TimeCount extends CountDownTimer {
+		public TimeCount(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);// 参数依次为总时长,和计时的时间间隔
+		}
+
+		@Override
+		public void onFinish() {// 计时完毕时触发
+			mSendOn.setText("重新验证");
+			mPhoneNumber.setEnabled(true);
+			mSendOn.setVisibility(View.VISIBLE);
+			mTime.setVisibility(View.GONE);
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {// 计时过程显示
+			mTimeTextView.setText(millisUntilFinished / 1000 + "秒");
+			mPhoneNumber.setEnabled(false);
+		}
+	}
+	public OsmandApplication getMyApplication() {
+		return ((OsmandApplication) getApplication());
+	}
+
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		app.setIsLoginActivity(null);
+	}
+}

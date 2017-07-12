@@ -1,0 +1,1843 @@
+package com.hifleet.lnfo.layer;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.util.DisplayMetrics;
+import android.util.Log;
+
+import com.hifleet.bean.AlertAreaShape;
+import com.hifleet.bean.Center;
+import com.hifleet.bean.Line;
+import com.hifleet.bean.MetaPolygon;
+import com.hifleet.bean.Plot;
+import com.hifleet.bean.PlotBean;
+import com.hifleet.bean.PlotLable;
+import com.hifleet.bean.Point;
+import com.hifleet.bean.Polygon;
+import com.hifleet.bean.WanningBean;
+import com.hifleet.bean.lableBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.map.ITileSource;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.LatLon;
+import com.hifleet.map.MapTileAdapter;
+import com.hifleet.map.MapTileLayer.IMapRefreshCallback;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.map.OsmandMapLayer;
+import com.hifleet.map.OsmandMapTileView;
+import com.hifleet.map.OsmandSettings;
+import com.hifleet.map.QuadRect;
+import com.hifleet.map.ResourceManager;
+import com.hifleet.map.RotatedTileBox;
+
+/**
+ * @{# PlotInfoLayer.java Create on 2015年5月18日 下午2:13:50
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ * 
+ */
+public class PlotInfoLayer extends OsmandMapLayer implements
+		IMapRefreshCallback {
+
+	OsmandApplication app;
+
+	private QuadRect quadRect;
+
+	protected static final int emptyTileDivisor = 16;
+	public static final int OVERZOOM_IN = 0;// 2;
+
+	// List<PlotBean> listp = new ArrayList<PlotBean>();
+	// List<PlotBean> msgs = null;
+
+	List<Plot> listp = new ArrayList<Plot>();
+
+	private final boolean mainMap;
+	protected ITileSource map = null;
+	protected MapTileAdapter mapTileAdapter = null;
+	Paint paintBitmap, locationPaint;
+
+	protected RectF bitmapToDraw = new RectF();
+
+	protected Rect bitmapToZoom = new Rect();
+
+	protected OsmandMapTileView view;
+	protected ResourceManager resourceManager;
+	private OsmandSettings settings;
+	private boolean visible = true;
+
+	private List<PlotBean> _plot = new ArrayList<PlotBean>();
+	private List<Plot> plotlist = new ArrayList<Plot>();
+	private List<Map<String,List<Map<String, Double>>>> myplots = new ArrayList<Map<String,List<Map<String, Double>>>>();
+	private List<Map<String,List<Map<String, Double>>>> rmyplots = new ArrayList<Map<String, List<Map<String, Double>>>>();
+	private Map<String,Paint> plotspaint = new HashMap<String,Paint>();
+	private Paint fill_paint;
+	private Paint edge_line_paint;
+	private Paint line_paint;
+
+	String Polygon;
+	float drawpoint[];
+	private List<String> _point = new ArrayList<String>();
+	private RotatedTileBox tileBox;
+
+	private Paint paint, paint1, paint2;
+	DisplayMetrics dm;
+
+	private boolean flag = true;
+	// private long lastCallAsynTaskTime = 0;
+	private double callIntervalLimit1 = 1 * 1000L;
+	private int PLOT_SHOW = 8;
+	static NumberFormat ddf1 = NumberFormat.getNumberInstance();
+
+	public PlotInfoLayer(boolean mainMap) {
+		this.mainMap = mainMap;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hifleet.map.OsmandMapLayer#initLayer(com.hifleet.map.OsmandMapTileView
+	 * )
+	 */
+	@Override
+	public void initLayer(OsmandMapTileView view) {
+		// TODO Auto-generated method stub
+		this.view = view;
+		settings = view.getSettings();
+		resourceManager = view.getApplication().getResourceManager();
+
+		ddf1.setMaximumFractionDigits(3);
+		dm = view.getResources().getDisplayMetrics();
+		fill_paint = new Paint();
+		fill_paint.setStyle(Style.FILL_AND_STROKE);
+		fill_paint.setAntiAlias(true);
+		fill_paint.setColor(view.getResources().getColor(
+				com.cnooc.R.color.red));
+		fill_paint.setAlpha(50);
+
+		paint = new Paint(); // 设置�?个笔刷大小是3的黄色的画笔
+		paint.setColor(Color.WHITE);
+		paint.setStrokeJoin(Paint.Join.ROUND);
+		paint.setStrokeCap(Paint.Cap.ROUND);
+		paint.setStrokeWidth(3);
+		paint.setStyle(Style.FILL_AND_STROKE);
+		paint.setAlpha(180);
+
+		paint1 = new Paint(); // 设置�?个笔刷大小是3的黄色的画笔
+		paint1.setColor(Color.BLACK);
+		paint1.setAntiAlias(true);
+		paint1.setStrokeJoin(Paint.Join.ROUND);
+		paint1.setStrokeCap(Paint.Cap.ROUND);
+		paint1.setStrokeWidth(2);
+
+		paint2 = new Paint();
+		paint2.setColor(Color.BLACK);
+		paint2.setAntiAlias(true);
+		paint2.setStrokeWidth(2);
+		paint2.setStyle(Style.STROKE);
+
+		edge_line_paint = new Paint();
+		edge_line_paint.setColor(view.getResources().getColor(
+				com.cnooc.R.color.red));
+		edge_line_paint.setStrokeWidth(2*dm.density);
+		edge_line_paint.setStyle(Style.STROKE);
+		edge_line_paint.setAntiAlias(true);
+		edge_line_paint.setStrokeJoin(Paint.Join.ROUND);
+		edge_line_paint.setStrokeCap(Paint.Cap.ROUND);
+
+		line_paint = new Paint();
+		line_paint.setColor(view.getResources().getColor(
+				com.cnooc.R.color.black));
+		line_paint.setStrokeWidth(2*dm.density);
+		line_paint.setAntiAlias(true);
+		line_paint.setStyle(Style.STROKE);
+		line_paint.setStrokeJoin(Paint.Join.ROUND);
+		line_paint.setStrokeCap(Paint.Cap.ROUND);
+
+		
+		int ii = 37;
+
+		int jj = 35;
+
+		setCheckPoint(ii, jj);
+	}
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings settings) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hifleet.map.OsmandMapLayer#destroyLayer()
+	 */
+	@Override
+	public void destroyLayer() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hifleet.map.OsmandMapLayer#drawInScreenPixels()
+	 */
+	@Override
+	public boolean drawInScreenPixels() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	LoadingPlotXMLThread task;
+	private HashMap<String, LoadingPlotXMLThread> asyntaskmap = new HashMap<String, LoadingPlotXMLThread>();
+
+	private void clearMapByUUID(String uuid) {
+		asyntaskmap.remove(uuid);
+	}
+
+	private void closeReqest() {
+		if (asyntaskmap.isEmpty())
+			return;
+		Iterator<String> it = asyntaskmap.keySet().iterator();
+		while (it.hasNext()) {
+			String uuid = it.next();
+			LoadingPlotXMLThread task = asyntaskmap.get(uuid);
+			task.cancel(true);
+//			print("取消了plot线程"+uuid);
+		}
+	}
+
+	private void callPlotInfoAction(RotatedTileBox viewportToDraw) {
+		closeReqest();
+		String uuid = UUID.randomUUID().toString();
+		task = new LoadingPlotXMLThread(uuid,
+				viewportToDraw);
+		asyntaskmap.put(uuid, task);
+		// System.out.println("" + uuid + " plot启动。");
+		execute(task);
+	}
+
+	private void execute(LoadingPlotXMLThread task) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			task.executeOnExecutor(Executors.newCachedThreadPool(), new Void[0]);
+		} else {
+			task.execute(new Void[0]);
+		}
+	}
+
+	class LoadingPlotXMLThread extends AsyncTask<Void,String,String> {
+		String uuid;
+		long time;
+		private RotatedTileBox privateTileBox;
+		private Canvas privateCanvas;
+
+		public LoadingPlotXMLThread(String uuid, RotatedTileBox box) {
+			this.uuid = uuid;
+			this.privateTileBox = box;
+			time=System.currentTimeMillis();
+			// System.out.println("LoadingPlotXMLThread");
+		}
+
+		@Override
+		protected String doInBackground(Void... arg0) {
+			 print("标绘层后台运行。。。");
+			try {
+				if (this.isCancelled()) {
+					// print("线程取消 1.");
+					return "";
+				}
+
+				String userId = app.myPreferences.getString("User", null);
+				QuadRect rect = privateTileBox.getLatLonBounds();
+
+				LatLon p3 = new LatLon(rect.top, rect.right);
+				LatLon p2 = new LatLon(rect.top, rect.left);
+				LatLon p1 = new LatLon(rect.bottom, rect.left);
+				LatLon p4 = new LatLon(rect.bottom, rect.right);
+
+				String polygon = "((" + ddf1.format(p2.getLongitude()) + "%20"
+						+ ddf1.format(p2.getLatitude()) + ","
+						+ ddf1.format(p1.getLongitude()) + "%20"
+						+ ddf1.format(p1.getLatitude()) + ","
+						+ ddf1.format(p4.getLongitude()) + "%20"
+						+ ddf1.format(p4.getLatitude()) + ","
+						+ ddf1.format(p3.getLongitude()) + "%20"
+						+ ddf1.format(p3.getLatitude()) + ","
+						+ ddf1.format(p2.getLongitude()) + "%20"
+						+ ddf1.format(p2.getLatitude()) + "))" + "&Scale="
+						+ tileBox.getZoom() + "&" + "UserId=" + userId
+						+ "&userDomain=qq.com";
+
+				String bboxurl = app.myPreferences.getString("loginserver",
+						null) + IndexConstants.GET_PLOT_URL + polygon;
+
+				 print("标绘请求地址： " + bboxurl);
+//				 System.out.println("biaoURL" + "====" +"执行了plot 请求啦");
+				if (this.isCancelled()) {
+					// print("线程取消 1.");
+					return "";
+				}
+
+				URL url = new URL(bboxurl);
+				HttpURLConnection conn = (HttpURLConnection) url
+						.openConnection();
+				try {
+					if (loginSession.getSessionid() != null) {
+						conn.setRequestProperty("cookie",
+								loginSession.getSessionid());
+					} else {
+						conn.setRequestProperty("cookie",
+								app.myPreferences.getString("sessionid", ""));
+					}
+					conn.setConnectTimeout(10000);
+
+					if (this.isCancelled()) {
+						// print("线程取消 1.");
+						return "";
+					}
+
+					InputStream inStream = conn.getInputStream();
+					if (this.isCancelled()) {
+//						 print("线程取消 1.");
+						return "";
+					}
+					 print("plot parse!!! start:::::"+(System.currentTimeMillis()-time));
+					plotlist = new ArrayList<Plot>();
+					parsePlotXMLnew(inStream,plotlist,this);
+					print("plot parse!!! finish"+(System.currentTimeMillis()-time));
+					if (this.isCancelled()) {
+						// print("线程取消 1.");
+						return "";
+					}
+
+//					if (plotlist.size() > 0) {
+//						listp=new ArrayList<Plot>();
+//						for (int i = 0; i < plotlist.size(); i++) {
+//							if (this.isCancelled()) {
+////								 print("线程取消 1.");
+//								return "";
+//							}
+//							listp.add(plotlist.get(i));
+//						}
+//					}
+
+//					 print("plot解析完成啦: " + plotlist.size());
+
+					inStream.close();
+
+					if (plotlist.size() > 0) {
+						test(plotlist, privateCanvas, privateTileBox);
+					}
+                print("plot test finish"+(System.currentTimeMillis()-time));
+				} catch (java.lang.RuntimeException re) {
+					re.printStackTrace();
+					// print("java.lang.RuntimeException plotinfo");
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				print("出错啦。。。" + ex.getMessage());
+			}
+			return null;
+		}
+
+		protected void onPostExecute(String result) {
+			clearMapByUUID(uuid);
+			 print("plot异步刷新"+(System.currentTimeMillis()-time));
+			plotrefresh=true;
+			view.callPrepareBufferImage("plotInfoLayer", privateTileBox, true);
+		}
+	}
+
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
+		this.tileBox = tileBox;
+
+		if (!app.myPreferences.getBoolean("isShowPlot", true)) {
+			// print("不显示标绘层。");
+			return;
+		}
+
+		// System.out.println("执行buffer");
+		// new LoadingPlotXMLThread(tileBox, canvas).execute();
+		// if(!flag){
+		// print("执行plot buffer刷新了");
+		if (tileBox.getZoom() < PLOT_SHOW) {
+			// print("当前比例尺大于9，不显示标绘信息" + tileBox.getZoom());
+			return;
+		}
+
+		// print("刷新标绘层。");
+		refreshPlotInfoLayer(canvas, tileBox);
+
+	}
+
+	private void parsePlotXMLnew(InputStream inStream,List<Plot> list,LoadingPlotXMLThread task) throws Exception {
+		long s = System.currentTimeMillis();
+		SAXReader reader = new SAXReader();
+		org.dom4j.Document document = reader.read(inStream);
+
+		Map<String, Element> map = new HashMap<String, Element>();
+		List<Element> plot = document.getRootElement().elements();
+//		print("plotinfolayer 》标绘结果中 Plot 个数: " + plot.size());
+//		print("MoreActivity 》 筛选目标 个数： " + alertplots.size());
+		for (Element e : plot) {
+			map.put(e.attribute("PlotId").getText(), e);
+		}
+
+		for (String p : map.keySet()) {
+			if(task.isCancelled()){
+				return;
+			}
+			Element rse = map.get(p);
+			if (rse != null) {
+				Plot myplot = new Plot();
+				String plotname = rse.attributeValue("PlotName");
+				String plottype = rse.attributeValue("PlotType");
+				String colorType =rse.attributeValue("ColorType");
+				
+				myplot.setColorType(colorType);
+				// print("标绘类型： " + plottype);
+				myplot.setName(plotname);
+				myplot.setType(plottype);
+				// print("MoreActivity 》 筛选目标name： "+plotname);
+				List<Element> rslist = rse.elements();
+				if (rslist != null) {
+					AlertAreaShape[] alertshapes = new AlertAreaShape[3];
+					for (Element e : rslist) {
+						if(task.isCancelled()){
+							return;
+						}
+						if(e.getName().equals("Center")){
+							String center =e.getText();	
+							myplot.setCenter(center);
+						}
+						if(e.getName().equals("Shape")){
+							String shape =e.getText();	
+							myplot.setShape(shape);
+						}
+						if(e.getName().equals("AlertAreaShapes1")){
+							List<Element> alertplots = e.elements();
+							String[] plygons1 = new String[alertplots.size()];
+							AlertAreaShape alert1 = new AlertAreaShape();
+							if(alertplots.size()>0){
+								for (int ply=0;ply<alertplots.size();ply++) {
+									if(alertplots.get(ply).getName().equals("Polygon")){
+										plygons1[ply]=alertplots.get(ply).getText();
+//										System.out.println("AlertAreaShapes1 alertplots.get(ply).getText()"
+//										+alertplots.get(ply).getText());
+									}
+								}
+							}
+							alert1.setPolygons(plygons1);
+							alertshapes[0] = alert1;
+						}
+//						if(alert1.getPolygons()==null){
+//							String[] plygons = new String[1];
+//							alert1.setPolygons(plygons);
+//							alertshapes[0] = alert1;
+//						}
+						if(e.getName().equals("AlertAreaShapes2")){
+							List<Element> alertplots2 = e.elements();
+							String[] plygons2 = new String[alertplots2.size()];
+							AlertAreaShape alert2 = new AlertAreaShape();
+							if(alertplots2.size()>0){
+								for (int ply=0;ply<alertplots2.size();ply++) {
+									if(alertplots2.get(ply).getName().equals("Polygon")){
+										plygons2[ply]=alertplots2.get(ply).getText();
+										System.out.println("AlertAreaShapes2 alertplots2.get(ply).getText()"
+												+alertplots2.get(ply).getText());
+									}
+								}
+							}
+							alert2.setPolygons(plygons2);
+							alertshapes[1] = alert2;
+						}
+//						if(alert2.getPolygons()==null){
+//							String[] plygons = new String[1];
+//							alert2.setPolygons(plygons);
+//							alertshapes[1] = alert2;
+//						}
+						if(e.getName().equals("AlertAreaShapes3")){
+							List<Element> alertplots3 = e.elements();
+							String[] plygons3 = new String[alertplots3.size()];
+							AlertAreaShape alert3 = new AlertAreaShape();
+							if(alertplots3.size()>0){
+								for (int ply=0;ply<alertplots3.size();ply++) {
+									if(alertplots3.get(ply).getName().equals("Polygon")){
+										plygons3[ply]=alertplots3.get(ply).getText();
+										System.out.println("AlertAreaShapes3 alertplots3.get(ply).getText()"
+												+alertplots3.get(ply).getText());
+									}
+								}
+							}
+							alert3.setPolygons(plygons3);
+							alertshapes[2] = alert3;
+//							print("AlertAreaShapes3 addd");
+						}
+						if(e.getName().equals("IntersectShapes")){
+							List<Element> intershapes = e.elements();
+							if(intershapes.size()>0){
+								for (Element ish : intershapes){
+									myplot.setIntesect(ish.getText());
+								}
+							}
+						}
+						// System.out.println(mmsi+", "+shipname+", "+TriggerTime);
+						
+					}
+					myplot.setAlertshapes(alertshapes);
+					list.add(myplot);
+				}	
+				
+//				System.err.println("parse xml before list add:"+list.size()+"name:"+myplot.getName()+"type::"+myplot.getType()
+//						+"center"+myplot.getCenter()+" myplot.getAlertshapes():"+myplot.getAlertshapes().length);
+				
+//				for(int a=0;a<myplot.getAlertshapes().length;a++){
+//					AlertAreaShape as=myplot.getAlertshapes()[a];
+//					System.err.println("asasasasa:::"+as);
+//					if(as!=null&&as.getPolygons()!=null){
+//						System.err.println("parse xml before list add:"+list.size()+"myplot.getAlertshapes()"+myplot.getAlertshapes().length
+//								+"AlertAreaShape::"+as.getPolygons());
+//					for(String poly:as.getPolygons()){
+//						System.err.println("parse xml before list add"+poly);
+//					}
+//					}
+//				}
+				
+//				for(AlertAreaShape as:myplot.getAlertshapes()){
+//					if(as!=null&&as.getPolygons()!=null){
+//						System.err.println("parse xml before list add:"+list.size()+"myplot.getAlertshapes()"+myplot.getAlertshapes().length
+//								+"AlertAreaShape::"+as.getPolygons());
+//					for(String poly:as.getPolygons()){
+//						System.err.println("parse xml before list add"+poly);
+//					}
+//					}
+//			    }
+				
+//				System.err.println("parse xml before list add:"+list.size()+myplot.getName());
+//				list.add(myplot);
+				
+//				for(Plot xxx:list){
+//					for(AlertAreaShape as:xxx.getAlertshapes()){
+//						if(as!=null&&as.getPolygons()!=null){
+//						for(String poly:as.getPolygons()){
+//							System.err.println("in for  allmyplot.getAlertshapes()"+poly);
+//						}
+//						}
+//				}
+//				}
+				
+				
+			}
+		}
+		print("plot plot plot list:"+list.size());
+//		for(Plot xxx:list){
+//			for(AlertAreaShape as:xxx.getAlertshapes()){
+//				if(as!=null&&as.getPolygons()!=null){
+//				for(String poly:as.getPolygons()){
+//					System.err.println("allmyplot.getAlertshapes()"+poly);
+//				}
+//				}
+//		}
+//		}
+		
+		long e = System.currentTimeMillis();
+		print("plotinfolayer 解析第二个xml 》 耗时：" + (e - s) );
+
+		// long g = System.currentTimeMillis() - d;
+		// print("MoreActivity 》 耗时： " + g/1000.0+", 消息数： "+wanningBean.size());
+
+	}
+	
+//	private List<Plot> parseXMLnew(InputStream inStream,List<Plot> list,LoadingPlotXMLThread task) {
+//		try {
+//			long s=System.currentTimeMillis();
+//			XPath xpath = XPathFactory.newInstance().newXPath();
+//			DocumentBuilder builder = DocumentBuilderFactory.newInstance()
+//					.newDocumentBuilder();
+//			Document document = builder.parse(inStream);
+//
+//			NodeList plots = (NodeList) xpath.evaluate("/root/plot", document,
+//					XPathConstants.NODESET);
+//
+//			for (int i = 0; i < plots.getLength(); i++) {
+//				if(task.isCancelled()){
+//					System.err.println("task iscancelled parseXMLnew return");
+//					return null;
+//				}
+//
+//				Plot myplot = new Plot();
+//
+//				Node plot = plots.item(i);
+//
+//				String plotname = ""
+//						+ xpath.evaluate("@PlotName", plot,
+//								XPathConstants.STRING);
+//				String plottype = ""
+//						+ xpath.evaluate("@PlotType", plot,
+//								XPathConstants.STRING);
+//				String colorType = ""
+//						+ xpath.evaluate("@ColorType", plot,
+//								XPathConstants.STRING);
+//
+//				myplot.setColorType(colorType);
+//				// print("标绘类型： " + plottype);
+//				myplot.setName(plotname);
+//				myplot.setType(plottype);
+//
+//				String center = ""
+//						+ xpath.evaluate("Center", plot, XPathConstants.STRING);
+//				String shape = ""
+//						+ xpath.evaluate("Shape", plot, XPathConstants.STRING);
+//
+//				myplot.setCenter(center);
+//				myplot.setShape(shape);
+//				// System.out.println("Center: "+Center+", Shape: "+Shape);
+//
+//				NodeList alertareas1 = (NodeList) xpath.evaluate(
+//						"AlertAreaShapes1/Polygon", plot,
+//						XPathConstants.NODESET);
+//
+//				AlertAreaShape alert1 = new AlertAreaShape();
+//				String[] plygons1 = new String[alertareas1.getLength()];
+//
+//				for (int j = 0; j < alertareas1.getLength(); j++) {
+//					Node polygon = alertareas1.item(j);
+//					plygons1[j] = polygon.getTextContent();
+//				}
+//				alert1.setPolygons(plygons1);
+//
+//				NodeList alertareas2 = (NodeList) xpath.evaluate(
+//						"AlertAreaShapes2/Polygon", plot,
+//						XPathConstants.NODESET);
+//
+//				AlertAreaShape alert2 = new AlertAreaShape();
+//				String[] plygons2 = new String[alertareas2.getLength()];
+//
+//				for (int j = 0; j < alertareas2.getLength(); j++) {
+//					Node polygon = alertareas2.item(j);
+//					plygons2[j] = polygon.getTextContent();
+//				}
+//				alert2.setPolygons(plygons2);
+//
+//				NodeList alertareas3 = (NodeList) xpath.evaluate(
+//						"AlertAreaShapes3/Polygon", plot,
+//						XPathConstants.NODESET);
+//				AlertAreaShape alert3 = new AlertAreaShape();
+//				String[] plygons3 = new String[alertareas3.getLength()];
+//				for (int j = 0; j < alertareas3.getLength(); j++) {
+//					Node polygon = alertareas3.item(j);
+//					plygons3[j] = polygon.getTextContent();
+//				}
+//				alert3.setPolygons(plygons3);
+//
+//				AlertAreaShape[] alertshapes = new AlertAreaShape[3];
+//				alertshapes[0] = alert1;
+//				alertshapes[1] = alert2;
+//				alertshapes[2] = alert3;
+//				myplot.setAlertshapes(alertshapes);
+//
+//				NodeList intersects = (NodeList) xpath.evaluate(
+//						"IntersectShapes", plot, XPathConstants.NODESET);
+//
+//				for (int j = 0; j < intersects.getLength(); j++) {
+//					Node node = intersects.item(j);
+//					myplot.setIntesect(node.getTextContent());
+//				}
+//
+//				list.add(myplot);
+//			}
+//			 print("plot parsetime"+(System.currentTimeMillis()-s));
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			print("plot parse错误！ " + ex.getMessage());
+//		}
+//		return list;
+//	}
+
+	public static List<Map<String, String>> checkpoint = new ArrayList<Map<String, String>>();
+	public static List<lableBean> addedlable = new ArrayList<lableBean>();
+	public static List<lableBean> addedlable1 = new ArrayList<lableBean>();
+	public List<String> xy = new ArrayList<String>();
+	public List<PlotLable> plotnames = new ArrayList<PlotLable>();
+//	public List<PlotLable> tempship = new ArrayList<PlotLable>();
+	public List<String> point = new ArrayList<String>();
+	private boolean plotrefresh=false;
+	public void setLable(List<PlotLable> list, RotatedTileBox tilebox) {
+
+//		 print("plot 准备添加lable"+list.size());
+
+		addedlable.clear();
+//		tempship.clear();
+//		tempship.addAll(list);
+		try {
+			for (int s = 0; s < list.size(); s++) {
+//				 System.out.println("船舶名称"+list.get(s).name+list.size());
+				int locationx = tilebox.getPixXFromLonNoRot(Double
+						.valueOf(list.get(s).center.getLon()));
+				int locationy = tilebox.getPixYFromLatNoRot(Double
+						.valueOf(list.get(s).center.getLat()));
+				// ship location
+				Rect rect = new Rect();
+				paint.setTextSize(dip2px(dm.density,15));
+				paint.getTextBounds(list.get(s).name, 0,
+						list.get(s).name.length(), rect);
+				int w = rect.width();
+				int h = rect.height();
+				// int textWidth = getTextWidth(paint, list.get(s).cname);
+				for (int i = 0; i < checkpoint.size(); i++) {
+					// System.out.println("选了几个点"+i+"checksize"+checkpoint.size());
+					boolean addlable = true;
+					int x = Integer.parseInt(checkpoint.get(i).get("x"));
+					int y = Integer.parseInt(checkpoint.get(i).get("y"));
+					// prepare point
+					rect.set(locationx + x - ((w + 4) / 2), locationy + y,
+							locationx + x + ((w) / 2), locationy + y + h);
+					for (int s1 = 0; s1 < list.size(); s1++) {
+						int locationx1 = tilebox.getPixXFromLonNoRot(Double
+								.valueOf(list.get(s1).center.getLon()));
+						int locationy1 = tilebox.getPixYFromLatNoRot(Double
+								.valueOf(list.get(s1).center.getLat()));
+						if (rect.contains(locationx1, locationy1)) {
+							addlable = false;
+							break;
+						}
+					}
+					for (int q = 0; q < addedlable.size(); q++) {
+//						int lx = addedlable.get(q).x;
+//						int ly = addedlable.get(q).y;
+						int wt = addedlable.get(q).width;
+//						int ht = addedlable.get(q).heigth;
+						int lonx=tileBox
+								.getPixXFromLonNoRot(addedlable.get(q).lon);
+							int laty=tileBox
+								.getPixYFromLatNoRot(addedlable.get(q).lat);
+							int lx = lonx + addedlable.get(q).x - ((wt + dip2px(dm.density,2)) / 2);
+							int ly = laty + addedlable.get(q).y;
+						if (w > wt) {
+							wt = w;
+						}
+						int __x = Math.abs(locationx + x - ((w + dip2px(dm.density,2)) / 2) - lx);
+						int __y = Math.abs(locationy + y - ly);
+						if ((__x >= wt) || (__y >= h)) {
+							continue;
+						}
+						addlable = false;
+						break;
+					}
+					if (addlable) {
+						lableBean l = new lableBean();
+//						l.x = locationx + x - ((w + 4) / 2);
+//						l.y = locationy + y;
+//						l.heigth = h;
+//						l.width = w;
+//						l.shipx = locationx;
+//						l.shipy = locationy;
+//						l.n = tempship.get(s).name;
+						
+//						l.x = locationx + x - ((w + dip2px(dm.density,2)) / 2);
+//						l.y = locationy + y;
+						l.x = x;
+						l.y = y;
+						l.heigth = h;
+						l.width = w;
+//						l.shipx = locationx;
+//						l.shipy = locationy;
+						l.lat=list.get(s).center.getLat();
+						l.lon=list.get(s).center.getLon();
+//						print("可以显示标签"+tempshipp.get(key).getLa()+tempshipp.get(key).getLo());
+						l.n = list.get(s).name;
+						addedlable.add(l);
+						break;
+					}
+				}
+
+			}
+		} catch (java.lang.IndexOutOfBoundsException jie) {
+			System.out.println("IndexOutOfBoundsException plotlable");
+			return;
+		}
+
+	}
+	 public static int dip2px(float density, float dpValue) {  
+	        final float scale = density;  
+	        return (int) (dpValue * scale + 0.5f);  
+	  }  
+	  
+	    /** 
+	     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp 
+	     */  
+	public static int px2dip(float density, float pxValue) {  
+	        final float scale = density;  
+	        return (int) (pxValue / scale + 0.5f);  
+	    }  
+	public void drawLable(Canvas canvas, RotatedTileBox tileBox) {
+
+		this.tileBox = tileBox;
+		// print("执行plotlable 刷新 "+addedlable.size());
+		addedlable1 = new ArrayList<lableBean>();
+		addedlable1.addAll(addedlable);
+		for (int q = 0; q < addedlable1.size(); q++) {
+//			int lx = addedlable1.get(q).x;
+//			int ly = addedlable1.get(q).y;
+//			int wt = addedlable1.get(q).width;
+//			int ht = addedlable1.get(q).heigth;
+//			int x = addedlable1.get(q).shipx;
+//			int y = addedlable1.get(q).shipy;
+//			String n = addedlable1.get(q).n;
+//			int lx = addedlable1.get(q).x;
+//			int ly = addedlable1.get(q).y;
+			int wt = addedlable1.get(q).width;
+			int ht = addedlable1.get(q).heigth;
+//			int x = addedlable1.get(q).shipx;
+//			int y = addedlable1.get(q).shipy;
+			String n = addedlable1.get(q).n;
+			
+			
+			int x=tileBox
+				.getPixXFromLonNoRot(addedlable1.get(q).lon);
+			int y=tileBox
+				.getPixYFromLatNoRot(addedlable1.get(q).lat);
+			int lx = x + addedlable1.get(q).x - ((wt + dip2px(dm.density,2)) / 2);
+			int ly = y + addedlable1.get(q).y;
+			Rect rect = new Rect(lx, ly, lx + wt, ly + ht);
+			Rect rect2 = new Rect(lx-dip2px(dm.density,1), ly-dip2px(dm.density,1),
+					lx + wt+dip2px(dm.density,1), ly + ht+dip2px(dm.density,1));
+			canvas.drawLine(x, y, lx + wt / 2, ly + ht / 2, paint1);
+			canvas.drawRect(rect, paint);
+			canvas.drawRect(rect2, paint2);
+			paint1.setTextSize(dip2px(dm.density,14));
+			canvas.drawText(n, lx + 2 * dm.density, ly + ht - 1
+					* dm.density, paint1);
+		}
+	}
+
+	public static void clearLable() {
+		addedlable1.clear();
+	}
+
+	private void setCheckPoint(int i, int j) {
+		point.add(1 * i + "");
+		point.add(-1 * j + "");
+
+		point.add(0 * i + "");
+		point.add(-1 * j + "");
+
+		point.add(-1 * i + "");
+		point.add(-1 * j + "");
+
+		point.add(-1 * i + "");
+		point.add(0 * j + "");
+
+		point.add(-1 * i + "");
+		point.add(1 * j + "");
+
+		point.add(0 * i + "");
+		point.add(1 * j + "");
+
+		point.add(1 * i + "");
+		point.add(1 * j + "");
+
+		point.add(1 * i + "");
+		point.add(0 * j + "");
+
+		// point.add(2 * i + "");
+		// point.add(-1 * j + "");
+
+		// point.add(1 * i + "");
+		// point.add(-2 * j + "");
+
+		// point.add(0 * i + "");
+		// point.add(-2 * j + "");
+
+		point.add(1 * i + "");
+		point.add(1 * j + "");
+
+		// point.add(-1 * i + "");
+		// point.add(-2 * j + "");
+
+		// point.add(-2 * i + "");
+		// point.add(0 * j + "");
+
+		// point.add(-2 * i + "");
+		// point.add(1 * j + "");
+
+		// point.add(-1 * i + "");
+		// point.add(2 * j + "");
+
+		// point.add(0 * i + "");
+		// point.add(2 * j + "");
+
+		// point.add(1 * i + "");
+		// point.add(2 * j + "");
+
+		// point.add(2 * i + "");
+		// point.add(1 * j + "");
+
+		// point.add(2 * i + "");
+		// point.add(0 * j + "");
+
+		// point.add(2 * i + "");
+		// point.add(-2 * j + "");
+
+		// point.add(-2 * i + "");
+		// point.add(-2 * j + "");
+
+		// point.add(-2 * i + "");
+		// point.add(2 * j + "");
+
+		// point.add(2 * i + "");
+		// point.add(2 * j + "");
+
+		checkpoint.clear();
+		// print("check清空"+checkpoint.size());
+		for (int mi = 0; mi < point.size(); mi += 2) {
+			Map map = new HashMap<String, String>();
+			map.put("x", point.get(mi));
+			map.put("y", point.get(mi + 1));
+			checkpoint.add(map);
+		}
+
+		point.clear();
+		// print("check完成"+checkpoint.size());
+	}
+//	private void solveplot(){
+////		System.out.println("solveplotsolveplotsolveplot");
+//		myplots = new ArrayList<Map<String,List<Map<String, Double>>>>();
+//		plotspaint = new HashMap<String,Paint>();
+//		clearLable();
+//		plotname = new ArrayList<PlotLable>();
+//		if (lineplotlist.size() > 0) {
+//			// print("画线标绘。");
+//			for (Line line : lineplotlist) {
+//
+//				Center c = line.getCenter();
+//				String name = line.getName();
+//				PlotLable p = new PlotLable();
+//				// print("画线标绘。"+name);
+//				p.center = c;
+//				p.name = name;
+//				plotname.add(p);
+//				Path path = new Path();
+//
+//				List<Map<String, Double>> points = line.getPoints();
+//				Map m=new HashMap();
+//                m.put("lineplotlistpath", points);
+//                myplots.add(m);
+////				int i = 0;
+////				double lon, lat;
+////				int locationx, locationy;
+////				for (Map<String, Double> map : points) {
+////					lon = map.get("x");
+////					lat = map.get("y");
+////					locationx = tileBox.getPixXFromLonNoRot(lon);
+////					locationy = tileBox.getPixYFromLatNoRot(lat);
+////					// print("线坐标： "+locationx+", "+locationy);
+////					if (i == 0) {
+////						path.moveTo(locationx, locationy);
+////						i++;
+////					} else {
+////						path.lineTo(locationx, locationy);
+////					}
+////				}
+//
+////				canvas.drawPath(path, line_paint);
+//				ArrayList<ArrayList<MetaPolygon>> alertareas = line
+//						.getAlertareaes();
+//
+//				for (ArrayList<MetaPolygon> shapes : alertareas) {
+//					// 遍历警戒区
+//					for (MetaPolygon polygon : shapes) {
+//						// 遍历警戒区下面的多边形
+//						ArrayList<HashMap<String, Double>> polypoints = polygon
+//								.getPoints();
+//						Map m1=new HashMap();
+//		                m1.put("lineplotlistpolypath", polypoints);
+//		                myplots.add(m1);
+////						double polylon, polylat;
+////						int polyx, polyy;
+////						Path polypath = new Path();
+////						int polyi = 0;
+////
+////						for (HashMap<String, Double> pointsmap : polypoints) {
+////							polylon = pointsmap.get("x");
+////							polylat = pointsmap.get("y");
+////							// print("jingjiequ: "+polylon+", "+polylat);
+////							polyx = tileBox.getPixXFromLonNoRot(polylon);
+////							polyy = tileBox.getPixYFromLatNoRot(polylat);
+////
+////							if (polyi == 0) {
+////								polyi++;
+////								polypath.moveTo(polyx, polyy);
+////							} else {
+////								polypath.lineTo(polyx, polyy);
+////								polypath.
+////							}
+////						}
+//						// print("画了一个线标绘的警戒区。");
+//		                
+////						canvas.drawPath(polypath, fill_paint);
+////						canvas.drawPath(polypath, edge_line_paint);
+//
+//					}
+//				}
+//
+//			}
+//
+//		}
+//		
+//		// 遍历点标绘
+//					if (pointplotlist.size() > 0) {
+//						for (Point p : pointplotlist) {
+//							Center c = p.getCenter();
+//							String name = p.getName();
+//
+//							PlotLable pl = new PlotLable();
+//							pl.center = c;
+//							pl.name = name;
+//							plotname.add(pl);
+//							// print("画dian标绘。"+name);
+//							ArrayList<ArrayList<MetaPolygon>> alertareas = p
+//									.getAlertareaes();
+//
+//							// 遍历警戒区
+//							for (ArrayList<MetaPolygon> shapes : alertareas) {
+//
+//								// 遍历警戒区下面的多边形
+//								for (MetaPolygon polygons : shapes) {
+//
+//									ArrayList<HashMap<String, Double>> polypoints = polygons
+//											.getPoints();
+//									Map m=new HashMap();
+//					                m.put("pointplotlist", polypoints);
+//					                myplots.add(m);
+////									double polylon, polylat;
+////									int polyx, polyy;
+////									Path polypath = new Path();
+////									int polyi = 0;
+////
+////									for (HashMap<String, Double> pointsmap : polypoints) {
+////										polylon = pointsmap.get("x");
+////										polylat = pointsmap.get("y");
+////
+////										// print("jingjiequ: "+polylon+", "+polylat);
+////
+////										polyx = tileBox.getPixXFromLonNoRot(polylon);
+////										polyy = tileBox.getPixYFromLatNoRot(polylat);
+////
+////										if (polyi == 0) {
+////											polyi++;
+////											polypath.moveTo(polyx, polyy);
+////										} else {
+////											polypath.lineTo(polyx, polyy);
+////										}
+////									}
+//									// print("画了一个点标绘的警戒区。");
+////									canvas.drawPath(polypath, fill_paint);
+////									canvas.drawPath(polypath, edge_line_paint);
+//									
+//									// }
+//								}
+//							}
+//
+//						}
+//					}
+//					
+//					// 遍历面标绘
+//					if (polygonplotlist.size() > 0) {
+//						// print("面标绘");
+//						for (Polygon poly : polygonplotlist) {
+//
+//							Paint polygon_paint = new Paint();
+//							polygon_paint.setStyle(Style.FILL_AND_STROKE);
+//							polygon_paint.setAntiAlias(true);
+//
+//							// 根据返回的面标绘的颜色值，绘制面标绘。
+//							String colorvaluestr = poly.getColorType();
+//							colorvaluestr = colorvaluestr.substring(2);// 去掉前面的 0x
+//							colorvaluestr = "#" + colorvaluestr;// 在前面加#
+//							// print("color_str_#: "+colorvaluestr);
+//							polygon_paint.setColor(Color.parseColor(colorvaluestr));
+//							polygon_paint.setAlpha(20);
+//
+//							Path path = new Path();
+//							int i = 0;
+//
+//							String name = poly.getName();
+//							Center center = poly.getCenter();
+//
+//							PlotLable pl = new PlotLable();
+//							pl.center = center;
+//							pl.name = name;
+//							plotname.add(pl);
+//							// print("画mian标绘。"+name);
+//							List<Map<String, Double>> points = poly.getPoints();
+//							Map m=new HashMap();
+//			                m.put("polygonplotlist", points);
+//			                plotspaint.put(points.toString(), polygon_paint);
+//			                myplots.add(m);
+////							double lon, lat;
+////							int locationx, locationy;
+////
+////							for (Map<String, Double> map : points) {
+////
+////								lon = map.get("x");
+////								lat = map.get("y");
+////								locationx = tileBox.getPixXFromLonNoRot(lon);
+////								locationy = tileBox.getPixYFromLatNoRot(lat);
+////
+////								if (i == 0) {
+////									i++;
+////									path.moveTo(locationx, locationy);
+////								} else {
+////									path.lineTo(locationx, locationy);
+////								}
+////							}
+////
+//////							canvas.drawPath(path, polygon_paint);
+//						}
+//					}
+//					
+//					if (app.myPreferences.getBoolean("isShowPlotName", true)) {
+//						setLable(plotname, tileBox);
+//					}
+//	}
+//	private void refreshPlotInfoLayer(Canvas canvas, RotatedTileBox tileBox) {
+//		if(plotrefresh&&lineplotlist!=null&&pointplotlist!=null&&polygonplotlist!=null){
+//			plotrefresh=false;
+//		try {
+//			// print("shuaxin标绘。");
+//			clearLable();
+//			plotname.clear();
+//			canvas.save();
+////			canvas.saveLayerAlpha(0, 0, 2000, 2000, 0x88, 2);  
+//
+//			// print("linelist: " + lineplotlist.size() + ", pointlist: "
+//			// + pointplotlist.size() + ", polylist: "
+//			// + polygonplotlist.size());
+//
+//			// 遍历线标绘
+//			if (lineplotlist.size() > 0) {
+//				// print("画线标绘。");
+//				for (Line line : lineplotlist) {
+//
+//					Center c = line.getCenter();
+//					String name = line.getName();
+//					PlotLable p = new PlotLable();
+//					// print("画线标绘。"+name);
+//					p.center = c;
+//					p.name = name;
+//					plotname.add(p);
+//					Path path = new Path();
+//
+//					List<Map<String, Double>> points = line.getPoints();
+//					int i = 0;
+//					double lon, lat;
+//					int locationx, locationy;
+//					for (Map<String, Double> map : points) {
+//						lon = map.get("x");
+//						lat = map.get("y");
+//						locationx = tileBox.getPixXFromLonNoRot(lon);
+//						locationy = tileBox.getPixYFromLatNoRot(lat);
+//						// print("线坐标： "+locationx+", "+locationy);
+//						if (i == 0) {
+//							path.moveTo(locationx, locationy);
+//							i++;
+//						} else {
+//							path.lineTo(locationx, locationy);
+//						}
+//					}
+//
+//					canvas.drawPath(path, line_paint);
+//
+//					ArrayList<ArrayList<MetaPolygon>> alertareas = line
+//							.getAlertareaes();
+//
+//					for (ArrayList<MetaPolygon> shapes : alertareas) {
+//						// 遍历警戒区
+//						for (MetaPolygon polygon : shapes) {
+//							// 遍历警戒区下面的多边形
+//							ArrayList<HashMap<String, Double>> polypoints = polygon
+//									.getPoints();
+//							double polylon, polylat;
+//							int polyx, polyy;
+//							Path polypath = new Path();
+//							int polyi = 0;
+//
+//							for (HashMap<String, Double> pointsmap : polypoints) {
+//								polylon = pointsmap.get("x");
+//								polylat = pointsmap.get("y");
+//								// print("jingjiequ: "+polylon+", "+polylat);
+//								polyx = tileBox.getPixXFromLonNoRot(polylon);
+//								polyy = tileBox.getPixYFromLatNoRot(polylat);
+//
+//								if (polyi == 0) {
+//									polyi++;
+//									polypath.moveTo(polyx, polyy);
+//								} else {
+//									polypath.lineTo(polyx, polyy);
+//								}
+//							}
+//							// print("画了一个线标绘的警戒区。");
+//							canvas.drawPath(polypath, fill_paint);
+//							canvas.drawPath(polypath, edge_line_paint);
+//
+//						}
+//					}
+//
+//				}
+//
+//			}
+//
+//			// 遍历点标绘
+//			if (pointplotlist.size() > 0) {
+//				for (Point p : pointplotlist) {
+//					Center c = p.getCenter();
+//					String name = p.getName();
+//
+//					PlotLable pl = new PlotLable();
+//					pl.center = c;
+//					pl.name = name;
+//					plotname.add(pl);
+//					// print("画dian标绘。"+name);
+//					ArrayList<ArrayList<MetaPolygon>> alertareas = p
+//							.getAlertareaes();
+//
+//					// 遍历警戒区
+//					for (ArrayList<MetaPolygon> shapes : alertareas) {
+//
+//						// 遍历警戒区下面的多边形
+//						for (MetaPolygon polygons : shapes) {
+//
+//							ArrayList<HashMap<String, Double>> polypoints = polygons
+//									.getPoints();
+//							double polylon, polylat;
+//							int polyx, polyy;
+//							Path polypath = new Path();
+//							int polyi = 0;
+//
+//							for (HashMap<String, Double> pointsmap : polypoints) {
+//								polylon = pointsmap.get("x");
+//								polylat = pointsmap.get("y");
+//
+//								// print("jingjiequ: "+polylon+", "+polylat);
+//
+//								polyx = tileBox.getPixXFromLonNoRot(polylon);
+//								polyy = tileBox.getPixYFromLatNoRot(polylat);
+//
+//								if (polyi == 0) {
+//									polyi++;
+//									polypath.moveTo(polyx, polyy);
+//								} else {
+//									polypath.lineTo(polyx, polyy);
+//								}
+//							}
+//							// print("画了一个点标绘的警戒区。");
+//							canvas.drawPath(polypath, fill_paint);
+//							canvas.drawPath(polypath, edge_line_paint);
+//							// }
+//
+//						}
+//					}
+//
+//				}
+//			}
+//
+//			// 遍历面标绘
+//			if (polygonplotlist.size() > 0) {
+//				// print("面标绘");
+//				for (Polygon poly : polygonplotlist) {
+//
+//					Paint polygon_paint = new Paint();
+//					polygon_paint.setStyle(Style.FILL_AND_STROKE);
+//					polygon_paint.setAntiAlias(true);
+//
+//					// 根据返回的面标绘的颜色值，绘制面标绘。
+//					String colorvaluestr = poly.getColorType();
+//					colorvaluestr = colorvaluestr.substring(2);// 去掉前面的 0x
+//					colorvaluestr = "#" + colorvaluestr;// 在前面加#
+//					// print("color_str_#: "+colorvaluestr);
+//					polygon_paint.setColor(Color.parseColor(colorvaluestr));
+//					polygon_paint.setAlpha(50);
+//
+//					Path path = new Path();
+//					int i = 0;
+//
+//					String name = poly.getName();
+//					Center center = poly.getCenter();
+//
+//					PlotLable pl = new PlotLable();
+//					pl.center = center;
+//					pl.name = name;
+//					plotname.add(pl);
+//					// print("画mian标绘。"+name);
+//					List<Map<String, Double>> points = poly.getPoints();
+//
+//					double lon, lat;
+//					int locationx, locationy;
+//
+//					for (Map<String, Double> map : points) {
+//
+//						lon = map.get("x");
+//						lat = map.get("y");
+//						locationx = tileBox.getPixXFromLonNoRot(lon);
+//						locationy = tileBox.getPixYFromLatNoRot(lat);
+//
+//						if (i == 0) {
+//							i++;
+//							path.moveTo(locationx, locationy);
+//						} else {
+//							path.lineTo(locationx, locationy);
+//						}
+//					}
+//
+//					canvas.drawPath(path, polygon_paint);
+//				}
+//			}
+//			if (app.myPreferences.getBoolean("isShowPlotName", true)) {
+////				setLable(plotname, tileBox);
+//				drawLable(canvas, tileBox);
+//			}
+//			// print("plot lable 画完了");
+//			// TODO 挂名字标签
+//			canvas.restore();
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
+//	}
+//	}
+
+	private void refreshPlotInfoLayer(Canvas canvas, RotatedTileBox tileBox) {
+		if(plotrefresh&&myplots!=null){
+			plotrefresh=false;
+		try {
+			// print("shuaxin标绘。");
+//			clearLable();
+//			canvas.saveLayerAlpha(0, 0, 2000, 2000, 0x88, 2);  
+
+			// print("linelist: " + lineplotlist.size() + ", pointlist: "
+			// + pointplotlist.size() + ", polylist: "
+			// + polygonplotlist.size());
+			rmyplots = new ArrayList<Map<String,List<Map<String, Double>>>>();
+			rmyplots.addAll(myplots);
+			if (rmyplots.size() > 0) {
+				print("refreshPlotInfoLayer画线标绘。");
+				for (Map<String, List<Map<String, Double>>> pointsmap : rmyplots) {
+					canvas.save();
+					if(pointsmap.containsKey("lineplotlistpath")){
+						int i = 0;
+						double lon, lat;
+						int locationx, locationy;
+						Path path = new Path();
+						for (Map<String, Double> map : pointsmap.get("lineplotlistpath")) {
+							lon = map.get("x");
+							lat = map.get("y");
+							locationx = tileBox.getPixXFromLonNoRot(lon);
+							locationy = tileBox.getPixYFromLatNoRot(lat);
+							// print("线坐标： "+locationx+", "+locationy);
+							if (i == 0) {
+								path.moveTo(locationx, locationy);
+								i++;
+							} else {
+								path.lineTo(locationx, locationy);
+							}
+						}
+						canvas.drawPath(path, line_paint);
+					}else if(pointsmap.containsKey("lineplotlistpolypath")){
+						double polylon, polylat;
+						int polyx, polyy;
+						Path polypath = new Path();
+						int polyi = 0;
+
+						for (Map<String, Double> pointsm: pointsmap.get("lineplotlistpolypath")) {
+							polylon = pointsm.get("x");
+							polylat = pointsm.get("y");
+							// print("jingjiequ: "+polylon+", "+polylat);
+							polyx = tileBox.getPixXFromLonNoRot(polylon);
+							polyy = tileBox.getPixYFromLatNoRot(polylat);
+
+							if (polyi == 0) {
+								polyi++;
+								polypath.moveTo(polyx, polyy);
+							} else {
+								polypath.lineTo(polyx, polyy);
+							}
+						}
+						canvas.drawPath(polypath, fill_paint);
+						canvas.drawPath(polypath, edge_line_paint);
+					}else if(pointsmap.containsKey("pointplotlist")){
+						double polylon, polylat;
+						int polyx, polyy;
+						Path polypath = new Path();
+						int polyi = 0;
+
+						for (Map<String, Double> pointsm : pointsmap.get("pointplotlist")) {
+							polylon = pointsm.get("x");
+							polylat = pointsm.get("y");
+
+							// print("jingjiequ: "+polylon+", "+polylat);
+
+							polyx = tileBox.getPixXFromLonNoRot(polylon);
+							polyy = tileBox.getPixYFromLatNoRot(polylat);
+
+							if (polyi == 0) {
+								polyi++;
+								polypath.moveTo(polyx, polyy);
+							} else {
+								polypath.lineTo(polyx, polyy);
+							}
+						}
+						canvas.drawPath(polypath, fill_paint);
+						canvas.drawPath(polypath, edge_line_paint);
+					}else if(pointsmap.containsKey("polygonplotlist")){
+						Path path = new Path();
+						int i = 0;
+						double lon, lat;
+						int locationx, locationy;
+	
+						for (Map<String, Double> map : pointsmap.get("polygonplotlist")) {
+	
+							lon = map.get("x");
+							lat = map.get("y");
+							locationx = tileBox.getPixXFromLonNoRot(lon);
+							locationy = tileBox.getPixYFromLatNoRot(lat);
+	
+							if (i == 0) {
+								i++;
+								path.moveTo(locationx, locationy);
+							} else {
+								path.lineTo(locationx, locationy);
+							}
+						}
+						canvas.drawPath(path, plotspaint.get(pointsmap.get("polygonplotlist").toString()));
+						Paint p=new Paint();
+						p.setAntiAlias(true);
+						p.setColor(plotspaint.get(pointsmap.get("polygonplotlist").toString()).getColor());
+						p.setAlpha(150);
+						p.setStyle(Style.STROKE);
+						p.setStrokeWidth(3/2*dm.density);
+						canvas.drawPath(path, p);
+						}
+					canvas.restore();
+					}
+				}
+			if (app.myPreferences.getBoolean("isShowPlotName", true)) {
+//				setLable(plotname, tileBox);
+				drawLable(canvas, tileBox);
+			}
+			// print("plot lable 画完了");
+			// TODO 挂名字标签
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	}
+	public void clearplot(){
+		plotrefresh=true;
+		view.callPrepareBufferImage("plotInfoLayer", tileBox, true);
+	}
+//	List<Plot> list1 = new ArrayList<Plot>();
+//	List<Line> lineplotlist ;
+//	List<Point> pointplotlist ;
+//	List<Polygon> polygonplotlist;
+
+	private boolean isTheSameTileBox;
+
+
+	public void test(List<Plot> list, Canvas canvas, RotatedTileBox tileBox) {
+		// pointList.clear();
+//		plotrefresh = false;
+//		list1.clear();
+//		lineplotlist= new ArrayList<Line>();
+//		pointplotlist= new ArrayList<Point>();
+//		polygonplotlist= new ArrayList<Polygon>();
+
+		ArrayList<Map<String, List<Map<String, Double>>>> tmyplots = new ArrayList<Map<String,List<Map<String, Double>>>>();
+		HashMap<String, Paint> tplotspaint = new HashMap<String,Paint>();
+		ArrayList<PlotLable> tplotnames = new ArrayList<PlotLable>();
+		
+		if (list.size() >= 1) {
+
+//			for (int i = 0; i < list.size(); i++) {
+//				list1.add(list.get(i));
+//			}
+
+			for (int i = 0; i < list.size(); i++) {
+				Plot plot = list.get(i);
+				
+				String plottype = plot.getType();
+				// print("plottype: " + plottype);
+				String plotname = plot.getName();
+				Center center = parseCenter(plot.getCenter());
+//				 print("plot test list size"+list.size()+plotname);
+				PlotLable p = new PlotLable();
+				// print("画线标绘。"+name);
+				p.center = center;
+				p.name = plotname;
+				tplotnames.add(p);
+				
+				ArrayList<ArrayList<MetaPolygon>> alertareaes = parseAlertAreaShapes(plot
+						.getAlertshapes());
+
+				if (plottype.compareTo("Line") == 0) {
+					// 线标绘
+					// print("线标绘");
+					List<Map<String, Double>> points = parseIntersectLine(plot
+							.getIntesect());
+//					Line line = new Line();
+//					line.setName(plotname);
+//
+//					line.setCenter(center);
+//					line.setPoints(points);
+//					line.setAlertareaes(alertareaes);
+					
+					Path path = new Path();
+
+					Map m=new HashMap();
+		            m.put("lineplotlistpath", points);
+		            tmyplots.add(m);
+                    if(alertareaes==null){
+                    	continue;
+                    }
+					for (ArrayList<MetaPolygon> shapes : alertareaes) {
+						// 遍历警戒区
+						for (MetaPolygon polygon : shapes) {
+							// 遍历警戒区下面的多边形
+							ArrayList<HashMap<String, Double>> polypoints = polygon
+									.getPoints();
+							Map m1=new HashMap();
+			                m1.put("lineplotlistpolypath", polypoints);
+			                tmyplots.add(m1);
+
+						}
+					}
+
+				
+
+					continue;
+				}
+
+				if (plottype.compareTo("Point") == 0) {
+					// 点标绘，没有intersect
+
+					// 遍历警戒区
+					if(alertareaes==null){
+                    	continue;
+					}
+					for (ArrayList<MetaPolygon> shapes : alertareaes) {
+
+						// 遍历警戒区下面的多边形
+						for (MetaPolygon polygons : shapes) {
+
+							ArrayList<HashMap<String, Double>> polypoints = polygons
+									.getPoints();
+							Map m=new HashMap();
+			                m.put("pointplotlist", polypoints);
+			                tmyplots.add(m);
+						}
+					}
+
+					continue;
+				}
+
+				if (plottype.compareTo("Polygon") == 0) {
+					// 面标绘
+					List<Map<String, Double>> points = parseIntersectPolygon(plot
+							.getIntesect());
+					
+					Paint polygon_paint = new Paint();
+					polygon_paint.setStyle(Style.FILL_AND_STROKE);
+					polygon_paint.setAntiAlias(true);
+
+					// 根据返回的面标绘的颜色值，绘制面标绘。
+					String str =plot.getColorType();
+					String[] colorvaluestr1=str.split(",");
+					String colorvaluestr=colorvaluestr1[0];
+					colorvaluestr = colorvaluestr.substring(2);// 去掉前面的 0x
+					colorvaluestr = "#" + colorvaluestr;// 在前面加#
+//					 print("color_str_#: "+colorvaluestr);
+					polygon_paint.setColor(Color.parseColor(colorvaluestr));
+					polygon_paint.setAlpha(40);
+
+					Path path = new Path();
+					Map m=new HashMap();
+	                m.put("polygonplotlist", points);
+	                tplotspaint.put(points.toString(), polygon_paint);
+	                tmyplots.add(m);
+					continue;
+					// 这个形状只会是一个面
+				}
+			}
+
+		}
+		myplots = new ArrayList<Map<String,List<Map<String, Double>>>>();
+		plotspaint = new HashMap<String,Paint>();
+		plotnames = new ArrayList<PlotLable>();
+		
+		myplots.addAll(tmyplots);
+		plotspaint.putAll(tplotspaint);
+		plotnames.addAll(tplotnames);
+		if (app.myPreferences.getBoolean("isShowPlotName", true)) {
+			setLable(plotnames, tileBox);
+		}
+//		solveplot();
+	}
+
+	// 解析中心点位置，即标签所在位置
+	private Center parseCenter(String center) {
+		// POINT (121.024591388889 40.2429875)
+		if (center.compareTo("POINT EMPTY") == 0)
+			return null;
+		String c = center.replace("POINT", "");
+		c = c.trim();
+		c = c.replace("(", "");
+		c = c.replace(")", "");
+		c = c.trim();
+		String ss[] = c.split(" ");
+		Center ccenter = new Center();
+		if (ss.length>1){
+		if (ss[0] != null && ss[1] != null) {
+
+			ccenter.setLon(Double.parseDouble(ss[0]));
+			ccenter.setLat(Double.parseDouble(ss[1]));
+		}
+		}
+		return ccenter;
+	}
+
+	// 解析裁剪后的面标绘形状
+	private List<Map<String, Double>> parseIntersectPolygon(String polygon) {
+		// 解析polygon字符串
+		String p = polygon.replace("POLYGON", "");
+		p = p.trim();
+		p = p.replace("((", "");
+		p = p.replace("))", "");
+		List<Map<String, Double>> points = new ArrayList<Map<String, Double>>();
+
+		if (p.contains("), (")) {
+			// TODO 有多个小的polygon
+		} else {
+			// 没有小polygon
+			String pairs[] = p.split(",");
+			for (String pair : pairs) {
+				pair = pair.trim();
+				String lonlat[] = pair.split(" ");
+				if (lonlat[0] != null && lonlat[1] != null) {
+					double lon = Double.parseDouble(lonlat[0]);
+					double lat = Double.parseDouble(lonlat[1]);
+					Map<String, Double> lonlatmap = new HashMap<String, Double>();
+					lonlatmap.put("x", lon);
+					lonlatmap.put("y", lat);
+					points.add(lonlatmap);
+				}
+			}
+		}
+
+		return points;
+	}
+
+	// 解析裁剪后的线标绘形状
+	private List<Map<String, Double>> parseIntersectLine(String line) {
+		// print("LinsStrin: "+line);
+		// 解析linestring 字符串
+		// LINESTRING (116.05388888888889 21.630833333333335, 116.04555555555555
+		// 21.64388888888889)
+
+		String linestring = line.replace("LINESTRING", "");
+		linestring = linestring.trim();
+		linestring = linestring.replace("(", "");
+		linestring = linestring.replace(")", "");
+
+		String pairs[] = linestring.split(",");
+		List<Map<String, Double>> points = new ArrayList<Map<String, Double>>();
+		for (String pair : pairs) {
+			pair = pair.trim();
+			String lonlat[] = pair.split(" ");
+			if(lonlat.length>1){
+			if (lonlat[0] != null && lonlat[1] != null) {
+				double lon = Double.parseDouble(lonlat[0]);
+				double lat = Double.parseDouble(lonlat[1]);
+				Map<String, Double> lonlatmap = new HashMap<String, Double>();
+				lonlatmap.put("x", lon);
+				lonlatmap.put("y", lat);
+				points.add(lonlatmap);
+			}
+			}
+		}
+		return points;
+	}
+
+	private ArrayList<ArrayList<MetaPolygon>> parseAlertAreaShapes(
+			AlertAreaShape[] alertareas) {
+//		System.err.println("parseAlertAreaShapes parseAlertAreaShapes parseAlertAreaShapes"+alertareas.length);
+		ArrayList<ArrayList<MetaPolygon>> alertarea_polygon_list = new ArrayList<ArrayList<MetaPolygon>>();
+
+		for (AlertAreaShape alertarea : alertareas) {
+			// 可能有多个警戒区（3个）
+			// 开始遍历每一个alertarea
+			// 每一个alertarea下有多个polygon
+			if(alertarea==null){
+				System.err.println("alertarea alertarea:::null");
+				continue;
+			}
+			String polygons[] = alertarea.getPolygons();
+			ArrayList<MetaPolygon> polygonlist = new ArrayList<MetaPolygon>();
+
+			for (String polygon : polygons) {
+				// 可能有多个polygon
+				// 开始遍历每一个polygon
+				MetaPolygon metapolygon = new MetaPolygon();
+
+				String p = polygon.replace("POLYGON", "");
+				p = p.trim();
+				p = p.replace("((", "");
+				p = p.replace("))", "");
+
+				if (p.contains("), (")) {
+					// 有多个小的polygon
+				} else {
+
+					String pairs[] = p.split(",");
+
+					for (String pair : pairs) {
+						pair = pair.trim();
+						String lonlat[] = pair.split(" ");
+						if (lonlat[0] != null && lonlat[1] != null) {
+							double lon = Double.parseDouble(lonlat[0]);
+							double lat = Double.parseDouble(lonlat[1]);
+							HashMap<String, Double> lonlatmap = new HashMap<String, Double>();
+							lonlatmap.put("x", lon);
+							lonlatmap.put("y", lat);
+							metapolygon.addPoint(lonlatmap);
+						}
+					}
+				}
+				polygonlist.add(metapolygon);
+			}
+			alertarea_polygon_list.add(polygonlist);
+		}
+		return alertarea_polygon_list;
+	}
+
+	@Override
+	public void mapRefreshed(RotatedTileBox tileBox) {
+		// TODO Auto-generated method stub
+		// long calltime = System.currentTimeMillis();
+		flag = false;
+		this.tileBox = tileBox;
+		plotrefresh=true;
+//		lineplotlist.clear();
+//		pointplotlist.clear();
+//		polygonplotlist.clear();
+//		if (!app.myPreferences.getBoolean("isShowPlot", true)) {
+//			return;
+//		}
+
+		if (tileBox.getZoom() >= PLOT_SHOW) {
+
+			if (lastQueryTileBox == null) {
+				// print("lastQueryTileBox null isTheSameTileBox=false. ");
+				lastQueryTileBox = tileBox;
+				isTheSameTileBox = false;
+
+			} else {
+				isTheSameTileBox = isTheSameTileBox(tileBox);
+				// print("判断结果： " + isTheSameTileBox);
+			}
+
+			if (!isTheSameTileBox) {
+				print("执行plot move" + tileBox.getZoom());
+				lastQueryTileBox = tileBox;
+
+				// if ((calltime - lastCallAsynTaskTime) > callIntervalLimit1) {
+
+				if (app.myPreferences.getBoolean("isShowPlot", true)) {
+
+					callPlotInfoAction(tileBox);
+
+				} else {
+//					if(list1!=null)
+//					list1.clear();
+//					if(lineplotlist!=null)
+//					lineplotlist.clear();
+//					if(pointplotlist!=null)
+//					pointplotlist.clear();
+//					if(polygonplotlist!=null)
+//					polygonplotlist.clear();
+
+					// System.out.println("隐藏标绘");
+				}
+				// }
+			}else{
+				plotrefresh=true;
+			}
+
+			// lastCallAsynTaskTime = calltime;
+
+			return;
+		}
+	}
+
+	private RotatedTileBox lastQueryTileBox;
+
+	private boolean isTheSameTileBox(RotatedTileBox tileBox) {
+
+		if (tileBox.getZoom() != lastQueryTileBox.getZoom()) {
+			return false;
+		}
+
+		if (lastQueryTileBox != null) {
+			LatLon lastLatLon = lastQueryTileBox.getCenterLatLon();
+			LatLon thisLatLon = tileBox.getCenterLatLon();
+
+			if ((lastLatLon.getLatitude() != thisLatLon.getLatitude())
+					|| lastLatLon.getLongitude() != thisLatLon.getLongitude()) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private static void print(String msg) {
+		Log.i(TAG, msg);
+	}
+
+	public static final String TAG = "FileDownloader";
+
+}

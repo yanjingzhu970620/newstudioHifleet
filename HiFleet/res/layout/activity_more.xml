@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_f5f0eb"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_nav" />
+    
+     <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dip"
+        android:indeterminateDrawable="@drawable/animdraw2"
+        android:indeterminateDuration="1500" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/list_wanning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/effectButton_delete" >
+        </ListView>
+
+        <com.e.common.widget.effect.button.EffectColorButton
+            android:id="@+id/effectButton_delete"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="删除报警信息"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:effectColor_bgNormalColor="#0164ca"
+            app:effectColor_bgPressedColor="#024c96" />
+    </RelativeLayout>
+
+</LinearLayout>

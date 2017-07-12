@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;TcpClient.java&apos; to &apos;NavigationAIS/src/com.hifleet.aisreceive&apos;&#x0D;&#x0A;- Original project: &apos;NavigationAIS&apos;&#x0D;&#x0A;- Destination element: &apos;NavigationAIS/src/com.hifleet.aisreceive&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.aisreceive.TcpClient.java&apos;" description="Copy compilation unit" destination="/src&lt;com.hifleet.aisreceive" element1="/src&lt;com.hifleet.aisreceive{TcpClient.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1456386032472" units="1" version="1.0"/>
+</session>

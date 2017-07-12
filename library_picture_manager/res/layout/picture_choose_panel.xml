@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent"
+    android:padding="5dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_paizhao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/actionsheet_top_selector"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="拍照"
+            android:textColor="#037BFF"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_choose_from_device"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/actionsheet_bottom_selector"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="从相册中选择"
+            android:textColor="#037BFF"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/actionsheet_single_selector"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="取消"
+            android:textColor="#037BFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</RelativeLayout>

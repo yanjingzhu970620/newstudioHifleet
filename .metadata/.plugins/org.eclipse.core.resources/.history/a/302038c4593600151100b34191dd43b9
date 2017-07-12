@@ -1,0 +1,1765 @@
+package com.hifleet.activities;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+ 
+import com.hifleet.adapter.ContextMenuAdapter;
+import com.hifleet.app.MapViewTrackingUtilities_Navigation;
+import com.hifleet.app.OsmAndAppCustomization;
+import com.hifleet.app.OsmandSettings;
+import com.hifleet.app.OsmAndLocationProvider.OsmAndLocationListener;
+import com.hifleet.app.OsmandApplication;
+import com.hifleet.base.AccessibleToast;
+import com.hifleet.base.NavigationService;
+import com.hifleet.base.OsmAndConstants;
+import com.hifleet.base.OsmAndFormatter;
+import com.hifleet.data.LatLon;
+import com.hifleet.data.Location;
+import com.hifleet.data.MyNavigationRoute;
+import com.hifleet.data.QuadPoint;
+import com.hifleet.data.RotatedTileBox;
+import com.hifleetand.plus.R;
+import com.hifleet.helper.FavouritesDbHelper;
+import com.hifleet.helper.SavingTrackHelper;
+import com.hifleet.helper.GPXUtilities.PlanRoutePoint;
+import com.hifleet.map.MapTileDownloader.DownloadRequest;
+import com.hifleet.map.MapTileDownloader.IMapDownloaderCallback;
+import com.hifleet.map.ResourceManager;
+import com.hifleet.util.Print;
+import com.hifleet.view.AnimateDraggingMapThread_Navigation;
+import com.hifleet.view.OsmandMapTileView_Navigation;
+import com.hifleet.waypoints.GetWayPointsService;
+import com.hifleet.waypoints.RecommendRoutePoints;
+
+
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class MapActivity_Navigation extends AccessibleActivity implements
+		OsmAndLocationListener {
+	
+	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
+	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
+	private static final int LONG_KEYPRESS_DELAY = 500;
+	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
+	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
+	int startname;
+	int endname;
+	private View view;
+	private ListView listViewt;
+	private ListView listViewb;
+	static SimpleAdapter topadapter = null;
+	static SimpleAdapter bottomadapter = null;
+//	private static List<Map<String, String>> adapterList = null;
+	private static List<Map<String, String>> adapterList = null;
+	private static MapViewTrackingUtilities_Navigation mapViewTrackingUtilities;
+
+	/** Called when the activity is first created. */
+	private OsmandMapTileView_Navigation mapView;
+
+	private MapActivityActions_Navigation mapActions;
+	private MapActivityLayers_Navigation mapLayers;
+
+	// Notification status
+	private NotificationManager mNotificationManager;
+	private int APP_NOTIFICATION_ID = 1;
+
+	// handler to show/hide trackball position and to link map with delay
+	private Handler uiHandler = new Handler();
+	// App variables
+	private OsmandApplication app;
+	private OsmandSettings settings;
+
+	private Dialog progressDlg = null;
+
+	private ProgressDialog startProgressDialog;
+	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(
+			2);
+	//private StateChangedListener<ApplicationMode> applicationModeListener;
+	private FrameLayout lockView;
+
+	private Button btn_search, btn_nav, btn_measure, btn_more,btn_plan;
+
+	private static MapActivity_Navigation activity;
+	
+	//private static RoutingHelper routingHelper;
+	private ImageButton img_layer_btn, img_locate_mylocation_btn, img_nav_btn;
+	private ImageButton img_record_gpx_btn;
+	//private static ImageButton saveRouteImageButton;
+
+	private boolean isRecordingGPX = false;
+	
+	private boolean isInNavigationMode = false;
+
+	private static TextView lon_text_view, lat_text_view, speed_text_view,
+			course_text_view;
+	
+	private ImageButton img_delete_last_point_btn,img_delete_all_points_btn;
+	private ImageButton img_zoom_in_btn,img_zoom_out_btn;
+	
+	private static boolean isSavePlanRouteDialogShown=false;
+	private static boolean isRouteSaved=false;
+	
+	public boolean getIsInNavigationMode(){return isInNavigationMode;}
+	public boolean getIsSavePlanRouteDialogShown(){return isSavePlanRouteDialogShown;}
+	
+	
+	//按下按钮
+		private final static float[] BUTTON_RELEASED/*BUTTON_PRESSED*/ = new float[] {
+			    2.0f, 0, 0, 0, -50,  
+			       0, 2.0f, 0, 0, -50, 
+			       0, 0, 2.0f, 0, -50, 
+			       0, 0, 0, 5, 0 };  
+
+		//按钮弹起
+		private final static float[] BUTTON_PRESSED/*BUTTON_RELEASED*/ = new float[] {
+			       1, 0, 0, 0, 0,      		
+			       0, 1, 0, 0, 0,      	
+			       0, 0, 1, 0, 0,      		
+			       0, 0, 0, 1, 0 }; 
+		
+		
+		private static final OnTouchListener touchListener = new OnTouchListener() {		
+			  @Override		
+			  public boolean onTouch(View v, MotionEvent event) {
+			   if(event.getAction() == MotionEvent.ACTION_DOWN) {		
+			    v.getBackground().setColorFilter(new ColorMatrixColorFilter(BUTTON_PRESSED));		
+			    v.setBackgroundDrawable(v.getBackground());		
+			   }else if(event.getAction() == MotionEvent.ACTION_UP) {		
+			    v.getBackground().setColorFilter(new ColorMatrixColorFilter(BUTTON_RELEASED));		
+			    v.setBackgroundDrawable(v.getBackground());		
+			   }		
+			   return false;
+			}		
+			};
+			
+	public static void setButtonStateChangeListener(View v) {			
+				  v.setOnTouchListener(touchListener);			
+	}
+	
+
+	public void updateLocation(com.hifleet.data.Location location) {
+		// System.err.println("update location in MapActivity.");
+		String lon_text = getResources().getString(R.string.navigate_point_longitude) +": "+ (formatLonString(location.getLongitude()));
+		if(settings.SHOW_LOCATION.get()){
+			lon_text_view.setVisibility(View.VISIBLE);
+			lon_text_view.setText(lon_text, null);
+		}else{
+			lon_text_view.setVisibility(View.GONE);
+		}
+
+		String lat_text = getResources().getString(R.string.navigate_point_latitude)+": "
+		+ (formatLatString(location.getLatitude()));
+		if(settings.SHOW_LOCATION.get()){
+			lat_text_view.setVisibility(View.VISIBLE);
+			lat_text_view.setText(lat_text, null);
+		}else{
+			lat_text_view.setVisibility(View.GONE);
+		}
+
+		String speed_text = getResources().getString(R.string.sea_speed)+": "
+		+ OsmAndFormatter.getFormattedSpeed(location.getSpeed(), app)+" "+getResources().getString(R.string.speed_unit);
+		
+		if(settings.SHOW_SPEED.get()){
+			speed_text_view.setVisibility(View.VISIBLE);
+			speed_text_view.setText(speed_text, null);
+		}else{
+			speed_text_view.setVisibility(View.GONE);
+		}
+
+		String course_text = getResources().getString(R.string.map_widget_course)+": " 
+		+ absoluteDirectionString(location.getBearing(),app)+"°";
+		
+		if(settings.SHOW_COURSE.get()){
+			course_text_view.setVisibility(View.VISIBLE);
+			course_text_view.setText(course_text, null);
+		}else{
+			course_text_view.setVisibility(View.GONE);
+		}
+	}
+	
+	public void showOrHideLocation(boolean flag){
+		if(flag){
+			lon_text_view.setVisibility(View.VISIBLE);
+			lat_text_view.setVisibility(View.VISIBLE);
+		}else{
+			lon_text_view.setVisibility(View.GONE);
+			lat_text_view.setVisibility(View.GONE);
+		}
+	}
+	
+	public void showOrHideSpeedAndCourse(boolean flag){
+		if(flag){
+			speed_text_view.setVisibility(View.VISIBLE);
+			course_text_view.setVisibility(View.VISIBLE);
+		}else{
+			speed_text_view.setVisibility(View.GONE);
+			course_text_view.setVisibility(View.GONE);
+		}
+	}
+	
+	public void showOrHideSpeed(boolean flag){
+		if(flag){
+			speed_text_view.setVisibility(View.VISIBLE);
+			//course_text_view.setVisibility(View.VISIBLE);
+		}else{
+			speed_text_view.setVisibility(View.GONE);
+			//course_text_view.setVisibility(View.GONE);
+		}
+	}
+	
+	public void showOrHideCourse(boolean flag){
+		if(flag){
+			//speed_text_view.setVisibility(View.VISIBLE);
+			course_text_view.setVisibility(View.VISIBLE);
+		}else{
+			//speed_text_view.setVisibility(View.GONE);
+			course_text_view.setVisibility(View.GONE);
+		}
+	}
+
+	private Notification getNotification() {
+		Intent notificationIndent = new Intent(this, getMyApplication()
+				.getAppCustomization().getMapActivity());
+		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Notification notification = new Notification(R.drawable.msaicon, "", //$NON-NLS-1$
+				System.currentTimeMillis());
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		notification.setLatestEventInfo(this, "EasyNavigation2",
+				getString(R.string.go_back_to_osmand), PendingIntent
+						.getActivity(this, 0, notificationIndent,
+								PendingIntent.FLAG_UPDATE_CURRENT));
+		return notification;
+	}
+
+	public final boolean onOptionsItemSelected(android.view.MenuItem item) {
+		switch (item.getItemId()) {
+			
+		case R.id.deleteLastPoint:
+			activity.getMapLayers_Navigation().getsingleTapWayPointLayer().deleteLastPoint();
+			return true;
+		case R.id.deleteAllPoints:
+			activity.getMapLayers_Navigation().getsingleTapWayPointLayer().deleteAllPoints();
+			return true;
+			default: 
+				if(isInNavigationMode){
+					//�?��确认�?��导航模式�?					
+					stopNavigationActionConfirm();
+					return true;
+				}else{					
+					//app.getRoutingHelper().clearSavedRoutePoints();
+					finish();
+					return true;
+			}
+		}			
+		//return true;
+		
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		
+		app = getMyApplication();
+		settings = app.getSettings();
+		app.applyTheme(this);
+
+		super.onCreate(savedInstanceState);
+		activity = this;
+
+		getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN); // 设置全屏
+
+		final OsmAndAppCustomization appCustomization = getMyApplication()
+				.getAppCustomization();
+
+		app.getLocationProvider().addLocationListener(this);
+		app.setMapActivity_Navigation(this);
+		mapActions = new MapActivityActions_Navigation(this);
+		mapLayers = new MapActivityLayers_Navigation(this);
+		setTitle(R.string.NavigationMode);
+		setContentView(R.layout.main_navigation_mode);
+		
+		
+		
+		lon_text_view = (TextView) findViewById(R.id.lon_text);
+		lat_text_view = (TextView) findViewById(R.id.lat_text);
+		speed_text_view = (TextView) findViewById(R.id.speed_text);
+		course_text_view = (TextView) findViewById(R.id.course_text);
+		
+		if(!settings.SHOW_LOCATION.get()){
+			lon_text_view.setVisibility(View.GONE);
+			lat_text_view.setVisibility(View.GONE);
+		}else{
+			lon_text_view.setVisibility(View.VISIBLE);
+			lat_text_view.setVisibility(View.VISIBLE);
+		}
+		
+		if(settings.SHOW_SPEED.get() ){
+			speed_text_view.setVisibility(View.VISIBLE);
+		}else{
+			speed_text_view.setVisibility(View.GONE);
+		}
+		
+		if(settings.SHOW_COURSE.get() ){
+			course_text_view.setVisibility(View.VISIBLE);
+		}else{
+			course_text_view.setVisibility(View.GONE);
+		}
+		
+		
+		img_zoom_in_btn = (ImageButton) findViewById(R.id.zoomInImageButton);
+		img_zoom_out_btn = (ImageButton) findViewById(R.id.zoomOutImageButton);
+		
+		//放大按钮触发事件
+		img_zoom_in_btn.setOnClickListener(new ImageButton.OnClickListener(){
+			public void onClick(View v){
+				zoomInMapView();
+			}
+		});
+		
+		img_zoom_out_btn.setOnClickListener(new ImageButton.OnClickListener(){
+			public void onClick(View v){
+				zoomOutMapView();
+			}
+		});
+
+
+		mapView = (OsmandMapTileView_Navigation) findViewById(R.id.NavigationMapView);
+
+		if (mapViewTrackingUtilities == null) {
+			mapViewTrackingUtilities = new MapViewTrackingUtilities_Navigation(
+					app);
+		}
+		mapViewTrackingUtilities.setMapView(mapView);
+
+		app.getResourceManager().getMapTileDownloader()
+				.addDownloaderCallback(new IMapDownloaderCallback() {
+					@Override
+					public void tileDownloaded(DownloadRequest request) {
+						if (request != null && !request.error
+								&& request.fileToSave != null) {
+							ResourceManager mgr = app.getResourceManager();
+							// System.err.println("在MapTileDoanloader类中下载瓦片成功，现在�?过MapActivity通知mgr中的tileDownloaded函数�?);
+							mgr.tileDownloaded(request);
+						}
+						if (request == null || !request.error) {
+							mapView.tileDownloaded(request);
+						}
+					}
+				});
+
+		// createProgressBarForRouting();
+
+		mapLayers.createLayers(mapView);
+
+		addDialogProvider(mapActions);
+
+		if (lockView != null) {
+			((FrameLayout) mapView.getParent()).addView(lockView);
+		}
+		
+		
+		img_record_gpx_btn = (ImageButton) findViewById(R.id.recordGPXButton);
+		
+		if(settings.SAVE_TRACK_TO_GPX.get()){
+			isRecordingGPX = true;
+			img_record_gpx_btn
+			.setImageDrawable(getResources()
+					.getDrawable(
+							R.drawable.monitoring_rec_big));
+		}else{
+			img_record_gpx_btn.setImageDrawable(getResources()
+					.getDrawable(
+							R.drawable.monitoring_rec_inactive));	
+				isRecordingGPX = false;
+		}
+		// 记录轨迹按钮图标被点�?		
+		img_record_gpx_btn
+				.setOnClickListener(new ImageButton.OnClickListener() {
+					public void onClick(View v) {
+						// System.err.println("记录轨迹按钮点击");
+						if (!isRecordingGPX) {
+							System.err.println("�?��记录轨迹");
+							img_record_gpx_btn
+									.setImageDrawable(getResources()
+											.getDrawable(
+													R.drawable.monitoring_rec_big));
+							startRecordTrack();
+							isRecordingGPX = true;
+						} else {
+							System.err.println("停止记录轨迹");
+							img_record_gpx_btn
+									.setImageDrawable(getResources()
+											.getDrawable(
+													R.drawable.monitoring_rec_inactive));
+							stopRecordTrack();
+							isRecordingGPX = false;
+						}
+					}
+				});
+
+		img_nav_btn = (ImageButton) findViewById(R.id.navigateButton);
+		img_nav_btn.setOnClickListener(new ImageButton.OnClickListener() {
+			public void onClick(View v) {
+				// System.err.println("导航图片按钮点击");
+				startGuideNavigation();
+			}
+		});
+
+		// 定位按钮图标被点		
+		img_locate_mylocation_btn = (ImageButton) findViewById(R.id.locateMyLocationImageButton);
+		
+		setButtonStateChangeListener(img_locate_mylocation_btn);
+		
+		img_locate_mylocation_btn
+				.setOnClickListener(new ImageButton.OnClickListener() {
+					public void onClick(View v) {
+						// System.err.println("定位图片按钮被点�?);
+						activity.getMapViewTrackingUtilities()
+								.backToLocationImpl();
+					}
+				});
+
+		// 搜索按钮
+		btn_search = (Button) findViewById(R.id.button_search);
+		
+		btn_measure = (Button) findViewById(R.id.button_measure);
+		
+//		setButtonStateChangeListener(btn_search);
+//		
+//		btn_search.setOnClickListener(new Button.OnClickListener() {
+//			public void onClick(View v) {
+//				openSearchLocationDialog();
+//			}
+//		});
+//		setButtonStateChangeListener(btn_plan);
+//		btn_plan.setOnClickListener(new Button.OnClickListener() {//路线规划按钮
+//			public void onClick(View v) {
+//				openPlanRouteDialog();
+//			}
+//		});
+//
+//       btn_search = (Button) findViewById(R.id.button_search);
+//		
+//		setButtonStateChangeListener(btn_search);
+//		
+//		btn_search.setOnClickListener(new Button.OnClickListener() {
+//			public void onClick(View v) {
+//				openSearchLocationDialog();
+//			}
+//		});
+		
+
+	}
+	
+	public void onClick(View view){
+		switch(view.getId()){
+		case R.id.button_search:
+			openSearchLocationDialog();
+			break;
+		case R.id.button_measure:
+			openPlanRouteDialog();
+			break;
+		}
+	}
+	
+	
+	//放大显示海图
+	private void zoomInMapView(){
+		activity.changeZoom(1);
+	}
+	
+	//缩小显示海图
+	private void zoomOutMapView(){
+		activity.changeZoom(-1);
+	}
+	
+	//�?��记录GPS轨迹数据
+	private void startRecordTrack(){		
+		if(settings.SAVE_TRACK_TO_GPX.get()){
+			app.showShortToastMessage(/*"已经在记录GPS轨迹数据了�?"*/getResources().getString(R.string.recording_track));
+			return;
+		}
+		OsmandMapTileView_Navigation view = activity.getMapView();
+		settings.SAVE_TRACK_TO_GPX.set(true);
+		if (view.getApplication().getNavigationService() == null) {
+			view.getSettings().SAVE_TRACK_TO_GPX.set(true);
+			final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
+			view.getContext().startService(serviceIntent);
+			//System.err.println("触发启动记录GPS轨迹数据�?);
+		}	
+	}
+	
+	//停止记录GPS轨迹数据
+	private void stopRecordTrack(){
+		if(!settings.SAVE_TRACK_TO_GPX.get()){
+			app.showShortToastMessage(/*"不在记录GPS数据�?*/getResources().getString(R.string.has_not_in_recording_track));
+			return;
+		}
+		OsmandMapTileView_Navigation view = activity.getMapView();
+		settings.SAVE_TRACK_TO_GPX.set(false);		
+		if (app.getNavigationService() != null 
+				&& !app.getNavigationService().startedForNavigation()) {
+			final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
+			//System.err.println("触发停止记录GPS轨迹数据�?);
+			view.getContext().stopService(serviceIntent);			
+			//System.err.println("现在，将GPX数据保存到文件中。�?�?);
+			SavingTrackHelper helper = app.getSavingTrackHelper();
+			helper.saveDataToGpx();
+			helper.close();
+			}
+	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.mapactivity_navigation_actionbar_menu, menu);
+		//MenuItem myFavouriteActionBar = menu.findItem(R.id.myFavorite);  
+		MenuItem deleteLastPointActionBar = menu.findItem(R.id.deleteLastPoint);
+		MenuItem deleteAllPointsActionBar = menu.findItem(R.id.deleteAllPoints);
+				
+				if(isInNavigationMode){
+					//myFavouriteActionBar.setVisible(false);
+					deleteLastPointActionBar.setVisible(false);
+					deleteAllPointsActionBar.setVisible(false);
+				}else{
+					//myFavouriteActionBar.setVisible(true);
+					deleteLastPointActionBar.setVisible(true);
+					deleteAllPointsActionBar.setVisible(true);
+				}
+				
+				//saveRouteImageButton = (ImageButton) findViewById(R.id.savePlanRoute);
+				return true;
+	}
+	
+	
+	public void savePlanedRoute(){
+		if(!isRouteSaved){
+			app.showShortToastMessage(getResources().getString(R.string.save_plan_route)/*"保存设计航线"*/);
+			openSavePlanedRouteDialog(activity);
+		}else{
+			
+		}
+	}
+	
+
+	//开始导航
+	public void startGuideNavigation() {
+		List<LinkedList<PlanRoutePoint>> planRoutePoints = activity
+				.getMapLayers_Navigation().getsingleTapWayPointLayer()
+				.getPlanRoutePoints();
+		
+		List<LinkedList<PlanRoutePoint>> savedRoutePoints = activity
+				.getMapLayers_Navigation().getsingleTapWayPointLayer()
+				.getSavedRoutePoints();
+		
+		
+		List<LinkedList<PlanRoutePoint>> planRoutePointsFromRoutingHelper =null; 
+		
+//		if(app.getRoutingHelper()!=null){
+//			planRoutePointsFromRoutingHelper= app.getRoutingHelper().getSavedPlanRoutePoints();			
+//		}
+		
+		if((planRoutePoints==null || planRoutePoints.size()<=0) &&
+				(savedRoutePoints==null ||savedRoutePoints.size()<=0)
+				&&( planRoutePointsFromRoutingHelper==null || planRoutePointsFromRoutingHelper.size()<=0)){
+			app.showShortToastMessage(getResources().getString(R.string.select_plan_route_first_warning_message)
+					/*"请先设计导航航线或�?择已收藏的设计航线或历史航迹�?*/);
+			
+			invalidateOptionsMenu();//显隐我的收藏菜单控制
+			
+			return;
+		}
+		
+		if(savedRoutePoints!=null && savedRoutePoints.size()>0){
+			//�?��提示已经在导航中了�?
+			app.showShortToastMessage(getResources().getString(R.string.navigating_using_saved_route_plan)/*"已经在导航中（使用收藏的设计航线）�?"*/);
+			isInNavigationMode=true;
+			img_nav_btn.setImageDrawable(getResources().getDrawable(R.drawable.navigation_arrow11));
+			
+			invalidateOptionsMenu();//显隐我的收藏菜单控制
+			
+			return;
+		}		
+		
+		if(planRoutePoints!=null 
+				&& planRoutePoints.size()>0 
+				&& (planRoutePoints.get((planRoutePoints.size()-1)).size()>1)){
+			//System.err.println("planRoutePoints.size: "+planRoutePoints.size());
+			if(!isSavePlanRouteDialogShown && !isRouteSaved){
+				openSavePlanedRouteDialog(activity);
+			}			
+			img_nav_btn.setImageDrawable(getResources().getDrawable(R.drawable.navigation_arrow11));
+			isInNavigationMode=true;			
+		}else{
+			app.showShortToastMessage(getResources().getString(R.string.select_plan_route_first_warning_message)/*"请先设计导航航线或�?择已收藏的设计航线或历史航迹�?*/);	
+		}
+		
+		invalidateOptionsMenu();//显隐我的收藏菜单控制
+
+	}
+	
+	public void activeNavigationImageButton(boolean flag){
+		if(flag){
+			img_nav_btn.setImageDrawable(getResources().getDrawable(R.drawable.navigation_arrow11));
+			isRouteSaved=false;
+		}
+		else {
+			img_nav_btn.setImageDrawable(getResources().getDrawable(R.drawable.navigation_arrow_inactive));
+			isRouteSaved = false;
+		}
+	}
+	
+	public static void print(String msg){
+
+        android.util.Log.i(TAG, msg);
+
+ }
+ 
+private static final String TAG = "FileDownloader";
+
+	// 保存设计航线对话�?	
+public static void openSavePlanedRouteDialog(
+			final MapActivity_Navigation activity) {
+		isSavePlanRouteDialogShown = true;
+		Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(R.string.edit_self_defined_route);
+		final View v = activity.getLayoutInflater().inflate(
+				R.layout.planed_route_edit_dialog, null, false);
+		final FavouritesDbHelper helper = ((OsmandApplication) activity
+				.getApplication()).getFavorites();
+
+		builder.setView(v);
+
+		final EditText editText = (EditText) v.findViewById(R.id.Name);
+		final TextView cat = (TextView) v
+				.findViewById(R.id.Category);
+		
+		final String route_category = activity.getString(R.string.favorite_route_category);
+		
+
+		builder.setNegativeButton(R.string.cancel_save_self_edit_route, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				AccessibleToast
+				.makeText(activity,activity.getResources().getString(R.string.cancel_plan_route)/*"取消收藏设计航线，不在导航中�?*/,
+						Toast.LENGTH_LONG).show();
+				return;
+			}
+		});
+
+		builder.setPositiveButton(R.string.add_self_edit_rout_btn,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String routeName="";
+						routeName = editText.getText().toString().trim();
+						
+						if(routeName.length()<=0 || "".compareTo(routeName)==0){
+							//不允许保存空的名字！
+							Builder noNameWarningDialogBuilder = new AlertDialog.Builder(activity);
+							noNameWarningDialogBuilder.setTitle(activity.getResources().getString(R.string.empty_file_name)/*"文件名为�?*/);
+							noNameWarningDialogBuilder.setMessage(activity.getResources().getString(R.string.enter_name_for_plan_route)/*"请填入收藏的设计航线的名称！"*/);
+							noNameWarningDialogBuilder.setPositiveButton(R.string.default_buttons_ok, null);	
+							noNameWarningDialogBuilder.create().show();
+						}else{
+						
+//						String pointsList = "";
+//						List<LinkedList<PlanRoutePoint>> planRoutePoints = activity
+//								.getMapLayers_Navigation()
+//								.getsingleTapWayPointLayer()
+//								.getPlanRoutePoints();
+//
+//						for (int i = 0; i < planRoutePoints.size(); i++) {
+//							Iterator<PlanRoutePoint> it = planRoutePoints
+//									.get(i).iterator();
+//							while (it.hasNext()) {
+//								PlanRoutePoint point = it.next();
+//								pointsList += ("" + point.lon + " " + point.lat + ",");
+//							}
+//						}
+
+						//System.err.println("points list: " + pointsList);
+
+						MyNavigationRoute route = new MyNavigationRoute();
+
+						final FavouritesDbHelper helper = ((OsmandApplication) activity
+								.getApplication()).getFavorites();
+
+						route.setName(editText.getText().toString().trim());
+						
+						String category = cat.getText().toString().trim();
+						String c="";
+						if(category.compareTo(route_category)==0){
+							//point.setCategory("002");//规划航线
+							//print("类型：规划航线：002");
+							c = "002";
+						}
+						else {
+							//point.setCategory("000");//其他
+							//print("类型：其他：000");
+							c = "000";
+						}
+						
+
+						//route.setCategory(cat.getText().toString().trim());//原版
+						route.setCategory(c);
+
+						//route.setPointsList(pointsList);
+
+						boolean added = helper.addFavourite(route);
+
+						if (added) {
+							isRouteSaved=true;
+							//saveRouteImageButton.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_action_gsave_light));
+							AccessibleToast
+									.makeText(
+											activity,
+											MessageFormat.format(
+													activity.getString(R.string.add_myroute_dialog_favourite_added_template),
+													route.getName()),
+											Toast.LENGTH_LONG).show();
+						}
+						activity.getMapView().refreshMap(true);
+						
+						AccessibleToast
+						.makeText(activity,activity.getResources().getString(R.string.navigating_using_plane_route)/*"�?��导航（使用新设计的航线）�?*/,Toast.LENGTH_SHORT).show();
+						}
+					}
+				});
+		builder.create().show();
+	}
+
+	// 打开记录GPX轨迹数据的窗�?	
+private void openRecordGPXDialog(View v) {
+//		final ContextMenuAdapter ca = new ContextMenuAdapter(activity);
+//		final QuickAction qa = new QuickAction(v);
+//		String[] itemNames = ca.getItemNames();
+//		for (int i = 0; i < ca.length(); i++) {
+//			final int ij = i;
+//			ActionItem ai = new ActionItem();
+//			ai.setTitle(itemNames[ij]);
+//			if (ca.getImageId(ij, false) != 0) {
+//				ai.setIcon(v.getResources().getDrawable(
+//						ca.getImageId(ij, false)));
+//			}
+//			ai.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					ca.getClickAdapter(ij).onContextMenuClick(ca.getItemId(ij),
+//							ij, false, null);
+//					qa.dismiss();
+//				}
+//			});
+//			qa.addActionItem(ai);
+//		}
+//		qa.show();
+	}
+
+	// 播放GPX轨迹数据窗口
+	private void openPlayGPXDialog() {
+	}
+
+	// 打开搜索�?��位置对话�?	
+	private void openSearchLocationDialog() {
+		Builder builder = new AlertDialog.Builder(this);
+
+		final View v = this.getLayoutInflater().inflate(
+				R.layout.search_lon_lat_layout, null, false);
+		builder.setView(v);
+		builder.setTitle(R.string.search_location)/*"搜索地理位置"*/;
+		final EditText long2SearchEditText = (EditText) v
+				.findViewById(R.id.Long2search);
+		final EditText lat2SearchEditText = (EditText) v
+				.findViewById(R.id.Lat2search);
+		final EditText longMinute2SearchEditText = (EditText) v
+				.findViewById(R.id.editText1);
+		final EditText latMinute2SearchEditText = (EditText) v
+				.findViewById(R.id.editText2);
+		final EditText longSec2SearchEditText = (EditText) v
+				.findViewById(R.id.editText3);
+		final EditText latSec2SearchEditText = (EditText) v
+				.findViewById(R.id.EditText01);
+
+		builder.setPositiveButton(R.string.search_location_by_lon_lat,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// 用户输入的指定的经纬�?						
+						double desg_lon, desg_lat, desg_lon_minute, desg_lat_minute;
+						double desg_lon_sec, desg_lat_sec;
+
+						String lonstr = long2SearchEditText.getText()
+								.toString().trim();
+						String latstr = lat2SearchEditText.getText().toString()
+								.trim();
+						String lonminstr = longMinute2SearchEditText.getText()
+								.toString().trim();
+						String latminstr = latMinute2SearchEditText.getText()
+								.toString().trim();
+						String lonsecstr = longSec2SearchEditText.getText()
+								.toString().trim();
+						String latsecstr = latSec2SearchEditText.getText()
+								.toString().trim();
+
+						// System.err.println(lonstr + ", " + lonminstr + ", "
+						// + latstr + ", " + latminstr);
+						if (lonstr.length() == 0 || latstr.length() == 0
+								|| "".compareTo(lonstr) == 0
+								|| "".compareTo(latstr) == 0) {
+							return;
+						}
+
+						desg_lat = Double.parseDouble(latstr);
+						desg_lon = Double.parseDouble(lonstr);
+
+						if (desg_lat > 90 || desg_lat < -90)
+							return;
+						if (desg_lon > 180 || desg_lon < -180)
+							return;
+
+						if (lonminstr.length() == 0
+								|| lonminstr.compareTo("") == 0) {
+							desg_lon_minute = 0;
+						} else {
+							desg_lon_minute = Double.parseDouble(lonminstr);
+						}
+						if (desg_lon_minute > 60 || desg_lon_minute < 0)
+							return;
+						if (latminstr.length() == 0
+								|| latminstr.compareTo("") == 0) {
+							desg_lat_minute = 0;
+						} else {
+							desg_lat_minute = Double.parseDouble(latminstr);
+						}
+						if (desg_lat_minute > 60 || desg_lat_minute < 0)
+							return;
+
+						if (lonsecstr.length() == 0
+								|| "".compareTo(lonsecstr) == 0) {
+							desg_lon_sec = 0;
+						} else {
+							desg_lon_sec = Double.parseDouble(lonsecstr);
+						}
+						if (desg_lon_sec > 60 || desg_lon_sec < 0)
+							return;
+
+						if (latsecstr.length() == 0
+								|| "".compareTo(latsecstr) == 0) {
+							desg_lat_sec = 0;
+						} else {
+							desg_lat_sec = Double.parseDouble(latsecstr);
+						}
+						if (desg_lat_sec > 60 || desg_lat_sec < 0)
+							return;
+
+						desg_lon = desg_lon + (desg_lon_minute) / 60.0
+								+ (desg_lon_sec / 3600.0);
+						desg_lat = desg_lat + (desg_lat_minute) / 60.0
+								+ (desg_lat_sec / 3600.0);
+						// System.err.println(desg_lon+", "+desg_lat);
+						// 定位到该处！
+						getMapViewTrackingUtilities()
+								.locateToDesignatedLocation(desg_lon, desg_lat);
+						RotatedTileBox tileBox = activity.getMapView()
+								.getCurrentRotatedTileBox();
+						float px = tileBox
+								.getPixXFromLatLon(desg_lat, desg_lon);
+						float py = tileBox
+								.getPixYFromLatLon(desg_lat, desg_lon);
+						// System.err.println("px,py: " + px + ", " + py);
+						PointF point = new PointF(px, py);
+//						activity.getMapLayers_Navigation()
+//								.getsingleTapWayPointLayer()
+//								.onSingleTap(
+//										point,
+//										activity.getMapView()
+//												.getCurrentRotatedTileBox());
+					}
+				});
+
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+
+		builder.create().show();
+	}
+	TextView t1;
+	TextView t2;
+	private static HashMap<String, RecommendRoutePoints> points = new HashMap<String, RecommendRoutePoints>();
+	private void openPlanRouteDialog() {//路线规划弹出框
+		startname=0;
+		endname=0;
+		final GetWayPointsService gpservice=new GetWayPointsService();
+		points=gpservice.getpoints(activity);
+//		System.out.println(points.size());   
+//		Iterator<String> it=points.keySet().iterator();   
+//		while(it.hasNext()){   
+//		     String key;   
+//		     RecommendRoutePoints value;  
+//		     String valuename; 
+//		     key=it.next().toString();   
+//		     value=points.get(key);   
+//		     valuename=value.getName();
+////		     System.out.println(key+"--"+valuename);   
+//		}  
+		RotatedTileBox tilebox=activity.getMapLayers_Navigation().getRouteLayer().getilebox();
+		com.hifleet.data.QuadRect rect = tilebox.getLatLonBounds();
+		LatLon p3 = new LatLon(rect.top, rect.right);
+		LatLon p2 = new LatLon(rect.top, rect.left);
+		LatLon p1 = new LatLon(rect.bottom, rect.left);
+		LatLon p4 = new LatLon(rect.bottom, rect.right);
+		final String screen="Polygon((" + p2.getLongitude() + " "
+				+ p2.getLatitude() + "," + p1.getLongitude() + " "
+				+ p1.getLatitude() + "," + p4.getLongitude() + " "
+				+ p4.getLatitude() + "," + p3.getLongitude() + " "
+				+ p3.getLatitude() + "," + p2.getLongitude() + " "
+				+ p2.getLatitude() + "))";//计算好像并未用到。
+		
+//		gpservice.getWayPoints(113001, 111043, screen);
+		Builder builder = new AlertDialog.Builder(this);
+		final View v = this.getLayoutInflater().inflate(
+				R.layout.route_plan_layout, null, false);
+		final LinearLayout start = (LinearLayout) v.findViewById(R.id.start_point);
+		final LinearLayout end = (LinearLayout) v.findViewById(R.id.end_point);
+		t1=(TextView) v.findViewById(R.id.text_start_name);
+		t2=(TextView) v.findViewById(R.id.text_end_name);
+		start.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				int x=(int)start.getX();
+				int y=(int)start.getY();
+				showPopupWindow(arg0,x+t1.getWidth(),y+t1.getHeight(),"start");
+			}
+		});
+		end.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				int x=(int)end.getX();
+				int y=(int)end.getY();
+				showPopupWindow(arg0,x+t2.getWidth(),y+t2.getHeight(),"end");
+			}
+		});
+		builder.setView(v);
+		builder.setTitle("航线搜索")/*"搜索地理位置"*/;
+
+		builder.setPositiveButton(R.string.search_location_by_lon_lat,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {			
+						if(startname!=0&&endname!=0){
+							if(startname==endname){
+								Toast.makeText(activity,"地点不能相同",
+										Toast.LENGTH_LONG).show();
+								return;
+							}
+							gpservice.getWayPoints(startname, endname, screen);
+//							System.out.println("jisuan getWayPoints");
+						}else{
+							Toast.makeText(activity,"请选择地点",
+									Toast.LENGTH_LONG).show();
+						}
+					}
+				});
+
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+
+		builder.create().show();
+//		System.out.println("builder close");
+	}
+	public static ArrayList<String> remarks=new ArrayList<String>();
+	public static HashMap<String, String> names=new HashMap<String , String> ();
+	public void showPopupWindow(final View view,int x,int y,String s) {
+		System.out.println("showPopupWindow");
+		final View contentView = LayoutInflater.from(view.getContext()).inflate(
+				R.layout.balloon_overlay_routepoint, null);
+		adapterList = new ArrayList<Map<String, String>>();
+//		Iterator<String> it=points.keySet().iterator();   
+//		while(it.hasNext()){   
+//		     String key;   
+//		     RecommendRoutePoints value;  
+//		     String valuename; 
+//		     key=it.next().toString();   
+//		     value=points.get(key);   
+//		     valuename=value.getName();
+//		     if(value.getRemark()!=null&&(!value.getRemark().equals(""))){
+//             Map m=new HashMap<String, String>(); 
+//             m.put("nameid", valuename);
+//             m.put("name", value.getRemark());
+//             adapterList.add(m);
+//		     }
+//             
+//		} 
+		
+		for(int i=0;i<remarks.size();i++){
+			HashMap<String, String> m=new HashMap<String, String>();
+			m.put("remark", remarks.get(i));
+//			System.out.println("remark  adapter ");
+			adapterList.add(m);
+		}
+		if(s.equals("start")){
+			System.out.println("startpoint"+adapterList.size());
+		listViewt= (ListView) contentView.findViewById(R.id.toplistView);
+		topadapter = new SimpleAdapter(this, adapterList,R.layout.balloon_overlay_routepoint,
+				new String[] { "remark"}, new int[] { R.id.text_name});
+		}else{
+			System.out.println("endpoint"+adapterList.size());
+		listViewb = (ListView) contentView.findViewById(R.id.bottomlistView);
+		bottomadapter = new SimpleAdapter(this, adapterList,R.layout.balloon_overlay_routepoint,
+				new String[] { "remark" }, new int[] { R.id.text_name});
+		}
+//		tv.setText("hello");
+		final PopupWindow pop = new PopupWindow(contentView,
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, true);
+		pop.setFocusable(true);
+		pop.setOutsideTouchable(true);
+		pop.setBackgroundDrawable(new BitmapDrawable());
+
+		int[] location = new int[2];
+		view.getLocationOnScreen(location);
+		pop.getContentView().measure(0, 0);
+		pop.showAtLocation(view, Gravity.NO_GRAVITY, location[0] + x
+				- pop.getContentView().getMeasuredWidth() / 2, location[1] + y
+				- pop.getContentView().getMeasuredHeight());
+		if(s.equals("start")){
+		listViewt.setAdapter(topadapter);
+		listViewt.setOnItemClickListener(new OnItemClickListener() {
+
+			   @Override
+			   public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+			     long arg3) {
+				   String n=adapterList.get(arg2).get("remark");
+				   String t=names.get(n);
+				   System.out.println("settext"+t);
+				   startname=Integer.parseInt(t);
+				   t1.setText(n);
+				   pop.dismiss();
+			   }
+
+			  });}else{
+			listViewb.setAdapter(bottomadapter);
+			listViewb.setOnItemClickListener(new OnItemClickListener() {
+
+				   @Override
+				   public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				     long arg3) {
+					  
+					   String n=adapterList.get(arg2).get("remark");
+					   String t=names.get(n);
+					   System.out.println("settext"+t);
+					   endname=Integer.parseInt(t); 
+					   t2.setText(n);
+					   pop.dismiss();
+				   }
+
+				  });
+		}
+	}
+	
+	public void addLockView(FrameLayout lockView) {
+		this.lockView = lockView;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Object getLastNonConfigurationInstanceByKey(String key) {
+		Object k = super.getLastNonConfigurationInstance();
+		if (k instanceof Map) {
+			return ((Map) k).get(key);
+		}
+		return null;
+	}
+
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		LinkedHashMap<String, Object> l = new LinkedHashMap<String, Object>();
+		
+		return l;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		Print.print("MapActivity_Navigation onResum..");
+		
+//		List<LinkedList<PlanRoutePoint>> savedPlanRoutePoints = app.getRoutingHelper().getSavedPlanRoutePoints();
+//		if(savedPlanRoutePoints!=null && savedPlanRoutePoints.size()>0){
+//			activity.getMapLayers_Navigation().getsingleTapWayPointLayer().setSavedRoutePoints(savedPlanRoutePoints);
+//		}
+		//app.getRoutingHelper().getSavedPlanRoutePoints() 
+		
+		cancelNotification();
+		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
+			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
+			// can't return from this method we are not sure if activity will be
+			// recreated or not
+		}
+
+		app.getLocationProvider().checkIfLastKnownLocationIsValid();
+
+		
+		//settings.APPLICATION_MODE.addListener(applicationModeListener);
+		updateApplicationModeSettings();
+
+		app.getLocationProvider().resumeAllUpdates();
+
+		if (settings != null && settings.isLastKnownMapLocation()) {
+			LatLon l = settings.getLastKnownMapLocation();
+			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			mapView.setIntZoom(settings.getLastKnownMapZoom());
+		}
+
+		settings.MAP_ACTIVITY_ENABLED.set(true);
+		checkExternalStorage();
+		showAndHideMapPosition();
+
+		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
+		String mapLabelToShow = settings.getAndClearMapLabelToShow();
+		Object toShow = settings.getAndClearObjectToShow();
+		if (settings.isRouteToPointNavigateAndClear()) {
+			// always enable and follow and let calculate it (i.e.GPS is not
+			// accessible in a garage)
+			Location loc = new Location("map");
+			loc.setLatitude(mapView.getLatitude());
+			loc.setLongitude(mapView.getLongitude());
+			//getMapActions().enterRoutePlanningMode(null, null);
+		}
+
+		// if (mapLabelToShow != null && latLonToShow != null) {
+		// mapLayers.getContextMenuLayer().setSelectedObject(toShow);
+		// mapLayers.getContextMenuLayer().setLocation(latLonToShow,
+		// mapLabelToShow);
+		// }
+
+		if (latLonToShow != null && !latLonToShow.equals(cur)) {
+			mapView.getAnimatedDraggingThread().startMoving(
+					latLonToShow.getLatitude(), latLonToShow.getLongitude(),
+					settings.getMapZoomToShow(), true);
+		}
+		if (latLonToShow != null) {
+			// remember if map should come back to isMapLinkedToLocation=true
+			mapViewTrackingUtilities.setMapLinkedToLocation(false);
+		}
+
+//		View progress = mapLayers.getMapInfoLayer().getProgressBar();
+//		if (progress != null) {
+//			app.getResourceManager().setBusyIndicator(
+//					new BusyIndicator(this, progress));
+//		}
+
+		// OsmandPlugin.onMapActivityResume(this);
+
+		mapView.refreshMap(true);
+
+	}
+
+	public OsmandApplication getMyApplication() {
+		return ((OsmandApplication) getApplication());
+	}
+
+	public void addDialogProvider(DialogProvider dp) {
+		dialogProviders.add(dp);
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+		for (DialogProvider dp : dialogProviders) {
+			dialog = dp.onCreateDialog(id);
+			if (dialog != null) {
+				return dialog;
+			}
+		}
+		if (id == OsmandApplication.PROGRESS_DIALOG) {
+			return startProgressDialog;
+		}
+		return null;
+	}
+
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		super.onPrepareDialog(id, dialog);
+		for (DialogProvider dp : dialogProviders) {
+			dp.onPrepareDialog(id, dialog);
+		}
+	}
+	
+	//更新 放大缩小图标
+	public void updateZoomButtonStatus(boolean zoomInEnabled,boolean zoomOutEnabled){
+		if(zoomInEnabled){
+			img_zoom_in_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_add));
+		}else{
+			img_zoom_in_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_add_cancel));
+		}
+		
+		if(zoomOutEnabled){
+			img_zoom_out_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_sub));
+		}else{
+			img_zoom_out_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_sub_cancel));
+		}
+	}
+
+	public void changeZoom(int stp) {
+		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) *
+		// OsmandMapTileView.ZOOM_DELTA_1;
+		boolean changeLocation = false;
+		// if (settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE) {
+		// changeLocation = false;
+		// }
+		final int newZoom = mapView.getZoom() + stp;
+		
+		if(stp>0){
+			if(newZoom>activity.getMapView().getMainLayer().getMaximumShownMapZoom()) {
+				img_zoom_in_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_add_cancel));
+				return;
+			}else{
+				img_zoom_in_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_add));
+				img_zoom_out_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_sub));
+			}
+		}else{
+			if(newZoom<activity.getMapView().getMainLayer().getMinimumShownMapZoom()){ 
+				img_zoom_out_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_sub_cancel));
+				return;
+		}else{
+				img_zoom_out_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_sub));
+				img_zoom_in_btn.setImageDrawable(getResources().getDrawable(R.drawable.stickers_add));
+			}
+		}
+		
+		// System.err.println("newZoom: "+newZoom+", changeLocation: "+changeLocation);
+		
+		mapView.getAnimatedDraggingThread().startZooming(newZoom,
+				changeLocation);
+		
+//		if (app.accessibilityEnabled())
+//			AccessibleToast
+//					.makeText(
+//							this,
+//							getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
+//		
+//		showAndHideMapPosition();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN){
+			if(isInNavigationMode){
+				stopNavigationActionConfirm();
+				return true;
+			}
+			
+		}
+
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	private void stopNavigationActionConfirm(){
+		Builder builder = new AlertDialog.Builder(activity);
+		if(isInNavigationMode){
+			builder.setTitle(getString(R.string.cancel_route));
+			builder.setMessage(getString(R.string.stop_routing_confirm));
+			builder.setPositiveButton(R.string.default_buttons_yes,
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							isInNavigationMode=false;
+							isSavePlanRouteDialogShown=false;
+							//app.getRoutingHelper().clearSavedRoutePoints();
+							activity.getMapLayers_Navigation().getsingleTapWayPointLayer().clearSavedRoutePoints();
+							activity.getMapLayers_Navigation().getsingleTapWayPointLayer().deleteAllPoints();
+							img_nav_btn.setImageDrawable(getResources().getDrawable(R.drawable.navigation_arrow_inactive));
+							mapView.refreshMap();
+							finish();
+						}
+					});			
+			builder.create().show();
+		}
+	}
+
+	private long exitTime = 0;
+
+	public void setMapLocation(double lat, double lon) {
+		mapView.setLatLon(lat, lon);
+		mapViewTrackingUtilities.locationChanged(lat, lon, this);
+	}
+
+	@Override
+	public boolean onTrackballEvent(MotionEvent event) {
+		if (event.getAction() == MotionEvent.ACTION_MOVE
+				&& settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
+			float x = event.getX();
+			float y = event.getY();
+			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final QuadPoint cp = tb.getCenterPixelPoint();
+			final LatLon l = tb
+					.getLatLonFromPixel(cp.x + x * 15, cp.y + y * 15);
+			setMapLocation(l.getLatitude(), l.getLongitude());
+			return true;
+		}
+		return super.onTrackballEvent(event);
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+	}
+
+	protected void setProgressDlg(Dialog progressDlg) {
+		this.progressDlg = progressDlg;
+	}
+
+	protected Dialog getProgressDlg() {
+		return progressDlg;
+	}
+
+	@Override
+	protected void onStop() {
+//		if (app.getRoutingHelper().isFollowingMode()) {
+//			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//			if (mNotificationManager != null) {
+//				mNotificationManager.notify(APP_NOTIFICATION_ID,
+//						getNotification());
+//			}
+//		}
+		if (progressDlg != null) {
+			progressDlg.dismiss();
+			progressDlg = null;
+		}
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		//FailSafeFuntions.quitRouteRestoreDialog();
+		// OsmandPlugin.onMapActivityDestroy(this);
+		mapViewTrackingUtilities.setMapView(null);
+		cancelNotification();
+		app.getResourceManager().getMapTileDownloader()
+				.removeDownloaderCallback(mapView);
+	}
+
+	private void cancelNotification() {
+		if (mNotificationManager == null) {
+			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		}
+		if (mNotificationManager != null) {
+			mNotificationManager.cancel(APP_NOTIFICATION_ID);
+		}
+	}
+
+	public LatLon getMapLocation() {
+		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
+	}
+
+	// Duplicate methods to OsmAndApplication
+//	public LatLon getPointToNavigate() {
+//		return app.getTargetPointsHelper().getPointToNavigate();
+//	}
+//
+//	public RoutingHelper getRoutingHelper() {
+//		return app.getRoutingHelper();
+//	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		app.getLocationProvider().pauseAllUpdates();
+		//app.getDaynightHelper().stopSensorIfNeeded();
+		//settings.APPLICATION_MODE.removeListener(applicationModeListener);
+
+		settings.setLastKnownMapLocation((float) mapView.getLatitude(),
+				(float) mapView.getLongitude());
+		AnimateDraggingMapThread_Navigation animatedThread = mapView
+				.getAnimatedDraggingThread();
+		if (animatedThread.isAnimating()
+				&& animatedThread.getTargetIntZoom() != 0) {
+			settings.setMapLocationToShow(animatedThread.getTargetLatitude(),
+					animatedThread.getTargetLongitude(),
+					animatedThread.getTargetIntZoom());
+		}
+
+		settings.setLastKnownMapZoom(mapView.getZoom());
+		settings.MAP_ACTIVITY_ENABLED.set(false);
+		//app.getResourceManager().interruptRendering();
+		//app.getResourceManager().setBusyIndicator(null);
+		// OsmandPlugin.onMapActivityPause(this);
+	}
+
+	public void updateApplicationModeSettings() {
+		// update vector renderer
+		//RendererRegistry registry = app.getRendererRegistry();
+		//RenderingRulesStorage newRenderer = registry
+		//		.getRenderer(settings.RENDERER.get());
+//		if (newRenderer == null) {
+//			newRenderer = registry.defaultRender();
+//		}
+//		if (registry.getCurrentSelectedRenderer() != newRenderer) {
+//			registry.setCurrentSelectedRender(newRenderer);
+//			app.getResourceManager().getRenderer().clearCache();
+//		}
+		mapViewTrackingUtilities.updateSettings();
+		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
+		
+//		if (mapLayers.getMapInfoLayer() != null) {
+//			mapLayers.getMapInfoLayer().recreateControls();
+//		}
+		
+		mapLayers.updateLayers(mapView);
+		mapView.setComplexZoom(mapView.getZoom(),
+				mapView.getSettingsZoomScale());
+//		app.getDaynightHelper().startSensorIfNeeded(
+//				new StateChangedListener<Boolean>() {
+//
+//					@Override
+//					public void stateChanged(Boolean change) {
+//						getMapView().refreshMap(true);
+//					}
+//				});
+		getMapView().refreshMap(true);
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+//			if (!app.accessibilityEnabled()) {
+//				mapActions.contextMenuPoint(mapView.getLatitude(),
+//						mapView.getLongitude());
+//			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+//				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
+//				mapActions.contextMenuPoint(mapView.getLatitude(),
+//						mapView.getLongitude());
+//			}
+			return true;
+		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
+			// Parrot device has only dpad left and right
+			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+				changeZoom(-1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+				changeZoom(1);
+				return true;
+			}
+		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT
+				|| keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
+				|| keyCode == KeyEvent.KEYCODE_DPAD_DOWN
+				|| keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15
+					: (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -15 : 0);
+			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15
+					: (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
+			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final QuadPoint cp = tb.getCenterPixelPoint();
+			final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+			setMapLocation(l.getLatitude(), l.getLongitude());
+			return true;
+		}
+		// else if(OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
+		// return true;
+		// }
+		return super.onKeyUp(keyCode, event);
+	}
+
+	public void checkExternalStorage() {
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			// ok
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+			AccessibleToast.makeText(this, R.string.sd_mounted_ro,
+					Toast.LENGTH_LONG).show();
+		} else {
+			AccessibleToast.makeText(this, R.string.sd_unmounted,
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public void showAndHideMapPosition() {
+		mapView.setShowMapPosition(true);
+		app.runMessageInUIThreadAndCancelPrevious(SHOW_POSITION_MSG_ID,
+				new Runnable() {
+					@Override
+					public void run() {
+						if (mapView.isShowMapPosition()) {
+							mapView.setShowMapPosition(false);
+							mapView.refreshMap();
+						}
+					}
+				}, 2500);
+	}
+
+	public OsmandMapTileView_Navigation getMapView() {
+		return mapView;
+	}
+
+	public MapViewTrackingUtilities_Navigation getMapViewTrackingUtilities() {
+		return mapViewTrackingUtilities;
+	}
+
+	protected void parseLaunchIntentLocation() {
+		Intent intent = getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if ("http".equalsIgnoreCase(data.getScheme())
+					&& "download.osmand.net".equals(data.getHost())
+					&& "/go".equals(data.getPath())) {
+				String lat = data.getQueryParameter("lat");
+				String lon = data.getQueryParameter("lon");
+				if (lat != null && lon != null) {
+					try {
+						double lt = Double.parseDouble(lat);
+						double ln = Double.parseDouble(lon);
+						String zoom = data.getQueryParameter("z");
+						int z = settings.getLastKnownMapZoom();
+						if (zoom != null) {
+							z = Integer.parseInt(zoom);
+						}
+						settings.setMapLocationToShow(lt, ln, z,
+								getString(R.string.shared_location));
+					} catch (NumberFormatException e) {
+					}
+				}
+			}
+		}
+	}
+
+	public MapActivityActions_Navigation getMapActions() {
+		return mapActions;
+	}
+
+	public MapActivityLayers_Navigation getMapLayers_Navigation() {
+		// return super.getMapLayers();
+		return mapLayers;
+	}
+
+	// public MapActivityLayers_Navigation getMapLayers() {
+	// return mapLayers;
+	// }
+
+	public static void launchMapActivity_NavigationMoveToTop(Context activity) {
+		Intent newIntent = new Intent(activity,
+				((OsmandApplication) activity.getApplicationContext())
+						.getAppCustomization().getMapActivity_Navigation());
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		activity.startActivity(newIntent);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
+	}
+
+	public void refreshMap() {
+		getMapView().refreshMap();
+	}
+
+	private String formatLonString(double value) {
+		boolean sign;
+		if (value >= 0)
+			sign = true;
+		else {
+			value = Math.abs(value);
+			sign = false;
+		}
+		
+//		if (value >= 0)
+//			sign = true;
+//		else {
+//			value = Math.abs(value);
+//			sign = false;
+//		}
+
+		double d_value = value * 3600;
+		//print("d_value (*3600) : "+d_value);
+
+		String str = "";
+		String deg_str = "";
+		int deg = (int) Math.floor(d_value / 3600);
+		if (deg < 10) {
+			deg_str = "00" + deg;
+		} else if (deg > 10 && deg < 100) {
+			deg_str = "0" + deg;
+		} else {
+			deg_str = "" + deg;
+		}
+		
+		//print("整个度： "+deg_str);
+		
+		String min_str="";
+
+		int min = (int) Math.floor((d_value - deg * 3600) / 60);
+		if(min<10){
+			min_str ="0"+min;
+		}else{
+			min_str =""+min;
+		}
+		
+		//print("整分�?+min_str);
+		
+		String sec_str="";
+		int sec = (int) Math.floor((d_value - deg * 3600 - min * 60));
+		
+		//print("sec: "+sec);
+		
+		double l = d_value - deg * 3600 - min * 60 - sec;//秒的小数
+		
+		java.text.DecimalFormat dft = new java.text.DecimalFormat(".##");
+		//double ll = l / 60.0;
+		
+		String ll_str = dft.format(l);
+		float ll_f = Float.parseFloat(ll_str);
+		sec_str = ""+(sec+ll_f);
+		
+//		if(sec_decimal<10){
+//			sec_str ="0"+sec_decimal;
+//		}else{
+//			sec_str = ""+sec_decimal;
+//		}
+		//print("sec_str: "+sec_str);
+		
+		str = deg_str + "°" + min_str + "'" + sec_str + "''"/* + sec_decimal */
+				+ (sign ? "E" : "W");		
+		
+		return str;
+	}
+	
+	private String formatLatString(double value) {
+
+		boolean sign;
+		if (value >= 0)
+			sign = true;
+		else {
+			value = Math.abs(value);
+			sign = false;
+		}
+
+//		if (value >= 0)
+//			sign = true;
+//		else {
+//			value = Math.abs(value);
+//			sign = false;
+//		}
+		
+		String str;
+		String deg_str,min_str,sec_str;
+
+		double d_value = value * 3600;
+
+		int deg = (int) Math.floor(d_value / 3600);
+		if(deg<10){
+			deg_str="0"+deg;
+		}else{
+			deg_str =""+deg;
+		}
+
+		int min = (int) Math.floor((d_value - deg * 3600) / 60);
+		if(min<10){
+			min_str = "0"+min;
+		}else{
+			min_str =""+min;
+		}
+
+		int sec = (int) Math.floor((d_value - deg * 3600 - min * 60));
+
+		double l = d_value - deg * 3600 - min * 60 - sec;
+		//double ll = l/60.0;
+		
+		
+		//double sec_d = sec+ll;
+		
+		java.text.DecimalFormat dft = new java.text.DecimalFormat(".##");
+		
+		String sec_d_str = dft.format(l);
+		
+		float sec_d_f = Float.parseFloat(sec_d_str);
+		
+		sec_str =""+(sec+sec_d_f);
+		
+		//sec_d_f = sec_d_f * 60;
+		
+//		java.text.DecimalFormat dft2 = new java.text.DecimalFormat("##.##");
+//		String sss = dft2.format(sec_d_f);
+		
+//		if(sec_d_f<10){
+//			sec_str ="0"+sec_d_f;
+//		}else{
+//			sec_str = ""+sec_d_f;		
+//		}
+		
+		str = deg_str + "°" + min_str + "'" + sec_str + "''"/*." + sec_decimal*/
+				+ (sign ? "N" : "S");
+		return str;
+	}
+	
+	private String absoluteDirectionString(float bearing, OsmandApplication app) {
+		int cs = (int) Math.round((float) Math.rint(bearing));
+		if (cs < 10) {
+			return "00" + cs;
+		} else if (cs > 10 && cs < 100) {
+			return "0" + cs;
+		} else
+			return "" + cs;
+
+	}
+	
+	
+
+}

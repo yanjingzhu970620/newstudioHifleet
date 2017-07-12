@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.hifleet.aisparser.Test&apos; to &apos;GetAisMsg&apos;&#x0D;&#x0A;- Original project: &apos;HifleetNavigation&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.aisparser.Test&apos;&#x0D;&#x0A;- Renamed element: &apos;com.hifleet.aisparser.GetAisMsg&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update fully qualified names in &apos;*&apos; files&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Test&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.hifleet.aisparser{Test.java[Test" matchStrategy="1" name="GetAisMsg" patterns="*" qualified="true" references="true" similarDeclarations="false" stamp="1441097665168" textual="true" version="1.0"/>
+</session>

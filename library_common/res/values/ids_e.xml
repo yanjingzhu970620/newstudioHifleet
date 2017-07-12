@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="tag_filepath" type="id"/>
+    <item name="tag_obj" type="id"/>
+    <item name="tag_another_path" type="id"/>
+    <item name="tag_obj1" type="id"/>
+    <item name="tag_obj2" type="id"/>
+    <item name="tag_obj_image_identity" type="id"/>
+    <item name="tag_obj_viewholder" type="id"/>
+    
+    <item name="request_1" type="id"/>
+    <item name="request_2" type="id"/>
+    <item name="request_3" type="id"/>
+    <item name="request_4" type="id"/>
+    <item name="request_5" type="id"/>
+
+</resources>

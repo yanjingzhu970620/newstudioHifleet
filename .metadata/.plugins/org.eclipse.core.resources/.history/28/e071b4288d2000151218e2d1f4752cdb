@@ -1,0 +1,441 @@
+package com.hifleet.activity;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlPullParser;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ListView;
+
+import com.hifleet.R;
+import com.hifleet.activity.ShowWanningActivity.alertareaThread;
+import com.hifleet.adapter.WanningListAdapter;
+import com.hifleet.bean.WanningBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.OsmandApplication;
+
+/**
+ * @{# MoreActivity.java Create on 2015年3月10日 上午9:34:56
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class MoreActivity extends HBaseActivity {
+
+	private List<WanningBean> wanningBean = new ArrayList<WanningBean>();
+	public static List<String> alertplots = new ArrayList<String>();
+	alertareaThread areatask=new alertareaThread();
+	WarningThread   warntask=new WarningThread();
+	ListView mListWanning;
+
+	WanningListAdapter mAdapter;
+
+	OsmandApplication app;
+
+	String wanning;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.e.common.activity.BaseActivity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_more);
+
+		initNav();
+		setNavTitle("报警信息");
+		setTextNavLeft("返回");
+
+		mListWanning = (ListView) findViewById(R.id.list_wanning);
+		print("MoreActivity 》");
+		callareaInfoAction();
+		
+
+	}
+
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.effectButton_delete:
+			mListWanning.setVisibility(View.GONE);
+			break;
+		case R.id.text_nav_left:
+			if(warntask!=null){
+				warntask.cancel(true);
+			}
+			if(areatask!=null){
+				areatask.cancel(true);
+			}
+			finish();
+			break;
+		}
+	}
+	private HashMap<String, alertareaThread> asyntaskmap = new HashMap<String, alertareaThread>();
+
+	private void closeReqest() {
+		if (asyntaskmap.isEmpty())
+			return;
+
+		Iterator<String> it = asyntaskmap.keySet().iterator();
+
+		while (it.hasNext()) {
+			String uuid = it.next();
+			alertareaThread task = asyntaskmap.get(uuid);
+			task.cancel(true);
+		}
+	}
+	public void callareaInfoAction() {
+         closeReqest();
+		
+		 areatask = new alertareaThread();		
+		String uuid = UUID.randomUUID().toString();
+		
+		areatask.execute();
+		asyntaskmap.put(uuid, areatask);
+			
+	}
+	class alertareaThread extends AsyncTask<String, Void, Void> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				print("MoreActivity 》 准备请求协助的报警数据");
+				long s=System.currentTimeMillis();
+				String userId = app.myPreferences.getString("User", null);
+				String httpPost = app.myPreferences.getString("loginserver",
+						null)
+						+ IndexConstants.GET_LAYER_LIST_URL
+						+ userId
+						+ "&userDomain=qq.com";
+				print("MoreActivity 》 获得报警区域列表 " + httpPost);
+				URL shipsUrl = new URL(httpPost);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+				}
+				conn.setConnectTimeout(10000);
+				if(this.isCancelled())
+					return null;
+				InputStream inStream = conn.getInputStream();
+				print("MoreActivity 》 解析报警区域列表数据");
+				if(this.isCancelled())
+					return null;
+				parsealertXML(inStream);
+				if(this.isCancelled())
+					return null;
+				inStream.close();
+				long e=System.currentTimeMillis();
+				print("MoreActivity 》 解析报警区域列表数据  完成"+(e-s));
+			} catch (Exception e) {
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			print("MoreActivity 》 alertareaThread 》 onPostExecute");
+			 //new WarningThread().execute();
+			closewarnReqest();
+			String uuid = UUID.randomUUID().toString();
+			warntask.execute();
+			warntasks.put(uuid, warntask);
+		}
+	}
+
+	private void parsealertXML(InputStream inStream) throws Exception {
+		long s=System.currentTimeMillis();
+		SAXReader reader = new SAXReader();
+		org.dom4j.Document document = reader.read(inStream);
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		String myFleet= LoginActivity.myFleet;
+		Map<String, Element> map = new HashMap<String, Element>();
+		List<Element> root = document.getRootElement().elements();
+		
+		print("MoreActivity 》 报警结果中 Plot 个数: "+root.size());
+		
+		for (Element e : root) {
+			 map.put(e.attribute("Name").getText(), e);
+		}
+		 for(String p:map.keySet()){
+			Element rse = map.get(p);
+			if(rse!=null){
+				List<Element>  fleetlayers = rse.elements();
+				if(fleetlayers!=null){
+					print("MoreActivity 》 筛选fleetlayers目标 个数： "+fleetlayers.size());
+					for(Element e:fleetlayers){
+						String layername=e.attributeValue("Name");
+						print("MoreActivity 》 筛选fleetlayersname： "+layername);
+						if(myFleet.equals(layername)){
+							List<Element>  layers = e.elements();
+							print("MoreActivity 》 筛选layers目标 个数： "+layers.size());
+							for(Element l:layers){
+							String layerid=l.attributeValue("LayerId");
+						if(app.myPreferences.getBoolean(layerid, false)){
+						NodeList plots = (NodeList) xpath.evaluate(
+								"/root/model/layer[@Name='" + myFleet + "']/layer[@LayerId='" + layerid + "']//plot",
+								document, XPathConstants.NODESET);
+						print("MoreActivity 》 筛选plots目标 个数： "+plots.getLength());
+							for (int i1 = 0; i1 < plots.getLength(); i1++) {
+								if(areatask.isCancelled())
+				                    return;
+								Node plot = plots.item(i1);
+									String plotid = xpath.evaluate("@PlotId", plot,
+											XPathConstants.STRING).toString();
+									if(alertplots.contains(plotid)){
+										alertplots.remove(plotid);
+									}
+									alertplots.add(plotid);
+								}
+
+					}
+            		}
+						}
+					}
+				}
+			}
+		 }
+		 long e=System.currentTimeMillis();
+	     print("more  报警时间"+(e-s)+"大小"+alertplots.size());
+	}
+	private HashMap<String, WarningThread> warntasks = new HashMap<String, WarningThread>();
+
+	private void closewarnReqest() {
+		if (warntasks.isEmpty())
+			return;
+
+		Iterator<String> it = warntasks.keySet().iterator();
+
+		while (it.hasNext()) {
+			String uuid = it.next();
+			WarningThread task = warntasks.get(uuid);
+			task.cancel(true);
+		}
+	}
+	class WarningThread extends AsyncTask<String, Void, Void> {
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Void doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				Date date = new Date();
+				SimpleDateFormat sDateFormat = new SimpleDateFormat(
+						"yyyy-MM-dd-hh-mm-ss");
+				String time = sDateFormat.format(date);
+				// System.out.println("time====" + time);
+				String mEndTime = time;
+				date.setHours(date.getHours() - 24);
+				time = sDateFormat.format(date);
+				String mStartTime = time;
+				String userId = app.myPreferences.getString("User", null);
+				String mUrl = app.myPreferences.getString("loginserver", null)
+						+ IndexConstants.GET_WANNING_URL + userId
+						+ "&userDomain=qq.com&starttime=" + mStartTime
+						+ "&endtime=" + mEndTime + "&AlertType=All";
+				print("MoreActivity 》 WarningThread: " + mUrl);
+				URL shipsUrl = new URL(mUrl);
+				HttpURLConnection conn = (HttpURLConnection) shipsUrl
+						.openConnection();
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+					// System.out.println("用的loginSession.getSessionid哦");
+				} else {
+					conn.setRequestProperty("cookie",
+							app.myPreferences.getString("sessionid", ""));
+					conn.setRequestProperty("cookie",
+							loginSession.getSessionid());
+				}
+				conn.setConnectTimeout(5000);
+				if(this.isCancelled())
+					return null;
+				InputStream inStream = conn.getInputStream();
+				print("MoreActivity 》 WarningThread: 解析报警数据");
+				if(this.isCancelled())
+					return null;
+				parseXMLnew(inStream);
+				if(this.isCancelled())
+					return null;
+				inStream.close();
+				print("MoreActivity 》 WarningThread: 解析完毕报警数据");
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("未能获取网络数据");
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			try {
+//				wanningBean.clear();
+				print("MoreActivity 》 对报警进行判断了" + wanningBean.size());
+				mAdapter = new WanningListAdapter(activity, wanningBean);
+				mListWanning.setAdapter(mAdapter);
+				mListWanning.setVisibility(View.VISIBLE);
+			} catch (java.util.ConcurrentModificationException cme) {
+				System.out.println("报警 Exception");
+			}
+		}
+	}
+
+	private void parseXMLnew(InputStream inStream) throws Exception {
+		wanningBean.clear();
+		
+		
+		long d = System.currentTimeMillis();
+		SAXReader reader = new SAXReader();
+		org.dom4j.Document document = reader.read(inStream);
+		
+		Map<String, Element> map = new HashMap<String, Element>();
+		List<Element> root = document.getRootElement().elements();
+		
+		print("MoreActivity 》 报警结果中 Plot 个数: "+root.size());
+        print("MoreActivity 》 筛选目标 个数： "+alertplots.size());
+		
+		for (Element e : root) {
+			 map.put(e.attribute("PlotId").getText(), e);
+		}
+		
+		 for(String p:alertplots){
+			Element rse = map.get(p);
+			if(rse!=null){
+				List<Element>  rslist = rse.elements();
+				if(rslist!=null){
+					for(Element e:rslist){
+            			String mmsi = e.attributeValue("Mmsi");//.getText();
+            			String shipname = e.attributeValue("Shipname");//.getText();
+            			String TriggerTime = e.attributeValue("TriggerTime");
+            			String speedtype = e.attributeValue("SpeedType");
+            			String speed = e.attributeValue("Speed");
+            			WanningBean wb = new WanningBean();
+            			wb.Mmsi=mmsi;
+            			wb.Shipname = shipname;
+            			wb.TriggerTime = TriggerTime;
+            			wb.SpeedType = speedtype;
+            			wb.Speed = speed;
+            			wanningBean.add(wb);    
+            			//System.out.println(mmsi+", "+shipname+", "+TriggerTime);
+            		}
+				}
+			}
+		 }
+		/*
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document document = builder.parse(inStream);
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		NodeList plots = (NodeList) xpath.evaluate("/root/Plot", document,
+				XPathConstants.NODESET);
+
+        
+        int count=0;
+        
+       
+        for(String p:alertplots){
+        	
+        	print("MoreActivity 》 筛选目标: "+p);
+        	NodeList plotlist = (NodeList) xpath.evaluate("/root/Plot[@PlotId='"
+					+ p + "']//AlertRs", document, XPathConstants.NODESET);
+        	
+        	for(int i1=0;i1<plotlist.getLength();i1++){
+        		
+        		Node alertrs = plotlist.item(i1);  
+        		WanningBean wb = new WanningBean();
+        		
+        		wb.Mmsi = xpath.evaluate("@Mmsi", alertrs,
+						XPathConstants.STRING).toString();
+				//print("MoreActivity 》 报警船mmsi: "+wb.Mmsi);
+				wb.Shipname = xpath.evaluate("@Shipname", alertrs,
+						XPathConstants.STRING).toString();
+				wb.TriggerTime = xpath.evaluate("@TriggerTime",
+						alertrs, XPathConstants.STRING).toString();
+				wb.SpeedType = xpath.evaluate("@SpeedType",
+						alertrs, XPathConstants.STRING).toString();
+				wb.Speed = xpath.evaluate("@Speed", alertrs,
+						XPathConstants.STRING).toString();
+				wanningBean.add(wb);        		
+        		}
+        	
+        	}  */     
+		
+		long g = System.currentTimeMillis() - d;
+		print("MoreActivity 》 耗时： " + g/1000.0+", 消息数： "+wanningBean.size());
+
+	}
+
+
+	private static void print(String msg) {
+		Log.i(TAG, msg);
+	}
+
+	public static final String TAG = "FileDownloader";
+
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if(warntask!=null){
+				warntask.cancel(true);
+			}
+			if(areatask!=null){
+				areatask.cancel(true);
+			}
+			finish();
+
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+}

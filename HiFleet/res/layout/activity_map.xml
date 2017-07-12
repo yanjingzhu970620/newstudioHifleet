@@ -1,0 +1,519 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:keepScreenOn="true">
+
+    <com.hifleet.map.OsmandMapTileView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/MapView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/map_view" />
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null">
+
+        <com.e.common.widget.effect.layout.EffectColorRelativeLayout
+            android:id="@+id/effectRelativeLayout_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_35"
+            android:layout_margin="@dimen/size_dp_20"
+            android:onClick="onClick"
+            app:effectColor_bgNormalColor="#C0FFFFFF"
+            app:effectColor_bgPressedColor="@color/c_cccccc"
+            app:effectColor_radius="20.0dip">
+
+            <TextView
+                android:id="@+id/text_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="请输入船名(拼音或英文)/呼号/MMSI/IMO"
+                android:textColor="@color/c_afa89f"
+                android:textSize="@dimen/size_sp_15" />
+            <!--
+            <ImageView
+                android:layout_width="@dimen/size_dp_25"
+                android:layout_height="@dimen/size_dp_25"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/size_dp_5"
+                android:layout_toLeftOf="@+id/text_search"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_search" />
+            -->
+        </com.e.common.widget.effect.layout.EffectColorRelativeLayout>
+
+        <ImageButton
+            android:id="@+id/locateMyLocationImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_bottom_bar"
+            android:layout_marginBottom="10dip"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_zoom_control"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@drawable/la_backtoloc_tracked" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_bottom_bar"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dip"
+            android:layout_marginRight="10dip"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/mapActivityZoomInImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_zoom_control"
+                android:src="@drawable/stickers_add" />
+
+            <ImageButton
+                android:id="@+id/mapActivityZoomOutImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_zoom_control"
+                android:src="@drawable/stickers_sub" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#55000000"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/img_change_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/effectRelativeLayout_search"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/bg_zoom_control"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@drawable/btn_change_map" />
+
+        <LinearLayout
+            android:id="@+id/ll_change_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/img_change_map"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="-6dip"
+            android:background="@drawable/bg_map_change"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="5dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="5dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/img_land_map"
+                        android:layout_width="60dip"
+                        android:layout_height="45dip"
+                        android:background="@drawable/btn_land_map"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="地图"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/img_all_sea_map"
+                        android:layout_width="60dip"
+                        android:layout_height="45dip"
+                        android:background="@drawable/btn_all_sea_map"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="全球海图"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/img_sea_map"
+                        android:layout_width="60dip"
+                        android:layout_height="45dip"
+                        android:background="@drawable/btn_sea_map"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="中国海图"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="5dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="5dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+
+                    <ImageButton
+                        android:id="@+id/img_air_pressure_show"
+                        android:layout_width="40dip"
+                        android:layout_height="45dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/btn_pressure"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="气压"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+
+                    <ImageButton
+                        android:id="@+id/img_wind_show"
+                        android:layout_width="40dip"
+                        android:layout_height="45dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/btn_wind"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="风"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/img_wave_show"
+                        android:layout_width="40dip"
+                        android:layout_height="45dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/btn_wave"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="海浪"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/img_ocean_show"
+                        android:layout_width="40dip"
+                        android:layout_height="45dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/btn_ocean"
+                        android:clickable="true"
+                        android:onClick="onClick" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:text="流"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="5dip"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/weather_time_before"
+                        android:layout_width="30dip"
+                        android:layout_height="30dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/bg_zoom_control"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:src="@drawable/bt_weather_before" />
+
+                    <ImageButton
+                        android:id="@+id/weather_time_after"
+                        android:layout_width="30dip"
+                        android:layout_height="30dip"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginTop="5dip"
+                        android:background="@drawable/bg_zoom_control"
+                        android:clickable="true"
+                        android:onClick="onClick"
+                        android:src="@drawable/bt_weather_after" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="拖动进度条" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_bottom_bar" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_above="@+id/ll_bottom_bar"
+            android:background="#e0e0e0" />
+
+        <RadioGroup
+            android:id="@+id/ll_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_55"
+            android:layout_alignParentBottom="true"
+            android:background="#f3f7f6"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_ships"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:clickable="true"
+                android:drawablePadding="-3dip"
+                android:drawableTop="@drawable/radiobutton_ships_focused"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="船位"
+                android:textColor="@drawable/radiobutton_text_focused"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_details"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_weight="1"
+                android:button="@null"
+                android:clickable="true"
+                android:drawablePadding="-3dip"
+                android:drawableTop="@drawable/radiobutton_details_focused"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="档案"
+                android:textColor="@drawable/radiobutton_text_focused"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_team"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_weight="1"
+                android:button="@null"
+                android:clickable="true"
+                android:drawablePadding="-3dip"
+                android:drawableTop="@drawable/radiobutton_team_focused"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="船队"
+                android:textColor="@drawable/radiobutton_text_focused"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_myarea"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_weight="1"
+                android:button="@null"
+                android:clickable="true"
+                android:drawablePadding="-3dip"
+                android:drawableTop="@drawable/radiobutton_area_focused"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="区域"
+                android:textColor="@drawable/radiobutton_text_focused"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_myportships"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_weight="1"
+                android:button="@null"
+                android:clickable="true"
+                android:drawablePadding="-3dip"
+                android:drawableTop="@drawable/radiobutton_port_focused"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="高级"
+                android:textColor="@drawable/radiobutton_text_focused"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_setting"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_weight="1"
+                android:button="@null"
+                android:clickable="true"
+                android:drawablePadding="-3dip"
+                android:drawableTop="@drawable/radiobutton_set_focused"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="我的"
+                android:textColor="@drawable/radiobutton_text_focused"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </RelativeLayout>
+
+</FrameLayout>

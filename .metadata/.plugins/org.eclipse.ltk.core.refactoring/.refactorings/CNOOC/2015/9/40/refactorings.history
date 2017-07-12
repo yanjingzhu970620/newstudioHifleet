@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;CNOOC&apos;&#x0D;&#x0A;- Original project: &apos;CNOOC&apos;&#x0D;&#x0A;- Original element: &apos;com.hifleet.bean.InportShipsBean.java&apos;" description="Delete element" element1="/src&lt;com.hifleet.bean{InportShipsBean.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1443603158213" subPackages="false" version="1.0"/>
+</session>

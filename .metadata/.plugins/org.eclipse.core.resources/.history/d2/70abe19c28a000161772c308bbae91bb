@@ -1,0 +1,173 @@
+/**
+ * MainSend.java
+ * 版权所有(C) 2012 
+ * 创建:cuiran 2012-07-24 11:31:35
+ */
+package com.wpn.iphone.send;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javapns.devices.Device;
+import javapns.devices.implementations.basic.BasicDevice;
+import javapns.notification.AppleNotificationServerBasicImpl;
+import javapns.notification.PushNotificationManager;
+import javapns.notification.PushNotificationPayload;
+import javapns.notification.PushedNotification;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * TODO
+ * @author cuiran
+ * @version TODO
+ */
+public class MainSend {
+//	private static Log log = LogFactory.getLog(MainSend.class.getName());
+	
+	 /************************************************
+	 测试推送服务器地址：gateway.sandbox.push.apple.com /2195 
+	 产品推送服务器地址：gateway.push.apple.com / 2195 
+
+	需要javaPNS_2.2.jar包
+
+	 ***************************************************/
+	/**
+
+     *这是一个比较简单的推送方法，
+
+     * apple的推送方法
+
+     * @param tokens   iphone手机获取的token
+
+     * @param path 这里是一个.p12格式的文件路径，需要去apple官网申请一个 
+
+     * @param password  p12的密码 此处注意导出的证书密码不能为空因为空密码会报错
+
+     * @param message 推送消息的内容
+
+     * @param count 应用图标上小红圈上的数值
+
+     * @param sendCount 单发还是群发  true：单发 false：群发
+
+     */
+
+	public void sendpush(List<String> tokens,String path, String password, String message,Integer count,boolean sendCount) {
+
+	try {
+		//message是一个json的字符串{“aps”:{“alert”:”iphone推送测试”}}
+
+			PushNotificationPayload payLoad =  PushNotificationPayload.fromJSON(message);//默认内容 后面修改
+			
+			payLoad.addAlert("iphone推送测试 这是hifleet测试 报警测试报警测试 报警测试"); // 消息内容
+			
+			payLoad.addBadge(count); // iphone应用图标上小红圈上的数值
+			
+			payLoad.addSound("default"); // 铃音 默认
+			
+//			payLoad.addCustomAlertActionLocKey("hifleetkey");
+//			payLoad.addCustomAlertBody("addCustomAlertBody addCustomAlertBody");
+			
+
+			PushNotificationManager pushManager = new PushNotificationManager();
+			
+			//true：表示的是产品发布推送服务 false：表示的是产品测试推送服务
+			
+			pushManager.initializeConnection(new AppleNotificationServerBasicImpl(path, password, false));
+			
+			List<PushedNotification> notifications = new ArrayList<PushedNotification>(); 
+			
+			// 发送push消息
+			
+			if (sendCount) {
+				System.out.println("--------------------------apple 推送 single-------");
+//			log.debug("--------------------------apple 推送 单-------");
+			
+			Device device = new BasicDevice();
+			
+			device.setToken(tokens.get(0));
+			
+			PushedNotification notification = pushManager.sendNotification(device, payLoad, true);
+			
+			notifications.add(notification);
+			
+			} else {
+			System.out.println("--------------------------apple 推送 群-------");
+//			log.debug("--------------------------apple 推送 群-------");
+			
+			List<Device> device = new ArrayList<Device>();
+			
+			for (String token : tokens) {
+			
+			device.add(new BasicDevice(token));
+			
+			}
+			
+			notifications = pushManager.sendNotifications(payLoad, device);
+			
+			}
+			
+			List<PushedNotification> failedNotifications = PushedNotification.findFailedNotifications(notifications);
+			
+			List<PushedNotification> successfulNotifications = PushedNotification.findSuccessfulNotifications(notifications);
+			
+			int failed = failedNotifications.size();
+			
+			int successful = successfulNotifications.size();
+			
+			 
+			
+			if (successful > 0 && failed == 0) {
+				System.out.println("-----All notifications pushed 成功 (" + successfulNotifications.size() + "):");
+//			log.debug("-----All notifications pushed 成功 (" + successfulNotifications.size() + "):");
+			
+			} else if (successful == 0 && failed > 0) {
+				System.out.println("-----All notifications 失败 (" + failedNotifications.size() + "):");
+//			log.debug("-----All notifications 失败 (" + failedNotifications.size() + "):");
+			
+			} else if (successful == 0 && failed == 0) {
+			
+			System.out.println("No notifications could be sent, probably because of a critical error");
+			
+			} else {
+				System.out.println("------Some notifications 失败 (" + failedNotifications.size() + "):");
+				System.out.println("------Others 成功 (" + successfulNotifications.size() + "):");
+//			log.debug("------Some notifications 失败 (" + failedNotifications.size() + "):");
+//			
+//			log.debug("------Others 成功 (" + successfulNotifications.size() + "):");
+			
+			}
+	
+	// pushManager.stopConnection();
+
+	} catch (Exception e) {
+	
+	e.printStackTrace();
+	
+	}
+
+}
+	
+	/**
+	 * TODO
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		MainSend send=new MainSend();
+		List<String> tokens=new ArrayList<String>();
+//		tokens.add("4468c7689237535428679c85f050b362457fcb92c96b362b4910c3ec486702b8");//5c正式
+		tokens.add("e0f234f183d98792aa20e7b063d6d17c1ed3b2ca224c1becddffaffbe550594d");//5c
+//		tokens.add("46e2766a4c45e0ae90c086f05bda3a7c4b71227e898e0d8448625cc60abe4a87");//寇
+		tokens.add("15c757eb3aed9366ed784c356af9854ec5127b524079e4f39a93fd2ae6475d5f");//hu
+//		tokens.add("47437f045fbeb460366a99caac393477ed478abc50bfd598241207f497faecd9");//向
+		String path="C:\\Users\\admin\\Desktop\\iphonepush\\ck.p12";
+		String password="manyships";
+		String message="{'aps':{'alert':'iphone推送测试 www.baidu.com','title':'推广测试','category':'ad'}}";
+		Integer count=1;
+		boolean sendCount=false;
+		send.sendpush(tokens, path, password, message, count, sendCount);
+		 
+	}
+
+}

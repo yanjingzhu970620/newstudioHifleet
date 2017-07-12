@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CommitComments>	<CommitComment>初始导入。20160721</CommitComment>
+	<CommitComment>初始导入。</CommitComment>
+	<CommitComment>初始导入。  2016 7 21</CommitComment>
+	<CommitComment>复制hifleet版本</CommitComment>
+	<CommitComment>修订了航线设计的逻辑。</CommitComment>
+	<CommitComment>默认无图。更改了经纬度格式。</CommitComment>
+	<CommitComment>清除多余代码前提交</CommitComment>
+	<CommitComment>修改了ip地址，把hifleet.com改成了182.92.229.132</CommitComment>
+	<CommitComment>尝试开启记录模式。</CommitComment>
+	<CommitComment>新增了Bing tile map system中的几个需要的类，
+调整了检索离线数据包的方法，
+在检索离线数据包目录时，下载该目录，
+当点击当前位置时，回到当前位置，不放大海图。</CommitComment>
+</CommitComments>

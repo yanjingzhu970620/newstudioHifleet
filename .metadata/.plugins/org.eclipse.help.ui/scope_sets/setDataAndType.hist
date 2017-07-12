@@ -1,0 +1,4 @@
+#Thu Mar 10 15:26:33 CST 2016
+__DEFAULT__=false
+org.eclipse.help.ui.localSearch.master=true
+expression=setDataAndType

@@ -1,0 +1,138 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_menu_item_layout.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\activity_show_image.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\activity_show_image.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_tab.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_tab.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\include_btn_right.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\include_btn_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_simple.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_simple.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\layout_custome_dialog.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\layout_custome_dialog.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_menu_layout.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_radio.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_tab_bar_view.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_tab_bar_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_action_bar_overlay.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_action_bar_overlay.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__popup_menu_item_layout.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\layout_item_view.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\layout_item_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_mode_bar.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_mode_bar.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_home.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_home.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__search_view.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__search_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_load_footer.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\pull_to_load_footer.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_layout.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__activity_chooser_view_list_item.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_icon.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_bar_title_item.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\view_loading.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\view_loading.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__activity_chooser_view.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__action_mode_close_item.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__action_mode_close_item.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\pull_to_refresh_header_e.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\pull_to_refresh_header_e.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\include_btn_left.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\include_btn_left.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_action_bar.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_action_bar.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\activity_camera.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\activity_camera.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\view_listview.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\view_listview.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__list_menu_item_checkbox.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\include_arrow_right.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\include_arrow_right.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\include_nav.xml",
+        "source": "D:\\studioHifleet\\library_common\\res\\layout\\include_nav.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__screen_simple_overlay_action_mode.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__search_dropdown_item_icons_2line.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\library_common\\build\\intermediates\\res\\merged\\debug\\layout\\abs__simple_dropdown_hint.xml",
+        "source": "D:\\studioHifleet\\library_common\\build\\intermediates\\exploded-aar\\studioHifleet\\SherlockBar\\unspecified\\res\\layout\\abs__simple_dropdown_hint.xml"
+    }
+]

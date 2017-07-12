@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipChildren="false"
+    android:keepScreenOn="true"
+    android:orientation="vertical" >
+
+    <com.hifleet.OsmandMapTileView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/MapView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/map_view" />
+<!--  
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|top"
+        android:orientation="vertical" >
+-->
+        <!-- 收藏图层显隐控制 -->
+<!--  
+        <ImageButton
+            android:id="@+id/switchMapLayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corners_image_view_drawable"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:src="@drawable/widget_layer1" />
+-->
+        <!-- 记录轨迹图标按钮 -->
+<!--  
+        <ImageButton
+            android:id="@+id/recordGPXButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corners_image_view_drawable"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:src="@drawable/monitoring_rec_inactive" />
+    </LinearLayout>
+    -->
+    <!-- 位置信息和航速航向信息显示区域 -->
+<!--  
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_corners_image_view_drawable"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/lat_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="纬度： 正在定位..."
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:editable="false"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="经度： 正在定位..."
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/speed_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="航速： 0 海里/小时"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/course_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:editable="false"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="航向： 未知"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
+-->
+    <!-- 定位图片按钮 -->
+<!--  
+    <ImageButton
+        android:id="@+id/locateMyLocationImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/bottom_image_view_background_drawable"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/la_backtoloc_tracked" />
+-->
+    <!-- 缩放按钮 -->
+<!--  
+    <ImageButton
+        android:id="@+id/mapActivityZoomInImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="95dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/map_zoom_control_background_drawable"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/stickers_add" />
+
+    <ImageButton
+        android:id="@+id/mapActivityZoomOutImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/map_zoom_control_background_drawable"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:src="@drawable/stickers_sub" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:background="@drawable/round_button_menu"
+        android:gravity="center"
+        android:orientation="horizontal" >
+-->
+        <!-- 搜索按钮 -->
+<!--  
+        <Button
+            android:layout_marginLeft="5dip"
+            android:id="@+id/button_search"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_button_menu"
+            android:drawableLeft="@drawable/ic_action_gsearch"
+            android:text="@string/bottom_search"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+-->
+        <!-- 量算按钮 -->
+<!--  
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#000000" />
+
+        <Button
+            android:layout_marginLeft="5dip"
+            android:id="@+id/button_measure"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_button_menu"
+            android:drawableLeft="@drawable/distance_ruler1"
+            android:text="@string/bottom_measure"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+-->
+        <!-- 导航按钮 -->
+<!--  
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#000000" />
+
+        <Button
+            android:layout_marginLeft="5dip"
+            android:id="@+id/button_nav"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_button_menu"
+            android:drawableLeft="@drawable/navigation_arrow1"
+            android:text="@string/bottom_nav"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+-->
+        <!-- 我的按钮 -->
+<!--  
+        <View
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#000000" />
+
+        <Button
+            android:layout_marginLeft="5dip"
+            android:id="@+id/button_more"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_button_menu"
+            android:drawableLeft="@drawable/mine_man1"
+            android:text="@string/bottom_more"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </LinearLayout>
+  --> 
+</FrameLayout>

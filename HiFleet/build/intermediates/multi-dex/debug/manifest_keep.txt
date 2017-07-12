@@ -1,0 +1,47 @@
+-keep class com.hifleet.map.OsmandApplication {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+-keep class cn.jpush.android.service.PushService { <init>(); }
+-keep class cn.jpush.android.service.PushReceiver { <init>(); }
+-keep class cn.jpush.android.ui.PushActivity { <init>(); }
+-keep class cn.jpush.android.service.DownloadService { <init>(); }
+-keep class cn.jpush.android.service.AlarmReceiver { <init>(); }
+-keep class com.hifleet.receiver.myJpushreceiver { <init>(); }
+-keep class com.hifleet.activity.MainwebActivity { <init>(); }
+-keep class com.hifleet.map.MapActivity { <init>(); }
+-keep class com.hifleet.map.MapActivity1 { <init>(); }
+-keep class com.hifleet.activity.SearchActivity { <init>(); }
+-keep class com.hifleet.activity.DownloadIndexActivity { <init>(); }
+-keep class com.hifleet.activity.GetInportShipsActivity { <init>(); }
+-keep class com.hifleet.activity.GetArriveShipsActivity { <init>(); }
+-keep class com.hifleet.activity.GetWillArriveShipsActivity { <init>(); }
+-keep class com.hifleet.activity.LineShipsActivity { <init>(); }
+-keep class com.hifleet.activity.PortShipsActivity { <init>(); }
+-keep class com.hifleet.activity.TeamShipsAlertMessageActivity { <init>(); }
+-keep class com.hifleet.activity.AreaAlertMessageActivity { <init>(); }
+-keep class com.hifleet.activity.AreaAlertTypeActivity { <init>(); }
+-keep class com.hifleet.activity.GetAreaShipsActivity { <init>(); }
+-keep class com.hifleet.activity.ShipInfoActivity { <init>(); }
+-keep class com.hifleet.activity.SettingActivity { <init>(); }
+-keep class com.hifleet.activity.MyTeamActivity { <init>(); }
+-keep class com.hifleet.activity.WeatherActivity { <init>(); }
+-keep class com.hifleet.activity.MoreActivity { <init>(); }
+-keep class com.hifleet.activity.WeatherInformationActivity { <init>(); }
+-keep class com.hifleet.activity.ShowMyTeamActivity { <init>(); }
+-keep class com.hifleet.activity.ShowWanningActivity { <init>(); }
+-keep class com.hifleet.activity.MyTeamShipsActivity { <init>(); }
+-keep class com.hifleet.activity.ShipDetailsActivity { <init>(); }
+-keep class com.hifleet.activity.ShipSimpleDetailActivity { <init>(); }
+-keep class com.hifleet.activity.WeatherShuiwenActivity { <init>(); }
+-keep class com.hifleet.activity.ShipPSCcheckActivity { <init>(); }
+-keep class com.hifleet.activity.WeatherStationInfoActivity { <init>(); }
+-keep class com.hifleet.activity.ChooseShipActivity { <init>(); }
+-keep class com.hifleet.activity.IsLoginActivity { <init>(); }
+-keep class com.hifleet.activity.RegisterActivity { <init>(); }
+-keep class com.hifleet.activity.AboutUsActivity { <init>(); }
+-keep class com.e.filechoose.activity.camera.TakePhotoActivity { <init>(); }
+-keep class com.e.filechoose.activity.AlbumActivity { <init>(); }
+-keep class com.hifleet.plus.wxapi.WXEntryActivity { <init>(); }
+-keep class com.e.filechoose.activity.PhotoToolActivity { <init>(); }
+-keep class com.hifleet.thread.LocationSvc { <init>(); }

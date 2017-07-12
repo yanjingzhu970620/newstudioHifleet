@@ -1,0 +1,674 @@
+package com.hifleet.helper;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.util.Xml;
+
+import com.hifleet.app.OsmandApplication;
+import com.hifleet.app.OsmandSettings;
+import com.hifleet.data.IndexConstants;
+import com.hifleet.data.LatLon;
+import com.hifleet.helper.GPXUtilities.GPXFile;
+import com.hifleet.helper.GPXUtilities.Track;
+import com.hifleet.helper.GPXUtilities.TrkSegment;
+import com.hifleet.helper.GPXUtilities.WptPt;
+import com.hifleet.helper.GpxSelectionHelper.SelectedGpxFile;
+
+public class SavingTrackHelper extends SQLiteOpenHelper {
+	
+	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
+	public final static int DATABASE_VERSION = 3;
+	
+	public final static String TRACK_NAME = "track"; //$NON-NLS-1$
+	public final static String TRACK_COL_DATE = "date"; //$NON-NLS-1$
+	public final static String TRACK_COL_LAT = "lat"; //$NON-NLS-1$
+	public final static String TRACK_COL_LON = "lon"; //$NON-NLS-1$
+	public final static String TRACK_COL_ALTITUDE = "altitude"; //$NON-NLS-1$
+	public final static String TRACK_COL_SPEED = "speed"; //$NON-NLS-1$
+	public final static String TRACK_COL_HDOP = "hdop"; //$NON-NLS-1$
+	
+	public final static String POINT_NAME = "point"; //$NON-NLS-1$
+	public final static String POINT_COL_DATE = "date"; //$NON-NLS-1$
+	public final static String POINT_COL_LAT = "lat"; //$NON-NLS-1$
+	public final static String POINT_COL_LON = "lon"; //$NON-NLS-1$
+	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
+	
+	//public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
+
+	private String updateScript;
+	private String updatePointsScript;
+	
+	private long lastTimeUpdated = 0;
+	private final OsmandApplication ctx;
+
+	private LatLon lastPoint;
+	private float distance = 0;
+	private SelectedGpxFile currentTrack;
+	
+	private List<WptPt> listpt= new ArrayList<WptPt>();
+	
+	public SavingTrackHelper(OsmandApplication ctx){
+		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
+		this.ctx = ctx;
+		
+		this.currentTrack = new SelectedGpxFile();
+		this.currentTrack.setShowCurrentTrack(true);
+		GPXFile gx = new GPXFile();
+		gx.showCurrentTrack = true;
+		this.currentTrack.setGpxFile(gx);
+		this.currentTrack.getGpxFile().tracks.add(new Track());
+		
+		updateScript = "INSERT INTO " + TRACK_NAME + 
+		" (" +TRACK_COL_LAT +", " +TRACK_COL_LON+", " +TRACK_COL_ALTITUDE+", " +TRACK_COL_SPEED
+			 +", " +TRACK_COL_HDOP+", " +TRACK_COL_DATE+ ")" +
+		" VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+		updatePointsScript = "INSERT INTO " +POINT_NAME+ " ("+POINT_COL_LAT + POINT_COL_LON //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
+				+ POINT_COL_DATE+ POINT_COL_DESCRIPTION+" )"+ " VALUES (?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		createTableForTrack(db);
+		createTableForPoints(db);
+	}
+	
+	private void createTableForTrack(SQLiteDatabase db){
+		db.execSQL("CREATE TABLE " + TRACK_NAME+ " ("+TRACK_COL_LAT +" double, " + TRACK_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
+				+ TRACK_COL_ALTITUDE+" double, " + TRACK_COL_SPEED+" double, "  //$NON-NLS-1$ //$NON-NLS-2$
+				+ TRACK_COL_HDOP +" double, " + TRACK_COL_DATE +" long )" ); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+	
+	private void createTableForPoints(SQLiteDatabase db){
+		try {
+			db.execSQL("CREATE TABLE " + POINT_NAME+ " ("+POINT_COL_LAT +" double, " + POINT_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
+					+ POINT_COL_DATE+" long, " + POINT_COL_DESCRIPTION+" text)" ); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (RuntimeException e) {
+			// ignore if already exists
+		}
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		if(oldVersion < 2){
+			createTableForPoints(db);
+		}
+		if(oldVersion < 3){
+			db.execSQL("ALTER TABLE " + TRACK_NAME +  " ADD " + TRACK_COL_HDOP + " double");
+		}
+	}
+	
+	
+	
+		
+	public boolean hasDataToSave() {
+		try {
+			SQLiteDatabase db = getWritableDatabase();
+			if (db != null) {
+				try {
+					Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
+					boolean has = q.moveToFirst();
+					q.close();
+					if (has) {
+						return true;
+					}
+					q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+					has = q.moveToFirst();
+					q.close();
+					if (has) {
+						return true;
+					}
+				} finally {
+					db.close();
+				}
+			}
+		} catch(RuntimeException e) {
+			return false;
+		}
+
+		return false;
+	}
+	
+	/**
+	 * @return warnings
+	 * 把数据库中的记录保存到GPX File中。
+	 * 这个函数的主要作用是计算保存文件的文件名。
+	 */
+	String xmlName;
+	public List<String> saveDataToGpx() {
+		List<String> warnings = new ArrayList<String>();
+		//保存在tracks目录下
+		File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		boolean hasDataToWrite=false;
+		if (dir.getParentFile().canWrite()) {
+			dir.mkdirs();
+			if (dir.exists()) {
+				//System.err.println("GPX dir exist..");
+				Map<String, GPXFile> data = collectRecordedData();
+
+				// save file
+				for (final String f : data.keySet()) {
+					///System.err.println("data.f: "+f+"。 1, 保存的文件名 （年-月-日）： "+f+".gpx");
+					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
+					if (!data.get(f).isEmpty()) {
+						WptPt pt = data.get(f).findPointToShow();
+						//System.err.println("point: "+pt.lon+", "+pt.lat);
+						String fileName = f + " " + new SimpleDateFormat("HH-mm-ss_EEE").format(new Date(pt.time)); //$NON-NLS-1$
+						xmlName=fileName;
+//						System.err.println("2, 文件名 (年-月-日 时-分-秒_星期)： "+fileName);
+						fout = new File(dir, fileName + ".gpx"); //$NON-NLS-1$
+						int ind = 1;
+						while (fout.exists()) {
+							//System.err.println("3,上述文件名已经存在了，文件命名为："+fileName+"_"+ind);
+							fout = new File(dir, fileName + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+							System.out.println("savingtrackhelper 存储轨迹已经存在了   .gpx");//这个地方有时会多次创建，暂时直接跳过。
+							continue;
+						}
+					}
+					hasDataToWrite=true;
+					//开始保存文件
+					System.out.println("savingtrackhelper 开始存储轨迹   .gpx");
+					String warn = GPXUtilities.writeGpxFile(fout, data.get(f), ctx);
+					if (warn != null) {
+						warnings.add(warn);
+						return warnings;
+					}
+				}
+			}
+		}
+		
+		if(!hasDataToWrite) {
+			ctx.showShortToastMessage("在记录轨迹期间设备定位不成功，无轨迹记录数据。");
+		}
+
+		SQLiteDatabase db = getWritableDatabase();
+		if (db != null && warnings.isEmpty() && db.isOpen()) {
+			try {
+				System.err.println("savingtrack remove all from db");
+				db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				// delete all
+				//			db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
+				//			db.execSQL("DELETE FROM " + POINT_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
+			} finally {
+				db.close();
+			}
+		}
+		distance = 0;
+		savexml();
+		uploadFile();
+		System.err.println("保存结束，返回警告信息！");
+		return warnings;
+	}
+	
+	public void savexml(){
+	try{
+		System.out.println("xml保存"+listpt.size());
+		File dir = ctx.getAppPath("trackxml/");
+		if(xmlName==null&&listpt!=null){
+			xmlName=new SimpleDateFormat("HH-mm-ss_EEE").format(new Date(listpt.get(0).time));
+		}
+		   File xmlFile = new File(dir,xmlName+".xml");
+			if (!xmlFile.exists()) {
+				xmlFile.getParentFile().mkdirs();
+				xmlFile.createNewFile();
+			}
+	        FileOutputStream outStream = new FileOutputStream(xmlFile); 
+			 XmlSerializer serializer = Xml.newSerializer();  
+		        serializer.setOutput(outStream, "UTF-8");  
+		        serializer.startDocument("UTF-8", true);  
+		        serializer.startTag(null, "gps");  
+		        for (WptPt pt: listpt ) {
+		            serializer.startTag(null, "gpspoint"); 
+		            if(pt.name!=null){
+		            serializer.attribute(null, "name",pt.name);  
+		            Log.v("name", pt.name);
+		            }
+		              
+		            serializer.startTag(null, "time");  
+		            serializer.text(String.valueOf(pt.time));  
+		            serializer.endTag(null, "time");  
+//		            Log.v("time",String.valueOf(pt.time));
+		            
+		            serializer.startTag(null, "la");  
+		            serializer.text(String.valueOf(pt.lat));  
+		            serializer.endTag(null, "la"); 
+//		            Log.v("la",String.valueOf(pt.lat));
+		            
+		            serializer.startTag(null, "lo");  
+		            serializer.text(String.valueOf(pt.lon));  
+		            serializer.endTag(null, "lo");  
+//		            Log.v("lo",String.valueOf(pt.lon));
+		            
+		            serializer.startTag(null, "sp");  
+		            serializer.text(String.valueOf(pt.speed));  
+		            serializer.endTag(null, "sp");  
+		            
+		            serializer.startTag(null, "co");  
+		            serializer.text(String.valueOf(pt.course));  
+		            serializer.endTag(null, "co"); 
+//		            Log.v("sp",String.valueOf(pt.speed));
+		            
+		            serializer.endTag(null, "gpspoint");  
+		        }  
+		        serializer.endTag(null, "gps");  
+		        serializer.endDocument();  
+		        outStream.flush();
+		        outStream.close();
+			}catch(Exception ex1){
+				System.out.println("保存失败");
+			}	
+	}
+	
+	//上传文件
+	   Map<String, File> upfiles = new HashMap<String, File>();   
+    public void uploadFile(){  
+        String name;
+        String pass;
+        String url = null;
+        Map<String, String> params = new HashMap<String, String>(); 
+		try {
+			url = new String("http://192.168.10.38:8080/appServer/uploadData".getBytes("UTF-8"));
+//			name = URLEncoder.encode("aa","utf-8");
+//			pass=URLEncoder.encode("aa","utf-8");           
+//	        params.put("NAME", name);     
+//	        params.put("PASSWORD", pass);  
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    
+          
+       try {
+    	   getFile();
+//		post(url, params, upfiles);
+    	   post(url, upfiles);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}  
+   }  
+       
+   
+  private void getFile() {         
+	   File file = ctx.getAppPath("trackxml/");
+	   if(file==null)
+		   return;
+       File[] files = file.listFiles();       
+         
+       for (File f: files) {         
+            upfiles.put(f.getName(), new File(file,f.getName()));  
+                
+       }         
+    	   System.out.println("getxmlfiles:   "+upfiles.entrySet());
+        //  Toast.makeText(this, filename, Toast.LENGTH_LONG).show();     
+             
+       }       
+        
+     
+    // 上传代码，第一个参数，为要使用的URL，第二个参数，为表单内容，第三个参数为要上传的文件，可以上传多个文件，这根据需要页定    
+//   public static boolean post(String actionUrl,Map<String, String> params,Map<String, File> files) throws IOException {    
+	   public static boolean post(String actionUrl,Map<String, File> files) throws IOException {    
+//       String BOUNDARY = java.util.UUID.randomUUID().toString();    
+//       String PREFIX = "--", LINEND = "\r\n";    
+//       String MULTIPART_FROM_DATA = "multipart/form-data";    
+       String MULTIPART_FROM_DATA = "text/html";    
+       String CHARSET = "UTF-8";    
+       URL uri = new URL(actionUrl);    
+       HttpURLConnection conn = (HttpURLConnection) uri.openConnection();    
+       conn.setReadTimeout(60 * 1000);    
+       conn.setDoInput(true);// 允许输入    
+       conn.setDoOutput(true);// 允许输出    
+       conn.setUseCaches(false);    
+       conn.setRequestMethod("POST"); // Post方式    
+       conn.setRequestProperty("connection", "keep-alive");    
+       conn.setRequestProperty("Charsert", "UTF-8");    
+       conn.setRequestProperty("Content-Type", MULTIPART_FROM_DATA);    
+       // 首先组拼文本类型的参数    
+//       StringBuilder sb = new StringBuilder();    
+//       for (Map.Entry<String, String> entry : params.entrySet()) {    
+//           sb.append(PREFIX);    
+//           sb.append(BOUNDARY);    
+//           sb.append(LINEND);    
+//           sb.append("Content-Disposition: form-data; name=\""    
+//                   + entry.getKey() + "\"" + LINEND);
+//           sb.append("Content-Type: text/plain; charset=" + CHARSET + LINEND);    
+//           sb.append("Content-Transfer-Encoding: 8bit" + LINEND);    
+//           sb.append(LINEND);    
+//           sb.append(entry.getValue());    
+//           sb.append(LINEND);    
+//       }    
+       DataOutputStream outStream = new DataOutputStream(    
+               conn.getOutputStream());    
+//       outStream.write(sb.toString().getBytes());    
+       // 发送文件数据    
+       if (files != null)    
+           for (Map.Entry<String, File> file : files.entrySet()) {    
+               StringBuilder sb1 = new StringBuilder();    
+//               sb1.append(PREFIX);    
+//               sb1.append(BOUNDARY);    
+//               sb1.append(LINEND);    
+//               sb1.append("Content-Disposition: form-data; name=\"file\"; filename=\""    
+//                       + file.getKey() + "\"" + LINEND);    
+//               sb1.append("Content-Type: multipart/form-data; charset="    
+//                       + CHARSET + LINEND);    
+//               sb1.append(LINEND);    
+              // outStream.write(sb1.toString().getBytes());    
+               InputStream is = new FileInputStream(file.getValue());    
+               byte[] buffer = new byte[1024];    
+               int len = 0;    
+               while ((len = is.read(buffer)) != -1) {    
+                   outStream.write(buffer, 0, len);  
+               }   
+               outStream.write("\r\n".getBytes());
+               outStream.write("FILEEND".getBytes());
+               outStream.write("\r\n".getBytes());
+               is.close();  
+               file.getValue().delete();
+//               outStream.write(LINEND.getBytes());    
+           }    
+       // 请求结束标志    
+//       byte[] end_data = (PREFIX + PREFIX + LINEND).getBytes();    
+//       outStream.write(end_data);    
+       outStream.flush();   //????? 
+       // 得到响应码    
+       boolean success = conn.getResponseCode()==200;    
+//       InputStream in = conn.getInputStream();    
+//       InputStreamReader isReader = new InputStreamReader(in);    
+//       BufferedReader bufReader = new BufferedReader(isReader);    
+//       String line = null;    
+//       String data = "getResult=";    
+//       while ((line = bufReader.readLine()) != null)    
+//           data += line;    
+//         System.out.println("data up"+success+conn.getResponseCode());
+       outStream.close();    
+       conn.disconnect();    
+       return success;  
+   }  
+   
+	
+	public Map<String, GPXFile> collectRecordedData() {
+		System.err.println("collect Recorded Data..");
+		Map<String, GPXFile> data = new LinkedHashMap<String, GPXFile>();
+		SQLiteDatabase db = getReadableDatabase();
+		if (db != null && db.isOpen()) {
+			//System.err.println("db open..");
+			try {
+				collectDBPoints(db, data);
+				collectDBTracks(db, data);
+			} finally {
+				db.close();
+			}
+		}
+		return data;
+	}
+
+	private void collectDBPoints(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
+		System.err.println("collectDBPoints");
+		Cursor query = db.rawQuery("SELECT " + POINT_COL_LAT + "," + POINT_COL_LON + "," + POINT_COL_DATE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ POINT_COL_DESCRIPTION + " FROM " + POINT_NAME+" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+		if (query.moveToFirst()) {
+			do {
+				WptPt pt = new WptPt();
+				pt.lat = query.getDouble(0);
+				pt.lon = query.getDouble(1);
+				System.err.println("collectDBPoints: "+pt.lon+", "+pt.lat);
+				long time = query.getLong(2);
+				pt.time = time;
+				pt.name = query.getString(3);
+				
+				String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
+				GPXFile gpx;
+				if (dataTracks.containsKey(date)) {
+					gpx = dataTracks.get(date);
+					
+				} else {
+					gpx  = new GPXFile();
+					dataTracks.put(date, gpx);
+					listpt.clear();
+				}
+				gpx.points.add(pt);
+//				System.out.println("gpsxml列表添加"+listpt.size());
+//				listpt.add(pt);
+			} while (query.moveToNext());
+		}
+//		savexml();
+		query.close();
+	}
+	/**
+	 * 
+	 * @param db
+	 * @param dataTracks
+	 * 
+	 * GPXFile——>tracks——>segments——>points——>point
+	 */
+	
+	private void collectDBTracks(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
+		//System.err.println("collectDBTracks");
+		Cursor query = db.rawQuery("SELECT " + TRACK_COL_LAT + "," + TRACK_COL_LON + "," + TRACK_COL_ALTITUDE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ TRACK_COL_SPEED + "," + TRACK_COL_HDOP + "," + TRACK_COL_DATE + " FROM " + TRACK_NAME +" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		long previousTime = 0;
+		long previousInterval = 0;
+		long time;
+		TrkSegment segment = null;
+		Track track = null;
+//		boolean isFirst =true;
+//		long firstPointTime=0;
+//		long lastPointTime=0;
+		if (query.moveToFirst()) {
+			do {
+				WptPt pt = new WptPt();
+				pt.lat = query.getDouble(0);
+				pt.lon = query.getDouble(1);
+				
+				pt.ele = query.getDouble(2);
+				pt.speed = query.getDouble(3);
+				pt.hdop = query.getDouble(4);
+				time = query.getLong(5);
+				pt.time = time;
+//				if(isFirst){
+//					firstPointTime = time;
+//					isFirst =false;
+//				}
+//				lastPointTime= time;
+				
+//				System.err.println("collectDBTracks 数据库中记录： "+pt.lon+", "+pt.lat+", time: "+pt.time);
+				
+				long currentInterval = Math.abs(time - previousTime);
+				boolean newInterval = pt.lat == 0 && pt.lon == 0;
+				
+				//System.err.println("newInterval? "+newInterval+", currentInterval= "+currentInterval);
+				
+				if (track != null && !newInterval 
+						&& (currentInterval < 6 * 60 * 1000 
+								|| currentInterval < 10 * previousInterval)) {
+					// 6 minute - same segment
+					segment.points.add(pt);
+					//System.err.println("同一段中的点1.");
+				} else if (track != null && currentInterval < 2 * 60 * 60 * 1000) {
+					//System.err.println("两点时间差了两个小时了！");
+					// 2 hour - same track
+					segment = new TrkSegment();
+					if(!newInterval) {
+						segment.points.add(pt);
+					}
+					track.segments.add(segment);
+					//System.err.println("在track中新起一个segments。");
+				} else {
+					// check if date the same - new track otherwise new file  
+					track = new Track();
+					segment = new TrkSegment();
+					track.segments.add(segment);
+					//System.err.println("2: track.segments.add(segment).");
+					if(!newInterval) {
+						segment.points.add(pt);
+					}
+					
+					String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
+					System.err.println("计算日期（年月日）"+date);
+					if (dataTracks.containsKey(date)) {
+						GPXFile gpx = dataTracks.get(date);
+						gpx.tracks.add(track);
+						
+//						System.err.println("要返回的映射中 包括了 "+date+" 关键字对应的"
+//								+ "GPXFile。执行：gpx.tracks.add(track)");
+					} else {
+						GPXFile file = new GPXFile();
+						file.tracks.add(track);
+						dataTracks.put(date, file);
+//						savexml();
+//						System.out.println("collectDBTracks  gpsxml清空列表");
+//						listpt.clear();
+					//	System.err.println("dataTracks.put(data)....");
+					}
+				}
+				
+				previousInterval = currentInterval;
+				previousTime = time;
+//				System.out.println("collectDBTracks  gpsxml列表添加"+listpt.size());
+//				listpt.add(pt);
+			} while (query.moveToNext());
+		}
+		
+//		
+		Iterator segit = track.segments.iterator() ;
+		
+		while(segit.hasNext()){
+			TrkSegment segt = (TrkSegment) segit.next();
+			Iterator pointit = segt.points.iterator();
+			while(pointit.hasNext()){
+				WptPt pt = (WptPt) pointit.next();
+//				System.out.println("collectDBTracks  gpsxml列表添加"+listpt.size());
+				listpt.add(pt);
+//				System.err.println("遍历track："+pt.lon+", "+pt.lat);
+			}
+		}
+//		savexml();
+		query.close();
+	}
+	
+	public void startNewSegment() {
+		System.err.println("调用SavingTrackHelper类中的startNewSegment函数。");
+		lastTimeUpdated = 0;
+		lastPoint = null;
+		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis()});
+		addTrackPoint(null, true);
+	}
+	
+	public void updateLocation(com.hifleet.data.Location location) {
+		// use because there is a bug on some devices with location.getTime()
+		long locationTime = System.currentTimeMillis();
+		OsmandSettings settings = ctx.getSettings();
+		if (/*OsmAndLocationProvider.isPointAccurateForRouting(location) &&*/ settings.SAVE_TRACK_TO_GPX.get()
+				/*&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null*/) {
+			System.err.println("savingtrack 插入轨迹数据。"+location.getLatitude()+"当前时间"+locationTime);
+			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
+					location.getAccuracy(), location.getBearing(),locationTime, settings);
+		}
+//		else {
+//			System.err.println("位置精度？: "+OsmAndLocationProvider.isPointAccurateForRouting(location));
+//			System.err.println("设置？: "+settings.SAVE_TRACK_TO_GPX.get());
+//			System.err.println("激活插件？: "+(OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null));
+//			System.err.println("没有插入轨迹数据。");
+//		}
+	}
+	
+	public void insertData(double lat, double lon, double alt, double speed, double hdop, double course,long time, OsmandSettings settings){
+		//* 1000 in next line seems to be wrong with new IntervalChooseDialog
+		//if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
+		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+			//System.err.println("执行插入数据。");
+			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
+			boolean newSegment = false;
+			if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
+				lastPoint = new LatLon(lat, lon);
+				newSegment = true;
+			} else {
+				float[] lastInterval = new float[1];
+				com.hifleet.data.Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
+				distance += lastInterval[0];
+				lastPoint = new LatLon(lat, lon);
+			}
+			lastTimeUpdated = time;
+			if (settings.SHOW_CURRENT_GPX_TRACK.get()) {
+				System.err.println("Savingtrack    settings.SHOW_CURRENT_GPX_TRACK.get(): "+settings.SHOW_CURRENT_GPX_TRACK.get());
+				WptPt pt = new GPXUtilities.WptPt(lat, lon, time,
+						alt, speed, hdop,course);
+				addTrackPoint(pt, newSegment);
+			}
+		}
+	}
+	
+	private void addTrackPoint(WptPt pt, boolean newSegment) {
+		GPXFile file = ctx.getGpxFileToDisplay();
+		if (file != null && ctx.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
+			List<List<WptPt>> points = file.processedPointsToDisplay;
+			if (points.size() == 0 || newSegment) {
+				points.add(new ArrayList<WptPt>());
+			}
+			if (pt != null) {
+				List<WptPt> last = points.get(points.size() - 1);
+				last.add(pt);
+			}
+		}
+	}
+	
+	public void insertPointData(double lat, double lon, long time, String description) {
+		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
+	}
+	
+	private void execWithClose(String script, Object[] objects) {
+		SQLiteDatabase db = getWritableDatabase();
+		try {
+			if (db != null) {
+				db.execSQL(script, objects);
+			}
+		} finally {
+			if (db != null) {
+				db.close();
+			}
+		}
+	}
+	
+	public float getDistance() {
+		return distance;
+	}
+	
+	public long getLastTimeUpdated() {
+		return lastTimeUpdated;
+	}
+	
+	public GPXFile getCurrentGpx() {
+		return currentTrack.getGpxFile();
+	}
+	
+	public SelectedGpxFile getCurrentTrack() {
+		return currentTrack;
+	}
+
+}

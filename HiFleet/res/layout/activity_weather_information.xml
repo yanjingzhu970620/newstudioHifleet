@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_nav" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_10"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="经度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_lo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="纬度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_la"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="风向/度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_windd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="风速/m/s："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_windf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="气温/℃："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="气压/hpa："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_pressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="能见度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_visibility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="湿度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_humidity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="水位："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_waterlevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="流速："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_current"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="流向："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_currentdirection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="波高："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_sea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="波向："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_seadir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="海水温度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_seatemp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="泥温："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_mudtemp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="盐度："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_salinity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更新时间："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+
+                <TextView
+                    android:id="@+id/text_weather_updatetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginLeft="110dip"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/size_sp_16" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

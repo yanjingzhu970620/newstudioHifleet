@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0eff4" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="#f3f7f6" >
+
+            <TextView
+                android:id="@+id/portships_activity_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="在港船舶"
+                android:textColor="#4f92ed"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginTop="3dip"
+                    android:src="@drawable/icon_arrow_left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:text="返回"
+                    android:textColor="#4f92ed"
+                    android:textSize="19sp" />
+            </LinearLayout>
+        </RelativeLayout>
+        
+
+        <LinearLayout
+             android:id="@+id/start_portedit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_50">
+         <TextView
+             android:id="@+id/start_port"
+            android:text="港口:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="20sp" >
+        </TextView>
+            <com.e.common.widget.effect.layout.EffectColorLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/size_dp_5"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginRight="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#cccccc"
+                app:effectColor_radius="7.0dip" >
+      
+                <com.e.common.widget.CleanableEditText
+                    android:id="@+id/edit_port_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_dp_10"
+                    android:layout_marginRight="@dimen/size_dp_10"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:drawableRight="@drawable/btn_close_edittext"
+                    android:hint="请输入港口名称(中文、拼音或英文)"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/c_afa89f"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/size_sp_19" />
+            </com.e.common.widget.effect.layout.EffectColorLinearLayout>
+         </LinearLayout>
+         <LinearLayout
+             android:id="@+id/end_porteditl"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_dp_50">
+         <TextView
+            android:id="@+id/end_port"
+            android:text="港口:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="20sp" >
+        </TextView>
+            <com.e.common.widget.effect.layout.EffectColorLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/size_dp_5"
+                android:layout_marginLeft="@dimen/size_dp_10"
+                android:layout_marginRight="@dimen/size_dp_10"
+                android:layout_marginTop="@dimen/size_dp_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:effectColor_bgNormalColor="#ffffff"
+                app:effectColor_bgPressedColor="#cccccc"
+                app:effectColor_radius="7.0dip" >
+      
+                <com.e.common.widget.CleanableEditText
+                    android:id="@+id/edit_port_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_dp_10"
+                    android:layout_marginRight="@dimen/size_dp_10"
+                    android:background="@null"
+                    android:cursorVisible="true"
+                    android:drawableRight="@drawable/btn_close_edittext"
+                    android:hint="请输入港口名称(中文、拼音或英文)"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/c_afa89f"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/size_sp_19" />
+            </com.e.common.widget.effect.layout.EffectColorLinearLayout>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dip"
+            android:indeterminateDrawable="@drawable/animdraw2"
+            android:indeterminateDuration="1500"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/list_ports"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+        <LinearLayout
+                 android:id="@+id/inportships_area"
+                 android:visibility="gone"
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/size_dp_50"
+                 android:layout_gravity="bottom"
+                 >
+             <TextView
+                android:id="@+id/text_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="区域:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <Spinner android:id="@+id/Spinnerarea"
+           android:layout_marginLeft="@dimen/size_dp_10"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           ></Spinner>
+           </LinearLayout>
+        
+         <LinearLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/size_dp_50"
+                 android:layout_gravity="bottom"
+                 >
+             <TextView
+                android:id="@+id/text_inport_dwt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类型:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <Spinner android:id="@+id/Spinner01"
+                android:layout_marginLeft="@dimen/size_dp_10"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           ></Spinner>
+           </LinearLayout>
+           
+            <LinearLayout
+                 android:layout_width="fill_parent"
+                android:layout_height="@dimen/size_dp_50"
+                 android:layout_gravity="bottom"
+                 >
+             <TextView
+                android:id="@+id/text_inport_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="吨位:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <Spinner android:id="@+id/Spinner02"
+                android:layout_marginLeft="@dimen/size_dp_10"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"></Spinner>
+           </LinearLayout>
+           <LinearLayout
+                 android:id="@+id/inportships_stop"
+                 android:visibility="gone"
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/size_dp_50"
+                 android:layout_gravity="bottom"
+                 >
+             <TextView
+                android:id="@+id/text_shipstop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停船时间:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <Spinner android:id="@+id/Spinnerstop"
+           android:layout_marginLeft="@dimen/size_dp_10"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           ></Spinner>
+           </LinearLayout>
+           
+            <LinearLayout
+                 android:id="@+id/choose_will_start_time"
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/size_dp_50"
+                 android:layout_gravity="center_vertical"
+                 android:clickable="true"
+                 android:onClick="onClick"
+                 android:visibility="gone"
+                 >
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="起始时间:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <TextView android:id="@+id/will_start_time"
+                android:layout_gravity="center_vertical"
+                android:text="请选择起始时间"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:textSize="15sp"
+                android:layout_marginLeft="@dimen/size_dp_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+           </LinearLayout>
+           <include layout="@layout/include_line" />
+            <LinearLayout
+                android:id="@+id/choose_will_end_time"
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/size_dp_50"
+                 android:layout_gravity="center_vertical"
+                 android:clickable="true"
+                 android:onClick="onClick"
+                 android:visibility="gone"
+                 >
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="终止时间:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <TextView android:id="@+id/will_end_time"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"
+                android:text="请选择终止时间"
+                android:clickable="true"
+                android:onClick="onClick"
+                android:layout_marginLeft="@dimen/size_dp_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+           </LinearLayout>
+            <include layout="@layout/include_line" />
+           <com.e.common.widget.effect.button.EffectColorButton
+                android:id="@+id/effectButton_search_inportships"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_dp_50"
+                android:layout_marginTop="20dip"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="查询"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_sp_22"
+                app:effectColor_bgNormalColor="#1e6be3"
+                app:effectColor_bgPressedColor="#1752b0" />
+            
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:visibility="gone" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/animdraw2"
+            android:indeterminateDuration="1500" />
+    </RelativeLayout>
+</RelativeLayout>

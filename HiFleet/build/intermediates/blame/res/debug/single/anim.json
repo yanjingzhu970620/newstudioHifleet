@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\shrink_from_bottomright_to_topleft.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\shrink_from_bottomright_to_topleft.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\shrink_from_topleft_to_bottomright.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\shrink_from_topleft_to_bottomright.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_out.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\anim\\push_bottom_out.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\shrink_from_topright_to_bottomleft.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\shrink_from_topright_to_bottomleft.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\loading_anim.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\anim\\loading_anim.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\actionsheet_dialog_in.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\actionsheet_dialog_in.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\grow_from_bottomleft_to_topright.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\grow_from_bottomleft_to_topright.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\cycle.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\cycle.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\shrink_from_bottom.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\shrink_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\grow_from_top.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\grow_from_top.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\shrink_from_bottomleft_to_topright.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\shrink_from_bottomleft_to_topright.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\grow_from_bottom.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\grow_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\grow_from_bottomright_to_topleft.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\grow_from_bottomright_to_topleft.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\grow_from_topleft_to_bottomright.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\grow_from_topleft_to_bottomright.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\shrink_from_top.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\shrink_from_top.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_in.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\exploded-aar\\studioHifleet\\library_common\\unspecified\\res\\anim\\push_bottom_in.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\rail.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\rail.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\actionsheet_dialog_out.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\actionsheet_dialog_out.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\myanim.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\myanim.xml"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\anim\\grow_from_topright_to_bottomleft.xml",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\anim\\grow_from_topright_to_bottomleft.xml"
+    }
+]

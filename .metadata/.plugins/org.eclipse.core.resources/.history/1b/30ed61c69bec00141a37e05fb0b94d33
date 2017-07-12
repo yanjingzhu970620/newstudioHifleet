@@ -1,0 +1,205 @@
+package com.example.link;
+
+import java.lang.reflect.Field;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.TabActivity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TabHost;
+import android.widget.TabWidget;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.TabHost.OnTabChangeListener;
+
+@SuppressWarnings("deprecation")
+public class Bluetooth extends TabActivity {
+    /** Called when the activity is first created. */
+
+	enum ServerOrCilent{
+		NONE,
+		SERVICE,
+		CILENT
+	};
+    private Context mContext;
+    static AnimationTabHost mTabHost;
+    static String BlueToothAddress = "null";
+    static ServerOrCilent serviceOrCilent = ServerOrCilent.NONE;
+    static boolean isOpen = false;
+    private TabWidget tabWidget;
+	public static int mtabIndex=0;
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState); 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); 
+        mContext = this;        
+    	setContentView(R.layout.main);
+        //实例化
+    	Field mCurrentTab = null;
+     
+    	mTabHost = (AnimationTabHost) getTabHost();      
+    	 try {
+             mCurrentTab = mTabHost.getClass()
+                     .getDeclaredField("mCurrentTab");
+             mCurrentTab.setAccessible(true);
+             mCurrentTab.setInt(mTabHost, -2);
+         } catch (SecurityException e) {
+             e.printStackTrace();
+         } catch (IllegalArgumentException e) {
+             e.printStackTrace();
+         } catch (NoSuchFieldException e) {
+             e.printStackTrace();
+         } catch (IllegalAccessException e) {
+             e.printStackTrace();
+         }
+        mTabHost.addTab(mTabHost.newTabSpec("Tab1")
+        		.setIndicator("wifi数据",getResources().getDrawable(R.drawable.tab_01))
+        		.setContent(new Intent(mContext, MainActivity.class))); 
+               
+        mTabHost.addTab(mTabHost.newTabSpec("Tab2").
+        		setIndicator("蓝牙设备",getResources().getDrawable(R.drawable.tab_02))
+        		.setContent(new Intent(mContext, SearchDeviceActivity.class)));   
+        mTabHost.addTab(mTabHost.newTabSpec("Tab3").
+        		setIndicator("已存数据",getResources().getDrawable(R.drawable.tab_03))
+        		.setContent(new Intent(mContext,FileAcitivity.class)));
+        mTabHost.setOnTabChangedListener(new OnTabChangeListener(){
+        	public void onTabChanged(String tabId) {
+        		// TODO Auto-generated method stub    
+        		if(tabId.equals("Tab1"))
+        		{        			
+        		}
+        	}         
+        });
+       //mTabHost.setCurrentTab(0); 
+       try {
+           if (mtabIndex == 0) {
+               mCurrentTab.setInt(mTabHost, 0);
+           }
+           else {
+               mCurrentTab.setInt(mTabHost, 1);
+           }
+        }
+       catch (Exception e){
+               e.printStackTrace();
+       }
+        
+       mTabHost.setCurrentTab(mtabIndex); 
+       updateTabBackground(mTabHost);
+       tabWidget = mTabHost.getTabWidget();
+  	 for (int i = 0; i < tabWidget.getChildCount(); i++) {
+  	    tabWidget.getChildAt(i).getLayoutParams().height = 126;
+  	  TextView tv = (TextView) tabWidget.getChildAt(i).findViewById(
+  		     android.R.id.title);
+  		   tv.setTextSize(10);
+  		   tv.setTextColor(this.getResources().getColorStateList(
+  		     android.R.color.black));
+  		 //tv.setGravity(Gravity.CENTER_VERTICAL);
+  		//tv.setTextSize(12); 
+  		 //ImageView iv=(ImageView)tabWidget.getChildAt(i).findViewById(android.R.id.icon);    
+  		//iv.setPadding(0, -5, 0, 0);    
+  		//tv.setPadding(0, 0, 0,-10);    
+  		//tv.setTextSize(15); 
+  	     
+  	   }
+  /*	ImageView iv=(ImageView)tabWidget.getChildAt(1).findViewById(android.R.id.icon);  
+		iv.setImageDrawable(getResources().getDrawable(R.drawable.img_dir)); 
+		iv=(ImageView)tabWidget.getChildAt(2).findViewById(android.R.id.icon);  
+		iv.setImageDrawable(getResources().getDrawable(R.drawable.img_dir));
+		iv=(ImageView)tabWidget.getChildAt(3).findViewById(android.R.id.icon);  
+		iv.setImageDrawable(getResources().getDrawable(R.drawable.img_dir)); */
+        
+        
+        //选择时背景更改。
+        mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                updateTabBackground(mTabHost);
+            }
+        });
+    }
+    private void updateTabBackground(final TabHost tabHost) {
+        for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+            View vvv = tabHost.getTabWidget().getChildAt(i);
+            if (tabHost.getCurrentTab() == i) {
+                //选中后的背景
+              vvv.setBackgroundColor(0xffe3e3e3);
+               // vvv.setBackgroundDrawable(getResources().getDrawable(android.R.color.white));
+            } else {
+                //非选择的背景
+            	  vvv.setBackgroundColor(0xfff2f2f2);
+            	//vvv.setBackgroundDrawable(getResources().getDrawable(android.R.color.darker_gray));
+            }
+        }
+    }
+	/**
+	 * 菜单、返回键响应
+	 */
+	//@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode == KeyEvent.KEYCODE_BACK&&mTabHost.getCurrentTab()!=2)
+        {  
+            //exitBy2Click();		//调用双击退出函数
+        }else if(mTabHost.getCurrentTab()==2){
+        	//Toast.makeText(this, "返回", Toast.LENGTH_SHORT).show();
+        }
+		return false;
+	}
+	/**
+	 * 双击退出函数
+	 */
+	private static Boolean isExit = false;
+
+	private void exitBy2Click() {
+		Timer tExit = null;
+		if (isExit == false) {
+			isExit = true; // 准备退出
+			Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+			tExit = new Timer();
+			tExit.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					isExit = false; // 取消退出
+				}
+			}, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
+
+		} else {
+			finish();
+			System.exit(0);
+		}
+	}
+	  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		  Toast.makeText(mContext, "address:", Toast.LENGTH_SHORT).show();
+
+	    }
+	  public static String lastblueToothAddress=null;
+    @Override
+    protected void onDestroy() {
+        /* unbind from the service */
+    	    	    
+        super.onDestroy();
+    }      
+	/*public class SiriListItem {
+		String message;
+		boolean isSiri;
+
+		public SiriListItem(String msg, boolean siri) {
+			message = msg;
+			isSiri = siri;
+		}
+	}   */
+}

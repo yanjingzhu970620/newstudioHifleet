@@ -1,0 +1,746 @@
+[
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_monitoring.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_monitoring.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_roadcolors.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_roadcolors.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_text_size.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_text_size.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\warnings_speed_bump.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\warnings_speed_bump.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_aircraft_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_aircraft_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\button_icon_favorites.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\button_icon_favorites.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\lock_enabled.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\lock_enabled.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_cancel.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_cancel.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\warnings_speed_camera.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\warnings_speed_camera.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_av_inactive.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_av_inactive.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_config_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_config_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_plain_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_plain_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_search_favorites_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_search_favorites_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_info_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_info_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_note_photo.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_note_photo.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\navigation_arrow_inactive.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\navigation_arrow_inactive.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\la_backtoloc_tracked_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\la_backtoloc_tracked_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_plain_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_plain_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_globus_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_globus_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\arrow_down.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\arrow_down.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_video.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_video.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_transparent_skin.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_transparent_skin.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\monitoring_rec_big.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\monitoring_rec_big.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_backtolocation.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_backtolocation.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_day_night_mode.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_day_night_mode.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\navigation_arrow11.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\navigation_arrow11.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_av_active.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_av_active.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_contourlines.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_contourlines.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_position_marker.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_position_marker.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_info_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_info_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\headline_close_button.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\headline_close_button.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ax_2_action_about_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ax_2_action_about_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_settings_screen_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_settings_screen_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\warnings_speed_limit_us.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\warnings_speed_limit_us.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\background0.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\background0.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_note_audio.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_note_audio.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\lock_enabled_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\lock_enabled_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\bicycle_location.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\bicycle_location.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_delete_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_delete_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\chart_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\chart_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\pedestrian_location.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\pedestrian_location.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\la_backtoloc_tracked.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\la_backtoloc_tracked.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_time_to_distance.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_time_to_distance.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\car_location.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\car_location.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_aircraft_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_aircraft_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\app_mode_globus_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\app_mode_globus_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_trekking_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_trekking_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\default_location.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\default_location.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\bgs_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\bgs_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\arrow_back.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\arrow_back.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_tracking.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_tracking.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\street_name.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\street_name.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_lock_screen.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_lock_screen.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\expandable_category_pushed.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\expandable_category_pushed.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_activities_compass_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_activities_compass_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\icon0.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\icon0.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\car_bearing.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\car_bearing.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\help_icon_pressed__original.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\help_icon_pressed__original.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_navigate_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_navigate_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\monitoring_rec_small.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\monitoring_rec_small.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\headline_close_button_pressed.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\headline_close_button_pressed.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_pedestrian_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_pedestrian_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_globus.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_globus.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_search_history_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_search_history_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\monitoring_rec_inactive.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\monitoring_rec_inactive.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\headline_close_button__original.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\headline_close_button__original.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_signpost_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_signpost_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_compass_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_compass_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_zoom_in_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_zoom_in_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\stickers_sub_cancel.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\stickers_sub_cancel.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_rendering_style.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_rendering_style.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_ok_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_ok_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_compass.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_compass.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\progress_green.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\progress_green.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\button_icon_settings.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\button_icon_settings.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\arrow_to_destination.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\arrow_to_destination.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_pin_origin.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_pin_origin.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_layer1.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_layer1.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_showcycleroutes.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_showcycleroutes.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_speed.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_speed.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\lock_disabled.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\lock_disabled.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\list_favorite.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\list_favorite.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_note_video.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_note_video.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_sail_boat_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_sail_boat_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\button_icon_search.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\button_icon_search.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_menu_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_menu_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\lock_disabled_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\lock_disabled_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_av_active_menu.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_av_active_menu.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\stickers_sub.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\stickers_sub.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\expandable_category_unpushed.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\expandable_category_unpushed.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\icon_small.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\icon_small.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_download_screen_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_download_screen_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\expandable_category_empty.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\expandable_category_empty.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\headline_close_button_pressed__original.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\headline_close_button_pressed__original.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\poi_parking_pos_no_limit.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\poi_parking_pos_no_limit.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\intermediate_point.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\intermediate_point.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_ruler.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_ruler.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\la_backtoloc_disabled.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\la_backtoloc_disabled.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_car_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_car_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_next_turn.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_next_turn.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_search_transport_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_search_transport_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\arrow_up.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\arrow_up.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_layers_black.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_layers_black.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\progress_orange.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\progress_orange.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_photo.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_photo.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_motorcycle_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_motorcycle_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_viewing_direction.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_viewing_direction.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_hmenu_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_hmenu_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_fav_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_fav_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_cancel_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_cancel_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_motorcycle_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_motorcycle_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_layers_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_layers_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_magnifier.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_magnifier.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\list_destination.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\list_destination.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_cancel_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_cancel_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_search_address_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_search_address_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_config.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_config.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_compass.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_compass.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_globus.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_globus.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_zoom_out_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_zoom_out_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_menu_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_menu_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ax_1_navigation_next_item_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ax_1_navigation_next_item_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_trekking_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_trekking_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_altitude.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_altitude.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_gps_info.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_gps_info.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_signpost_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_signpost_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_osmctraces.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_osmctraces.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_pedestrian_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_pedestrian_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_showroadmaps.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_showroadmaps.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_parking.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_parking.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ax_1_navigation_previous_item_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ax_1_navigation_previous_item_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\la_backtoloc_enabled.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\la_backtoloc_enabled.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\help_icon_pressed.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\help_icon_pressed.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\target_point.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\target_point.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_navigate_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_navigate_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_layer.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_layer.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_monitoring.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_monitoring.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\pedestrian_small.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\pedestrian_small.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_zoom_in_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_zoom_in_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\la_backtoloc_disabled_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\la_backtoloc_disabled_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\icon_free.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\icon_free.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_bicycle_light.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_bicycle_light.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\poi.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\poi.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\app_mode_globus_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\app_mode_globus_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_target.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_target.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\help_icon_simple__original.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\help_icon_simple__original.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_ok_o.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_ok_o.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\device_access_video.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\device_access_video.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_audio.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_audio.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_audio_active.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_audio_active.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_search_location_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_search_location_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_max_speed.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_max_speed.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\bicycle_bearing.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\bicycle_bearing.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_appmode.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_appmode.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_video_active.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_video_active.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\list_intermediate.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\list_intermediate.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_zoom_out_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_zoom_out_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_show_destination_arrow.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_show_destination_arrow.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_alpinehiking.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_alpinehiking.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_distance.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_distance.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_pin_destination.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_pin_destination.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_time.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_time.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_nopolygons.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_nopolygons.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\poi_favourite.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\poi_favourite.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\stickers_add_cancel.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\stickers_add_cancel.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_bicycle_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_bicycle_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_intermediate.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_intermediate.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\progress_grey.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\progress_grey.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_monitoring_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_monitoring_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_btn_hmenu_p.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_btn_hmenu_p.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_car_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_car_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\map_config.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\map_config.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\pedestrian_bearing.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\pedestrian_bearing.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\pedestrian_small_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\pedestrian_small_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_icon_photo_active.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_icon_photo_active.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\progress_blue.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\progress_blue.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\button_icon_map.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\button_icon_map.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\la_backtoloc_enabled_white.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\la_backtoloc_enabled_white.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\tab_search_poi_icon.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\tab_search_poi_icon.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\ic_action_sail_boat_dark.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\ic_action_sail_boat_dark.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\poi_parking_pos_limit.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\poi_parking_pos_limit.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_noadminboundaries.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_noadminboundaries.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_reset_to_default.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_reset_to_default.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\help_icon_simple.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\help_icon_simple.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\stickers_add.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\stickers_add.png"
+    },
+    {
+        "merged": "D:\\studioHifleet\\HiFleet\\build\\intermediates\\res\\merged\\debug\\drawable-large\\widget_street_name.png",
+        "source": "D:\\studioHifleet\\HiFleet\\res\\drawable-large\\widget_street_name.png"
+    }
+]

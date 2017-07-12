@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/EasyNavigation"/>
+	<item value="254" key="HistoryTableProvider.SVNHistoryPage.作者"/>
+	<item value="174" key="HistoryTableProvider.HistoryDialog.注释"/>
+	<item value="202" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.作者"/>
+	<item value="0" key="UpdateDialogWithConflictHandling.location.y"/>
+	<item value="1146" key="TreeConflictsView.col.Description"/>
+	<item value="101" key="HistoryTableProvider.revisionsBlock.修订"/>
+	<item value="E:/Android development/EasyNavigationAIS" key="TreeConflictsView.resource"/>
+	<item value="503" key="HistoryTableProvider.revisions.注释"/>
+	<item value="606" key="SwitchDialogWithConflictHandling.size.x"/>
+	<item value="715" key="SwitchDialogWithConflictHandling.size.y"/>
+	<item value="252" key="HistoryTableProvider.revisions.日期"/>
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/android"/>
+	<item value="88" key="HistoryTableProvider.HistoryDialog.日期"/>
+	<item value="0" key="CommitDialog.location.y"/>
+	<item value="0" key="CommitDialog.location.x"/>
+	<item value="2" key="ResourceSelectionTree.mode"/>
+	<item value="538" key="RevertDialog.location.x"/>
+	<item value="130" key="MarkResolvedDialog.location.y"/>
+	<item value="527" key="MarkResolvedDialog.location.x"/>
+	<item value="546" key="MarkResolvedDialog.size.x"/>
+	<item value="101" key="HistoryTableProvider.revisions.修订"/>
+	<item value="0" key="RevertDialog.location.y"/>
+	<item value="450" key="MarkResolvedDialog.size.y"/>
+	<item value="192" key="TreeConflictsView.col.Resource"/>
+	<item value="503" key="HistoryTableProvider.revisionsBlock.注释"/>
+	<item value="252" key="HistoryTableProvider.revisionsBlock.日期"/>
+	<item value="900" key="CompareDialog.size.x"/>
+	<item value="524" key="CompareDialog.size.y"/>
+	<item value="true" key="TreeConflictsView.container"/>
+	<item value="128" key="HistoryTableProvider.SVNHistoryPage.修订"/>
+	<item value="552" key="ChooseUrlDialog.location.x"/>
+	<item value="229" key="ChooseUrlDialog.location.y"/>
+	<item value="637" key="HistoryTableProvider.SVNHistoryPage.注释"/>
+	<item value="102" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.修订"/>
+	<item value="860" key="RevertDialog.size.y"/>
+	<item value="319" key="HistoryTableProvider.SVNHistoryPage.日期"/>
+	<item value="70" key="HistoryTableProvider.HistoryDialog.作者"/>
+	<item value="525" key="RevertDialog.size.x"/>
+	<item value="350" key="CompareDialog.location.x"/>
+	<item value="81" key="CompareDialog.location.y"/>
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/hifleet/NavigationAIS"/>
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/yangchun"/>
+	<item value="201" key="HistoryTableProvider.revisions.作者"/>
+	<item value="35" key="HistoryTableProvider.HistoryDialog.修订"/>
+	<item value="500" key="CommitDialog.weights.0"/>
+	<item value="500" key="CommitDialog.weights.1"/>
+	<item value="700" key="UpdateDialogWithConflictHandling.size.y"/>
+	<item value="860" key="CommitDialog.size.y"/>
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/hifleet/AndroidMessage"/>
+	<item value="525" key="UpdateDialogWithConflictHandling.size.x"/>
+	<item value="1600" key="CommitDialog.size.x"/>
+	<item value="252" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.日期"/>
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/Link"/>
+	<item value="538" key="UpdateDialogWithConflictHandling.location.x"/>
+	<item value="497" key="ChooseUrlDialog.size.x"/>
+	<item value="https://10.72.36.161/svn/EasyNavigation/bin" key="UrlCombo.EasyNavigation.0"/>
+	<item value="505" key="HistoryTableProvider.MergeWizardUnblockRevisionsPage.注释"/>
+	<item value="201" key="HistoryTableProvider.revisionsBlock.作者"/>
+	<item value="377" key="ChooseUrlDialog.size.y"/>
+	<item value="https://10.72.36.161/svn/yangchun" key="RepositorySelectionPage.lastRepository"/>
+	<item value="" key="DirectorySelectionPage.lastParent_https://10.72.36.161/svn/hifleet"/>
+	<item value="0" key="SwitchDialogWithConflictHandling.location.y"/>
+	<item value="497" key="SwitchDialogWithConflictHandling.location.x"/>
+	<section name="CommitWizard">
+		<item value="500" key="VWeight2"/>
+		<item value="350" key="HWeight1"/>
+		<item value="650" key="HWeight2"/>
+		<item value="500" key="VWeight1"/>
+		<item value="true" key="ShowCompare"/>
+	</section>
+	<section name="IgnoreResourcesDialog">
+		<item value="0" key="Action"/>
+	</section>
+	<section name="NewLocationWizard">
+		<list key="ConfigurationWizardMainPage.STORE_URL_ID">
+			<item value="https://10.72.36.161/svn/hifleet"/>
+			<item value="https://10.72.36.161/svn/android"/>
+			<item value="https://10.72.36.161/svn/Link"/>
+			<item value="https://10.72.36.161/svn/hifleet/AndroidMessage"/>
+		</list>
+	</section>
+</section>

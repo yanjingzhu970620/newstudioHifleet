@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<osmand_regions mapversion="1">
+<region type="map" rlon="122.7236" rlat="40.9967" llon="117.4992" llat="38.8047" date="03.12.2015" size="114" targetsize="114" name="渤海北部.sqlitedb" description="渤海北部" filename="bohaibeibu" id="1"/>
+<region type="map" rlon="122.7067" rlat="39.4863" llon="121.1137" llat="37.4304" date="03.12.2015" size="63" targetsize="63" name="渤海海峡.sqlitedb" description="渤海海峡" filename="bohaihaixia" id="2"/>
+<region type="map" rlon="121.1467" rlat="38.7704" llon="117.1003" llat="38.0631" date="03.12.2015" size="90" targetsize="90" name="渤海南部.sqlitedb" description="渤海南部" filename="bohainanbu" id="3"/>
+<region type="map" rlon="125.58" rlat="39.9605" llon="122.5258" llat="37.3704" date="03.12.2015" size="86" targetsize="86" name="黄海北部.sqlitedb" description="黄海北部" filename="huanghaibeibu" id="4"/>
+<region type="map" rlon="126.6787" rlat="37.4751" llon="119.2079" llat="34.5611" date="03.12.2015" size="237" targetsize="237" name="黄海中部.sqlitedb" description="黄海中部" filename="huanghaizhongbu" id="5"/>
+<region type="map" rlon="130.6777" rlat="34.4887" llon="119.1201" llat="31.0156" date="03.12.2015" size="200" targetsize="200" name="黄海南部.sqlitedb" description="黄海南部" filename="huanghainanbu" id="6"/>
+<region type="map" rlon="126.3556" rlat="30.7752" llon="120.412" llat="28.1546" date="03.12.2015" size="227" targetsize="227" name="东海北部.sqlitedb" description="东海北部" filename="donghaibeibu" id="7"/>
+<region type="map" rlon="130.3481" rlat="28.768" llon="119.0322" llat="25.3443" date="03.12.2015" size="180" targetsize="180" name="东海南部.sqlitedb" description="东海南部" filename="donghainanbu" id="8"/>
+<region type="map" rlon="120.79" rlat="25.4039" llon="116.0659" llat="21.2283" date="03.12.2015" size="164" targetsize="164" name="台湾海峡.sqlitedb" description="台湾海峡" filename="taiwanhaixia" id="10"/>
+<region type="map" rlon="117.6003" rlat="23.25" llon="110.3005" llat="20.8395" date="03.12.2015" size="238" targetsize="238" name="南海东北部.sqlitedb" description="南海东北部" filename="nanhaidongbeibu" id="12"/>
+<region type="map" rlon="114.6501" rlat="20.8395" llon="110.3005" llat="18.9227" date="03.12.2015" size="87" targetsize="87" name="南海中部.sqlitedb" description="南海中部" filename="nanhaizhongbu" id="13"/>
+<region type="map" rlon="111.9167" rlat="18.9227" llon="107.5" llat="17.0001" date="03.12.2015" size="99" targetsize="99" name="南海西北部.sqlitedb" description="南海西北部" filename="nanhaixibeibu" id="14"/>
+<region type="map" rlon="110.4" rlat="21.7394" llon="107.5" llat="18.6466" date="03.12.2015" size="139" targetsize="139" name="北部湾.sqlitedb" description="北部湾" filename="beibuwan" id="18"/>
+</osmand_regions>				

@@ -1,0 +1,463 @@
+package com.hifleet.lnfo.layer;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.xmlpull.v1.XmlPullParser;
+
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.util.Xml;
+
+import com.hifleet.activity.LoginActivity;
+import com.hifleet.bean.LoginBean;
+import com.hifleet.bean.PlotBean;
+import com.hifleet.bean.loginSession;
+import com.hifleet.map.ITileSource;
+import com.hifleet.map.IndexConstants;
+import com.hifleet.map.LatLon;
+import com.hifleet.map.MapTileAdapter;
+import com.hifleet.map.OsmandApplication;
+import com.hifleet.map.OsmandMapLayer;
+import com.hifleet.map.OsmandMapTileView;
+import com.hifleet.map.OsmandSettings;
+import com.hifleet.map.QuadRect;
+import com.hifleet.map.ResourceManager;
+import com.hifleet.map.RotatedTileBox;
+
+/**
+ * @{# PlotInfoLayer.java Create on 2015年5月18日 下午2:13:50
+ * 
+ * @author <a href="mailto:evan0502@qq.com">Evan</a>
+ * @version 1.0
+ * @description
+ *
+ */
+public class PlotInfoLayer extends OsmandMapLayer {
+
+	OsmandApplication app;
+
+	private QuadRect quadRect;
+
+	protected static final int emptyTileDivisor = 16;
+	public static final int OVERZOOM_IN = 0;// 2;
+
+	public static final int START_SHOW = 10;
+	List<PlotBean> listp = new ArrayList<PlotBean>();
+
+	List<PlotBean> msgs = null;
+	private final boolean mainMap;
+	protected ITileSource map = null;
+	protected MapTileAdapter mapTileAdapter = null;
+	public static List<Map<String, String>> pointList = new ArrayList<Map<String, String>>();
+	public static List<Map<String, String>> pointList1 = new ArrayList<Map<String, String>>();
+	Paint paintBitmap, locationPaint;
+
+	protected RectF bitmapToDraw = new RectF();
+
+	protected Rect bitmapToZoom = new Rect();
+
+	protected OsmandMapTileView view;
+	protected ResourceManager resourceManager;
+	private OsmandSettings settings;
+	private boolean visible = true;
+
+	private List<PlotBean> _plot = new ArrayList<PlotBean>();
+
+	private Paint paint_mid_point;
+
+	String Polygon;
+	float drawpoint[];
+	private List<String> _point = new ArrayList<String>();
+	private RotatedTileBox tileBox;
+
+	private Paint paint;
+
+	private boolean flag = true;
+
+	public PlotInfoLayer(boolean mainMap) {
+		this.mainMap = mainMap;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hifleet.map.OsmandMapLayer#initLayer(com.hifleet.map.OsmandMapTileView
+	 * )
+	 */
+	@Override
+	public void initLayer(OsmandMapTileView view) {
+		// TODO Auto-generated method stub
+		this.view = view;
+		settings = view.getSettings();
+		resourceManager = view.getApplication().getResourceManager();
+
+		// paintBitmap = new Paint();
+		// paintBitmap.setFilterBitmap(true);
+
+		locationPaint = new Paint();
+		locationPaint.setAntiAlias(true);
+		locationPaint.setFilterBitmap(true);
+		locationPaint.setDither(true);
+
+		paint_mid_point = new Paint();
+		paint_mid_point.setStyle(Style.FILL_AND_STROKE);
+		paint_mid_point.setAntiAlias(true);
+		paint_mid_point.setColor(view.getResources().getColor(
+				com.hifleet.R.color.red));
+		paint_mid_point.setAlpha(127);
+		paint = new Paint(); // 设置一个笔刷大小是3的黄色的画笔
+		paint.setColor(Color.YELLOW);
+		paint.setStrokeJoin(Paint.Join.ROUND);
+		paint.setStrokeCap(Paint.Cap.ROUND);
+		paint.setStrokeWidth(3);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hifleet.map.OsmandMapLayer#onDraw(android.graphics.Canvas,
+	 * com.hifleet.map.RotatedTileBox,
+	 * com.hifleet.map.OsmandMapLayer.DrawSettings)
+	 */
+	public void onMapMoveEndDraw(Canvas canvas, RotatedTileBox viewportToDraw) {
+		flag=false;
+		this.tileBox = viewportToDraw;
+		//System.out.println("执行move");
+		if (app.myPreferences.getBoolean("isShowPlot", true)) {
+			new LoadingPlotXMLThread(viewportToDraw, canvas).execute();
+			//System.out.println("显示标绘");
+		} else {
+			pointList.clear();
+			//System.out.println("隐藏标绘");
+		}
+	}
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings settings) {
+		// TODO Auto-generated method stub
+		// System.out.println("执行onDraw   我是plot");
+		if (flag) {
+			if (app.myPreferences.getBoolean("isShowPlot", true)) {
+				new LoadingPlotXMLThread(tileBox, canvas).execute();
+				System.out.println("显示标绘");
+			} else {
+				pointList.clear();
+				System.out.println("隐藏标绘");
+			}
+			// flag=false;
+			 refreashShipsInfoLayer(canvas, tileBox);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hifleet.map.OsmandMapLayer#destroyLayer()
+	 */
+	@Override
+	public void destroyLayer() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.hifleet.map.OsmandMapLayer#drawInScreenPixels()
+	 */
+	@Override
+	public boolean drawInScreenPixels() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	class LoadingPlotXMLThread extends AsyncTask<Void, String, String> {
+		private RotatedTileBox privateTileBox;
+		private Canvas privateCanvas;
+
+		public LoadingPlotXMLThread(RotatedTileBox box, Canvas canvas) {
+			this.privateTileBox = box;
+			this.privateCanvas = canvas;
+			// System.out.println("LoadingPlotXMLThread");
+		}
+
+		@Override
+		protected String doInBackground(Void... arg0) {
+			// print("后台运行。。。");
+			try {
+				QuadRect rect = privateTileBox.getLatLonBounds();
+				LatLon p3 = new LatLon(rect.top, rect.right);
+				LatLon p2 = new LatLon(rect.top, rect.left);
+				LatLon p1 = new LatLon(rect.bottom, rect.left);
+				LatLon p4 = new LatLon(rect.bottom, rect.right);
+				String polygon = "((" + p2.getLongitude() + "%20"
+						+ p2.getLatitude() + "," + p1.getLongitude() + "%20"
+						+ p1.getLatitude() + "," + p4.getLongitude() + "%20"
+						+ p4.getLatitude() + "," + p3.getLongitude() + "%20"
+						+ p3.getLatitude() + "," + p2.getLongitude() + "%20"
+						+ p2.getLatitude() + "))"
+						+ "&Scale=8&UserId=admin&userDomain=qq.com";
+				String bboxurl = IndexConstants.GET_PLOT_URL + polygon;
+
+				//System.out.println("biaoURL" + "====" + bboxurl);
+				System.out.println("biaoURL" + "====" +app.myPreferences.getString("sessionid", ""));
+				URL url = new URL(bboxurl);
+				HttpURLConnection conn = (HttpURLConnection) url
+						.openConnection();
+				try{
+				if (loginSession.getSessionid() != null) {
+					conn.setRequestProperty("cookie", loginSession.getSessionid());
+				}else{
+					conn.setRequestProperty("cookie",app.myPreferences.getString("sessionid", ""));
+				}
+				conn.setConnectTimeout(5000);
+				InputStream inStream = conn.getInputStream();
+				parseXMLnew(inStream);
+				if (msgs.size() > 0) {
+					for (int i = 0; i < msgs.size(); i++) {
+						listp.add(msgs.get(i));
+					}
+				}
+				//System.out.println("plot解析完成啦"+loginSession.getSessionid());
+				inStream.close();
+
+				}catch(java.lang.RuntimeException re){
+					System.out.print("java.lang.RuntimeException plotinfo");
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				System.out.println("出错啦。。。");
+			}
+			return null;
+		}
+
+		protected void onPostExecute(String result) {
+			if (listp.size() > 0) {
+				test(listp, privateCanvas, privateTileBox);
+			}
+		}
+	}
+
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
+		this.tileBox = tileBox;
+		//System.out.println("执行buffer");
+		// new LoadingPlotXMLThread(tileBox, canvas).execute();
+		// if(!flag){
+		// System.out.println("执行buffer刷新了");
+		refreashShipsInfoLayer(canvas, tileBox);
+		// }
+
+	}
+
+	private List<PlotBean> parseXMLnew(InputStream inStream) throws Exception {
+		XmlPullParser parser = Xml.newPullParser();
+		PlotBean msg = null;
+		if (inStream != null && !inStream.equals(null)) {
+			try {
+				parser.setInput(inStream, "utf-8");
+
+				int type = parser.getEventType();
+				while (type != XmlPullParser.END_DOCUMENT) {
+					switch (type) {
+					case XmlPullParser.START_DOCUMENT:
+						msgs = new ArrayList<PlotBean>();
+						break;
+					case XmlPullParser.START_TAG:
+						if ("plot".equals(parser.getName())) {
+							msg = new PlotBean();
+							String Plotid = parser.getAttributeValue(null,
+									"PlotId");
+							String Plotname = parser.getAttributeValue(null,
+									"PlotName");
+							msg.setPlotId(Plotid);
+							msg.setPlotName(Plotname);
+							// Log.v("mes", "解析的时间" +
+							// Plotid+"Plotname"+Plotname);
+							// msg.settime(time);
+						} else if (msg != null) {
+							if ("Center".equals(parser.getName())) {
+								String center = parser.nextText();
+								// Log.v("mes", "解析的内容" + center);
+								// msg.setbody(body);
+							}
+							if ("Shape".equals(parser.getName())) {
+								String shape = parser.nextText();
+								msg.setShape(shape);
+								// Log.v("mes", "解析的内容" + shape);
+								// msg.setbody(body);
+							}
+							if ("Polygon".equals(parser.getName())) {
+								Polygon = parser.nextText();
+								msg.setPolygon(Polygon);
+								// Log.v("mes", "解析的内容111" + Polygon);
+								// msg.setbody(body);
+							}
+						}
+						break;
+					case XmlPullParser.END_TAG:
+						try {
+							if ("plot".equals(parser.getName())
+									&& (msg != null)) {
+								// Log.v("mes",
+								// "msg==="+msg.getPlotId()+msg.getPlotName()+msg.getShape()+msg.getPolygon());
+								msgs.add(msg);
+								msg = null;
+								//Log.v("mes", "存了" + msgs.size());
+							}
+						} catch (NullPointerException exxx) {
+							Log.v("错啦msg+", msg.toString());
+							Log.v("错啦name+", parser.getName());
+						}
+						// else{
+						// Log.v("nameaaaa", parser.getName()+"msggggg"+msg);
+						// }
+						break;
+
+					}
+					type = parser.next();
+					// Log.v("mes", "解析成功");
+				}
+				Log.v("mes", msgs.size() + "最终长度");
+				// for(int i=0;i<msgs.size();i++){
+				// Log.v("mes"+i+"=", msgs.get(i).Polygon);
+				// }
+				return msgs;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.v("mes", "解析失败");
+			}
+		}
+		// System.out.println("plot===" +_plot);
+		// for (PlotBean p : _plot) {
+		// //System.out.println("plotname===" + p.getPlotName());
+		// }
+		return null;
+	}
+
+	private void refreashShipsInfoLayer(Canvas canvas, RotatedTileBox tileBox) {
+		try {
+			Path path = new Path();
+			// paint = new Paint(); //设置一个笔刷大小是3的黄色的画笔
+			// paint.setColor(Color.YELLOW);
+			// paint.setStrokeJoin(Paint.Join.ROUND);
+			// paint.setStrokeCap(Paint.Cap.ROUND);
+			// paint.setStrokeWidth(3);
+			// System.out.println("pointList"+pointList.size());
+			// if(!pointList.isEmpty()){
+			pointList1.addAll(pointList);
+			for (int i = 0; i < pointList1.size(); i++) {
+				if (i >= 0) {
+					// System.out.println("point"+_point.size());
+					// System.out.println("pointList"+pointList.size());
+					float xx = Float.parseFloat(pointList1.get(i).get("x"));
+					float yy = Float.parseFloat(pointList1.get(i).get("y"));
+					int locationX = tileBox.getPixXFromLonNoRot(xx);
+					int locationY = tileBox.getPixYFromLatNoRot(yy);
+					// float xx1 =
+					// Float.parseFloat(pointList.get(i-1).get("x"));
+					// float yy1 =Float.parseFloat(pointList.get(i-1).get("y"));
+					// int locationX1 = tileBox.getPixXFromLonNoRot(xx1);
+					// int locationY1 = tileBox.getPixYFromLatNoRot(yy1);
+					if (pointList1.get(i).get("z").equals("starttag")) {
+						path.moveTo(locationX, locationY);
+						// canvas.drawPoint(locationX,locationY, paint);
+						// System.out.println("起始locationsX"+pointList.get(i).get("x")+"sy"+pointList.get(i).get("y"));
+					} else if (pointList1.get(i).get("z").equals("c")) {
+						// System.out.println("这个画了没"+"locationX"+locationX+"y"+locationY);
+						// canvas.drawPoint(locationX,locationY, paint);
+						path.lineTo(locationX, locationY);
+					}
+					if (pointList1.get(i).get("z").equals("endtag")) {
+						// System.out.println("start");
+						// canvas.drawPoint(locationX,locationY, paint);
+						path.lineTo(locationX, locationY);
+						// System.out.println("locationeX"+locationX+"ey"+locationY);
+						canvas.drawPath(path, paint_mid_point);
+						// canvas.drawCircle(100, 100, 90, paint);
+						// System.out.println("end");
+					}
+				}
+			}
+			pointList1.clear();
+			// canvas.save();
+			// canvas.restore();
+			// Path path1 = new Path(); //定义一条路径
+			// path1.moveTo(100, 100); //移动到 坐标10,10
+			// path1.lineTo(500, 60);
+			// path1.lineTo(1000,80);
+			// path1.lineTo(10, 10);
+
+			// canvas.drawPath(path1, paint);
+
+			// }
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	List<PlotBean> list1 = new ArrayList<PlotBean>();
+
+	public void test(List<PlotBean> list, Canvas canvas, RotatedTileBox tileBox) {
+		pointList.clear();
+		if (list.size() >= 1) {
+			System.out.println("listsize" + list.size());
+			for (int i = 0; i < list.size(); i++) {
+				// Log.v("mes"+i+"=", list.get(i).Polygon);
+				list1.add(list.get(i));
+			}
+			for (int i = 0; i < list1.size(); i++) {
+				// System.out.println("shipsizeeee" + list1.size());
+				String token[] = list1.get(i).Polygon.split("\\(");
+				String token1[] = token[token.length - 1].split("\\)");
+				String point1[] = token1[0].split(",");
+				for (int i1 = 0; i1 < point1.length; i1++) {
+					// System.out.println("tokenh" +i1+ point1[i1]);
+					// String point[]=token1[i1].split(", ");
+					String point[] = point1[i1].split(" ");
+					if (i1 > 0) {
+
+						Map map = new HashMap<String, String>();
+						map.put("x", point[1]);
+						map.put("y", point[2]);
+						if (i1 == point1.length - 1) {
+							map.put("z", "endtag");
+						} else {
+							map.put("z", "c");
+						}
+						pointList.add(map);
+					} else {
+						// System.out.println("开始的x=" +point[0]+"y="+point[1]);
+						Map map = new HashMap<String, String>();
+						map.put("x", point[0]);
+						map.put("y", point[1]);
+						map.put("z", "starttag");
+						pointList.add(map);
+					}
+				}
+			}
+			System.out.println("test刷新");
+			view.callPrepareBufferImage();
+			list1.clear();
+
+		}
+	}
+
+}
